@@ -13,4 +13,8 @@ public class Vector2D {
 		x = 0.0;
 		y = 0.0;
 	}
+	
+	/**
+	 * Test Comment
+	 */
 }
