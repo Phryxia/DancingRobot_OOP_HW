@@ -15,11 +15,6 @@ import java.awt.event.*;
 public class UI_Main_Real extends JFrame {
 	private Container contentPane;
 	private JRootPane root;
-	private String[] list_test = {
-			"Saved 1 : Test 1",
-			"Saved 2 : Test 2",
-			"Saved 3 : Test 3"
-	};
 	
 	/**
 	 * Components of Program UI
@@ -28,6 +23,7 @@ public class UI_Main_Real extends JFrame {
 	 */
 	JFrame frame;
 	JTabbedPane tabPan;
+	DefaultListModel<String> listModel;
 	JList<String> list;
 	
 	JLabel leftLabel;
@@ -50,6 +46,7 @@ public class UI_Main_Real extends JFrame {
 	JSplitPane leftright;
 	JScrollPane scpane;
 	ImageIcon bg;
+	JFileChooser fc;
 	
 	/**
 	 * Constructor
@@ -65,6 +62,7 @@ public class UI_Main_Real extends JFrame {
 		setResizable(false);
 		setVisible(true);
 	}
+	
 	
 	/**
 	 * Initialize the Variables
@@ -109,37 +107,36 @@ public class UI_Main_Real extends JFrame {
 	 * @author Tae-in Kim
 	 */
 	public void generate_ListPanel() {
-		leftLabel = new JLabel("Saved Options.");
+		leftLabel = new JLabel("File List.");
+		listModel = new DefaultListModel<String>();
 		
-		list = new JList<String>(list_test);
+		list = new JList<String>(listModel);
 		list.setSize(200, 300);
 		
 		JPanel btns = new JPanel();
 		btns.setLayout(new GridLayout(2, 2, 1, 1));
 		
-		
 		addFile.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent e){
-				promptForFile();
-				/*
-				 * Testing Mouse Double Click
-				 
-					if(e.getClickCount() == 2) {
-						promptForFile();
-					}
-				*/
+				String name = promptForFile();
+				listModel.addElement(name);
 			}
+			
 			public void mouseEntered(MouseEvent arg0) {}
 			public void mouseExited(MouseEvent arg0) {}
 			public void mousePressed(MouseEvent arg0) {}
 			public void mouseReleased(MouseEvent arg0) {}
 		});
 		
-		removeFile.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
+		removeFile.addMouseListener(new MouseListener() {
+			public void mouseClicked(MouseEvent e){
+				listModel.remove(list.getSelectedIndex());
 			}
+			
+			public void mouseEntered(MouseEvent arg0) {}
+			public void mouseExited(MouseEvent arg0) {}
+			public void mousePressed(MouseEvent arg0) {}
+			public void mouseReleased(MouseEvent arg0) {}
 		});
 		
 		btns.add(play);
@@ -155,10 +152,10 @@ public class UI_Main_Real extends JFrame {
 	}
 	
 	private String promptForFile(){
-		JFileChooser fc=new JFileChooser();
+		fc=new JFileChooser();
 		int returnVal=fc.showOpenDialog(this);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-		    return fc.getSelectedFile().getAbsolutePath();
+		    return fc.getSelectedFile().getName();
 		} else {
 		    return null;
 		}
@@ -216,8 +213,8 @@ public class UI_Main_Real extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JMenuBar menuBar = new JMenuBar();
 
-		// File Menu
-		// Help Menu
+		// File Menu & Set Mnemonic 'F'
+		// Help Menu & Set Mnemonic 'H'
 		JMenu fileMenu = new JMenu("File");
 		JMenu helpMenu = new JMenu("Help");
 		fileMenu.setMnemonic(KeyEvent.VK_F);
@@ -225,8 +222,8 @@ public class UI_Main_Real extends JFrame {
 		menuBar.add(fileMenu);
 		menuBar.add(helpMenu);
 
-		// File->Item(E)
-		// Help->Items(S, P)
+		// File->Item(Mnemonic : E)
+		// Help->Items(Mnemonic : S, P)
 		stuinfoItem = new JMenuItem("About Student..", KeyEvent.VK_S);
 		exitItem = new JMenuItem("Exit", KeyEvent.VK_E);
 		proinfoItem = new JMenuItem("About Program..", KeyEvent.VK_P);
