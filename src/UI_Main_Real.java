@@ -1,8 +1,16 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Class UI_Main_Real
+ * 
+ * This class is about Main UI of the Dancing Robot Program.
+ * 
+ * @author Tae-in Kim
+ * Soongsil University, Seoul, Korea
+ *
+ */
 @SuppressWarnings("serial")
 public class UI_Main_Real extends JFrame {
 	private Container contentPane;
@@ -36,16 +44,62 @@ public class UI_Main_Real extends JFrame {
 	JPanel treeList;
 	JPanel Player;
 	JPanel KeyFrame;
+	JPanel play_panel;
 	
 	JSplitPane updown;
 	JSplitPane leftright;
+	JScrollPane scpane;
+	ImageIcon bg;
 	
+	/**
+	 * Constructor
+	 * Construct the Frame with many Components
+	 * 
+	 * @author Tae-in Kim
+	 */
 	public UI_Main_Real() {
+		Initialize();
 		generate_Panel();
 		generate_Menu();
 		setSize(800, 600);
 		setResizable(false);
 		setVisible(true);
+	}
+	
+	/**
+	 * Initialize the Variables
+	 * - JComponents
+	 * 
+	 * @author Tae-in Kim
+	 */
+	public void Initialize() {
+		play = new JButton("Play");
+		stop = new JButton("Stop");
+		addFile = new JButton("Add");
+		removeFile = new JButton("Remove");
+		play.setFont(new Font("Arial", Font.PLAIN, 15));
+		stop.setFont(new Font("Arial", Font.PLAIN, 15));
+		addFile.setFont(new Font("Arial", Font.PLAIN, 15));
+		removeFile.setFont(new Font("Arial", Font.PLAIN, 15));
+	}
+	
+	/**
+	 * Print Stage Image
+	 * - By ContentPane
+	 * 
+	 * @author Tae-in Kim
+	 */
+	public void show_Stage() {
+		bg = new ImageIcon("C:\\Users\\Administrator\\Documents\\GitHub\\DancingRobot_OOP_HW\\image\\moodae.jpg");
+		play_panel = new JPanel() {
+			public void paintComponent(Graphics g) {
+				Dimension d = getSize();
+            	g.drawImage(bg.getImage(), 0, 0, d.width, d.height, null);
+            	setOpaque(false);
+            	super.paintComponent(g);
+			}
+		};
+
 	}
 	
 	/**
@@ -61,10 +115,9 @@ public class UI_Main_Real extends JFrame {
 		list.setSize(200, 300);
 		
 		JPanel btns = new JPanel();
-		btns.setLayout(new GridLayout(1, 2, 3, 0));
+		btns.setLayout(new GridLayout(2, 2, 1, 1));
 		
-		addFile = new JButton("Add");
-		addFile.setFont(new Font("Arial", Font.PLAIN, 15));
+		
 		addFile.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent e){
 				promptForFile();
@@ -82,8 +135,6 @@ public class UI_Main_Real extends JFrame {
 			public void mouseReleased(MouseEvent arg0) {}
 		});
 		
-		removeFile = new JButton("Remove");
-		removeFile.setFont(new Font("Arial", Font.PLAIN, 15));
 		removeFile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -91,6 +142,8 @@ public class UI_Main_Real extends JFrame {
 			}
 		});
 		
+		btns.add(play);
+		btns.add(stop);
 		btns.add(addFile);
 		btns.add(removeFile);
 		
@@ -133,10 +186,11 @@ public class UI_Main_Real extends JFrame {
 	 * @author Tae-in Kim
 	 */
 	public void generate_Panel() {
+		show_Stage();
 		generate_TabPanel();
 		generate_ListPanel();
 		root = this.getRootPane();
-		leftright = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treeList, new JPanel());
+		leftright = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treeList, play_panel);
 		updown = new JSplitPane(JSplitPane.VERTICAL_SPLIT, leftright, KeyFrame);		
 		contentPane = root.getContentPane();
 		contentPane.setLayout(new BorderLayout());
