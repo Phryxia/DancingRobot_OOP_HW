@@ -136,6 +136,42 @@ public class Vector2D {
 		y = y_temp;
 		return this;
 	}
+
+	/**
+	 * Add one vector to this vector and return itself.
+	 * 
+	 * @param v
+	 * @return this += v
+	 */
+	public Vector2D add(Vector2D v) {
+		x += v.x;
+		y += v.y;
+		return this;
+	}
+	
+	/**
+	 * Subtract one vector to this vector and return itself.
+	 * 
+	 * @param v
+	 * @return this -= v
+	 */
+	public Vector2D sub(Vector2D v) {
+		x -= v.x;
+		y -= v.y;
+		return this;
+	}
+	
+	/**
+	 * Do scalar multiplication to this vector and return itself.
+	 * 
+	 * @param v
+	 * @return this *= k
+	 */
+	public Vector2D mul(double k) {
+		x *= k;
+		y *= k;
+		return this;
+	}
 	
 	/**
 	 * Add Function. Doesn't affect to original things.
