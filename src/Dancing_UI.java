@@ -35,6 +35,8 @@ public class Dancing_UI extends JFrame {
 		//Buttons
 		add(play_btn);
 		add(stop_btn);
+		play_btn.setBounds(720, 350, 50, 30);
+		stop_btn.setBounds(815, 350, 50, 30);
 	
 		setResizable(false);
 		setSize(1000, 700);
@@ -48,6 +50,10 @@ public class Dancing_UI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		
+	}
+	
+	public static void main(String[] args) {
+		new Dancing_UI();
 	}
 
 }
