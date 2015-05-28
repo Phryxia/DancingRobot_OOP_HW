@@ -167,4 +167,19 @@ public abstract class RobotPart implements Servo {
 	{
 		angle.setDestination(angle.getDestination() + theta);
 	}
+	
+	/**
+	 * Apply instruction to this system.
+	 * 
+	 * @param in
+	 */
+	public void giveInstruction(Instruction in) {
+		if(in != null) {
+			move(in.getDesiredPos().x, in.getDesiredPos().y);
+			setCurrentAngle(in.getDesiredAngle());
+			for(int i=0; i<subParts.size(); ++i) {
+				subParts.get(i).giveInstruction(in.getChild(i));
+			}
+		}
+	}
 }

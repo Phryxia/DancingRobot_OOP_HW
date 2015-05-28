@@ -51,13 +51,16 @@ class RobotDisplayer extends JComponent {
 			public void actionPerformed(ActionEvent arg0) {
 				t = (t + 1)%1000;
 				
-				body.move(0, -0.1*Math.sin(2*Math.PI*t/500));
+				//body.move(0, -0.1*Math.sin(2*Math.PI*t/500));
 				
 				if(t % 500 == 0) {
-					larm.rotate(Math.PI*(0.5 - Math.random()));
-					rarm.rotate(Math.PI*(0.5 - Math.random()));
-					lleg.rotate(Math.PI*(0.5 - Math.random()));
-					rleg.rotate(Math.PI*(0.5 - Math.random()));
+					Instruction i1 = new Instruction(0, 0, 0.25*Math.PI*(0.5 - Math.random()));
+					i1.add(new Instruction(0, 0, Math.PI*(0.5 - Math.random())));
+					i1.add(new Instruction(0, 0, Math.PI*(0.5 - Math.random())));
+					i1.add(new Instruction(0, 0, Math.PI*(0.5 - Math.random())));
+					i1.add(new Instruction(0, 0, Math.PI*(0.5 - Math.random())));
+					
+					body.giveInstruction(i1);
 				}
 				
 				repaint();
