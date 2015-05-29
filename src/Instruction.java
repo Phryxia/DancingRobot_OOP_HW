@@ -51,24 +51,56 @@ public class Instruction {
 	private double   desiredAngle;
 	private ArrayList <Instruction> child;
 	
-	public Instruction(double x, double y, double theta) {
-		desiredPos = new Vector2D(x, y);
+	/**
+	 * Create an instruction.
+	 * 
+	 * @param dx : amount of x translation
+	 * @param dy : amount of y translation
+	 * @param theta
+	 */
+	public Instruction(double dx, double dy, double theta) {
+		desiredPos = new Vector2D(dx, dy);
 		desiredAngle = theta;
 		child = new ArrayList <Instruction> (4);
 	}
 	
-	public Vector2D setDesiredPos(double x, double y) {
-		return desiredPos.set(x, y);
+	/**
+	 * Set objective translation amount.
+	 * 
+	 * @param x
+	 * @param y
+	 * @return this
+	 */
+	public Instruction setDesiredPos(double x, double y) {
+		desiredPos.set(x, y);
+		return this;
 	}
 	
+	/**
+	 * Get objective translation amount.
+	 * 
+	 * @return
+	 */
 	public Vector2D getDesiredPos() {
 		return desiredPos;
 	}
 	
-	public double setDesiredAngle(double theta) {
-		return (desiredAngle = theta);
+	/**
+	 * Set objective angle destination.
+	 * 
+	 * @param theta
+	 * @return this
+	 */
+	public Instruction setDesiredAngle(double theta) {
+		desiredAngle = theta;
+		return this;
 	}
 	
+	/**
+	 * Get objective angle destination.
+	 * 
+	 * @return desiredAngle.
+	 */
 	public double getDesiredAngle() {
 		return desiredAngle;
 	}
@@ -93,12 +125,26 @@ public class Instruction {
 		return Instruction.add(in, this, 0, address);
 	}
 	
+	/**
+	 * Return it's sub instruction node.
+	 * This is used at applying instructions to robot.
+	 * 
+	 * @param index
+	 * @return index-th instruction tree. null can be returned.
+	 */
 	public Instruction getChild(int index) {
-		return child.get(index);
+		// Safety!
+		if(0 <= index && index < child.size()) {
+			return child.get(index);
+		}
+		else {
+			return null;
+		}
 	}
 	
 	/**
 	 * Helper method to implement static add.
+	 * 
 	 * @param in
 	 * @param where
 	 * @param depth
@@ -111,7 +157,15 @@ public class Instruction {
 			return in;
 		}
 		else {
-			return Instruction.add(in, where.child.get(address[depth]), depth+1, address);
+			// Check null pointer safety
+			if(where.child.get(address[depth]) == null)
+			{
+				throw new IllegalArgumentException("[Instruction] add : there is no such child depth of " + depth);
+			}
+			else
+			{
+				return Instruction.add(in, where.child.get(address[depth]), depth+1, address);
+			}
 		}
 	}
 	

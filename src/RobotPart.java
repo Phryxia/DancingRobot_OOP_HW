@@ -10,8 +10,8 @@ import java.util.ArrayList;
  */
 public abstract class RobotPart implements Servo {
 	// Attribute
-	protected String   name;
-	protected Vector2D position;
+	protected String    name;
+	protected Vector2D  position;
 	protected RobotPart root;
 	protected ArrayList <RobotPart> subParts;
 	
@@ -132,10 +132,36 @@ public abstract class RobotPart implements Servo {
 		
 		// Calculate from root's position.
 		if(root != null) {
+			result.rotate(root.angle.getCurrent()); // Follow root's angle
 			result.add(root.getAbsolutePosition());
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * Return it's relative angular position.
+	 * This is completly same as getCurrentAngle()
+	 * 
+	 * @return
+	 */
+	public double getRelativeAngle() {
+		return getCurrentAngle();
+	}
+	
+	/**
+	 * Return it's absolute angular position.
+	 * Note that method from Servo is relative angular.
+	 * 
+	 * @return
+	 */
+	public double getAbsoluteAngle() {
+		if(root == null) {
+			return getCurrentAngle();
+		}
+		else {
+			return getCurrentAngle() + root.getAbsoluteAngle();
+		}
 	}
 	
 	@Override
@@ -177,6 +203,7 @@ public abstract class RobotPart implements Servo {
 		if(in != null) {
 			move(in.getDesiredPos().x, in.getDesiredPos().y);
 			setCurrentAngle(in.getDesiredAngle());
+			
 			for(int i=0; i<subParts.size(); ++i) {
 				subParts.get(i).giveInstruction(in.getChild(i));
 			}

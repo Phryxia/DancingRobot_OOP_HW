@@ -1,15 +1,21 @@
 import java.awt.*;
 import java.awt.geom.*;
 
-public class GRobotArm extends RobotArm implements Drawable, ColorModule {
+/**
+ * Drawing class of RobotArm. (Owner : Se Kyu Kwon)
+ * 
+ * Hey You!!!!! ToDo!!!!!
+ * 
+ * Extends GRobotPart to this class and remove draw function
+ * 
+ * @author Se-Kyu-Kwon
+ */
+public class GRobotArm extends GRobotPart implements ColorModule {
 	// Attribution
 	public static final int BODY_LINE = 0;
 	public static final int BODY_FILL = 1;
 	
 	private Color[] cList;
-	
-	// Don't touch if you don't know what you are doing
-	private AffineTransform matrix;
 	
 	/**
 	 * Constructor 
@@ -21,12 +27,18 @@ public class GRobotArm extends RobotArm implements Drawable, ColorModule {
 	 * @param weight
 	 */
 	public GRobotArm(String name, double x, double y, double length, double weight) {
-		super(name, x, y, length, weight);
+		super(name, x, y);
+		
+		this.length = length;
+		this.weight = weight;
 		
 		cList = new Color[4];
 		cList[BODY_LINE] = Color.BLACK;
 		cList[BODY_FILL] = Color.RED;
 	}
+	
+	protected double length;
+	protected double weight;
 
 	/**
 	 * Get this part's specific color.
@@ -52,33 +64,15 @@ public class GRobotArm extends RobotArm implements Drawable, ColorModule {
 	}
 	
 	/**
-	 * Draw robot arm using transformation.
+	 * Your own drawing method.
+	 * 
+	 * @param g2d
 	 */
-	@Override
-	public void draw(Graphics2D g2d) {
-		double   temp_angle  = getCurrentAngle(); // To ensure thread safety
-		Vector2D absolutePos = getAbsolutePosition();
-		
-		// Transformation
-		g2d.translate(absolutePos.x, absolutePos.y);
-		g2d.rotate(temp_angle);
-		
+	public void drawDefine(Graphics2D g2d) {
 		// Start Drawing
 		g2d.setColor(cList[BODY_LINE]);
 		g2d.drawRect(-20, (int)(-weight/2), (int)length, (int)weight);
 		g2d.setColor(cList[BODY_FILL]);
 		g2d.fillRect(-20, (int)(-weight/2), (int)length, (int)weight);
-		
-		// Inverse-Transformation
-		g2d.rotate(-temp_angle);
-		g2d.translate(-absolutePos.x, -absolutePos.y);
-		
-		// Draw attached subParts
-		for(RobotPart e : subParts) {
-			if(e instanceof Drawable) {
-				((Drawable) e).draw(g2d);
-			}
-		}
 	}
-
 }

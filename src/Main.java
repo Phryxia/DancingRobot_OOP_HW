@@ -34,7 +34,6 @@ class RobotDisplayer extends JComponent {
 		larm.setCurrentAngle(Math.PI);
 		
 		rarm = new GRobotArm("Robot Arm R", 50, -50, 100, 30);
-		
 		lleg = new GRobotArm("Robot Leg L", -50, 50, 120, 30);
 		lleg.setCurrentAngle(Math.PI/2);
 		rleg = new GRobotArm("Robot Leg R", 50, 50, 120, 30);
@@ -44,6 +43,8 @@ class RobotDisplayer extends JComponent {
 		body.add(rarm);
 		body.add(lleg);
 		body.add(rleg);
+		body.add(new GRobotHead("Robot Head", 0, -85, 80));
+		lleg.add(new GRobotArm("Test", 100, 0, 50, 5));
 		
 		class THandler implements ActionListener {
 
@@ -53,7 +54,7 @@ class RobotDisplayer extends JComponent {
 				
 				//body.move(0, -0.1*Math.sin(2*Math.PI*t/500));
 				
-				if(t % 500 == 0) {
+				if(t % 50 == 0) {
 					Instruction i1 = new Instruction(0, 0, 0.25*Math.PI*(0.5 - Math.random()));
 					i1.add(new Instruction(0, 0, Math.PI*(0.5 - Math.random())));
 					i1.add(new Instruction(0, 0, Math.PI*(0.5 - Math.random())));
@@ -73,6 +74,10 @@ class RobotDisplayer extends JComponent {
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
+		
+		g2d.setColor(Color.BLACK);
+		g2d.drawLine(200, 0, 200, 400);
+		g2d.drawLine(0, 200, 400, 200);
 		
 		body.draw(g2d);
 		//repaint();
