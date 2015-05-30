@@ -29,6 +29,7 @@ public class Main {
 class RobotDisplayer extends JComponent {
 	
 	GRobot myRobot;
+	GRobot youRobot;
 	
 	private int t;
 	
@@ -40,6 +41,9 @@ class RobotDisplayer extends JComponent {
 		ArrayList <Instruction> iList = new ArrayList <Instruction> ();
 		
 		myRobot.applyInstruction(iList);
+		
+		youRobot = new SeKyuRobot("JiSu!");
+		youRobot.move(300, 200);
 		
 		
 		class THandler implements ActionListener {
@@ -64,5 +68,6 @@ class RobotDisplayer extends JComponent {
 		g2d.drawLine(0, 200, 400, 200);
 		
 		myRobot.draw(g2d);
+		youRobot.draw(g2d);
 	}
 }
