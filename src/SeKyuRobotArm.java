@@ -10,7 +10,7 @@ import java.awt.geom.*;
  * 
  * @author Se-Kyu-Kwon
  */
-public class GRobotArm extends GRobotPart implements ColorModule {
+public class SeKyuRobotArm extends GRobotPart implements ColorModule {
 	// Attribution
 	public static final int BODY_LINE = 0;
 	public static final int BODY_FILL = 1;
@@ -26,7 +26,7 @@ public class GRobotArm extends GRobotPart implements ColorModule {
 	 * @param length
 	 * @param weight
 	 */
-	public GRobotArm(String name, double x, double y, double length, double weight) {
+	public SeKyuRobotArm(String name, double x, double y, double length, double weight) {
 		super(name, x, y);
 		
 		this.length = length;

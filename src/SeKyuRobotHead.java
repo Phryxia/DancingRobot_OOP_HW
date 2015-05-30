@@ -5,7 +5,7 @@ import java.awt.*;
  * 
  * @author Se-Kyu-Kwon
  */
-public class GRobotHead extends GRobotPart implements ColorModule {
+public class SeKyuRobotHead extends GRobotPart implements ColorModule {
 
 	// Attribution
 	public static final int BODY_LINE = 0;
@@ -23,7 +23,7 @@ public class GRobotHead extends GRobotPart implements ColorModule {
 	 * @param y
 	 * @param radius
 	 */
-	public GRobotHead(String name, double x, double y, double radius) {		
+	public SeKyuRobotHead(String name, double x, double y, double radius) {		
 		super(name, x, y);
 		this.radius = radius;
 		
@@ -41,15 +41,13 @@ public class GRobotHead extends GRobotPart implements ColorModule {
 	}
 	
 	@Override
-	public Color getColor(int color_id)
-	{
+	public Color getColor(int color_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setColor(int color_id, Color c)
-	{
+	public void setColor(int color_id, Color c) {
 		// TODO Auto-generated method stub
 		
 	}

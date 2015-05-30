@@ -5,7 +5,7 @@ import java.awt.*;
  * 
  * @author Se-Kyu-Kwon
  */
-public class GRobotBody extends GRobotPart implements ColorModule {
+public class SeKyuRobotBody extends GRobotPart implements ColorModule {
 	
 	public static final int BODY_LINE = 0;
 	public static final int BODY_FILL = 1;
@@ -24,7 +24,7 @@ public class GRobotBody extends GRobotPart implements ColorModule {
 	 * @param width
 	 * @param height
 	 */
-	public GRobotBody(String name, double x, double y, double width, double height) {
+	public SeKyuRobotBody(String name, double x, double y, double width, double height) {
 		super(name, x, y);
 		
 		this.width = width;

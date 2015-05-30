@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 
 /**
+ * Todo List
+ * 
+ * - Bug : getAbsolutePosition - Unmatched. (Not Accurate)
+ */
+
+/**
  * Abstract class RobotPart represents independent
  * robot parts. Each part can have several RobotParts.
  * 
@@ -34,6 +40,15 @@ public abstract class RobotPart implements Servo {
 	}
 	
 	/**
+	 * Return it's subParts. Don't abuse this function.
+	 * 
+	 * @return
+	 */
+	public ArrayList <RobotPart> getSubParts() {
+		return subParts;
+	}
+	
+	/**
 	 * Search and return RobotPart which name is 'targetName'
 	 * If there is no such element, null will be returned
 	 * 
@@ -62,14 +77,16 @@ public abstract class RobotPart implements Servo {
 	 * which name is same to one that already exists.
 	 * 
 	 * @param newPart
+	 * @return newPart
 	 */
-	public void add(RobotPart newPart) {
+	public RobotPart add(RobotPart newPart) {
 		if(search(newPart.name) != null) {
 			throw new IllegalArgumentException("[RobotPart] Can't have duplicated name : " + newPart.name);
 		}
 		else {	
 			subParts.add(newPart);
 			newPart.root = this;
+			return newPart;
 		}
 	}
 	
@@ -107,6 +124,12 @@ public abstract class RobotPart implements Servo {
 		return false;
 	}
 	
+	/**
+	 * Move this parts as specified difference.
+	 * 
+	 * @param dx
+	 * @param dy
+	 */
 	public void move(double dx, double dy) {
 		position.translate(dx, dy);
 	}
@@ -164,6 +187,9 @@ public abstract class RobotPart implements Servo {
 		}
 	}
 	
+	/**
+	 * Servo Methods
+	 */
 	@Override
 	public Vector2D getCenter()
 	{
@@ -173,7 +199,7 @@ public abstract class RobotPart implements Servo {
 	@Override
 	public void setCenter(Vector2D center)
 	{
-		position = center;
+		position.set(center);
 	}
 
 	@Override
@@ -195,18 +221,26 @@ public abstract class RobotPart implements Servo {
 	}
 	
 	/**
-	 * Apply instruction to this system.
+	 * Apply single instruction to current RobotPart.
 	 * 
-	 * @param in
+	 * @param ins
 	 */
-	public void giveInstruction(Instruction in) {
-		if(in != null) {
-			move(in.getDesiredPos().x, in.getDesiredPos().y);
-			setCurrentAngle(in.getDesiredAngle());
-			
-			for(int i=0; i<subParts.size(); ++i) {
-				subParts.get(i).giveInstruction(in.getChild(i));
-			}
+	public void applyInstruction(Instruction ins) {
+		position.set(ins.position);
+		setCurrentAngle(ins.angle);
+	}
+	
+	/**
+	 * Investigate how many children exist in this system.
+	 * Use recursive algortihm.
+	 * 
+	 * @return
+	 */
+	public int size() {
+		int result = 1; // Count itself
+		for(RobotPart rp : subParts) {
+			result += rp.size();
 		}
+		return result;
 	}
 }
