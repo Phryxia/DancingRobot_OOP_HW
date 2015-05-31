@@ -224,13 +224,16 @@ public abstract class RobotPart implements Servo {
 	 * Apply single instruction to current RobotPart.
 	 * Note that angle must wihtin 0 ~ 360 otherwise no change.
 	 * 
+	 * Note that Instruction has 60-degree angle so that you
+	 * have to convert it in radian.
+	 * 
 	 * @param ins
 	 */
 	public void applyInstruction(Instruction ins) {
 		position.add(ins.position);
 		
 		if(ins.angle != -1) {
-			setCurrentAngle(ins.angle);
+			setCurrentAngle(Math.PI/180*ins.angle);
 		}
 	}
 	

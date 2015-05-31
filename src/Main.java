@@ -19,7 +19,6 @@ public class Main {
 		
 		aFrame.setVisible(true);
 	}
-
 }
 
 /*
@@ -64,10 +63,10 @@ class RobotDisplayer extends JComponent {
 				iList.add(new Instruction(0, 0, -1));
 					
 				// LArm
-				iList.add(new Instruction(0, 0, damper.getCurrent()*Math.PI + Math.PI/2));
+				iList.add(new Instruction(0, 0, (int)(damper.getCurrent()*90 + 90)));
 					
 				// RArm
-				iList.add(new Instruction(0, 0, -damper.getCurrent()*Math.PI + Math.PI/2));
+				iList.add(new Instruction(0, 0, -(int)(damper.getCurrent()*90 + 90)));
 					
 				// Head
 				iList.add(new Instruction(0, 0, -1));
@@ -75,8 +74,8 @@ class RobotDisplayer extends JComponent {
 				// LLeg
 				if(damper.getDelta() > 0.2) {
 					double x = (0.5-Math.random())*Math.PI/2;
-				iList.add(new Instruction(0, 0, Math.PI/2 + x));
-				iList.add(new Instruction(0, 0, Math.PI/2 + x));	
+					iList.add(new Instruction(0, 0, (int)(Math.PI/2 + x)));
+					iList.add(new Instruction(0, 0, (int)(Math.PI/2 + x)));	
 				}
 				
 				myRobot.applyInstruction(iList);

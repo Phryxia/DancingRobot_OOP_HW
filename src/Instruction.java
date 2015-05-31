@@ -14,18 +14,20 @@
  */
 public class Instruction {
 	public Vector2D position;
-	public double   angle;
+	public int angle;
 	
 	/**
 	 * Constructor. Note that argument will be copied.
 	 * (Doesn't store it's reference)
 	 * 
+	 * theta should be represented in 60-degree
+	 * 
 	 * @param position
 	 * @param angle
 	 */
-	public Instruction(Vector2D position, double angle)	{
+	public Instruction(Vector2D position, int theta)	{
 		this.position = new Vector2D(position);
-		this.angle    = angle;
+		angle = theta;
 	}
 	
 	/**
@@ -35,8 +37,12 @@ public class Instruction {
 	 * @param y
 	 * @param angle
 	 */
-	public Instruction(double x, double y, double angle) {
+	public Instruction(double x, double y, int theta) {
 		position = new Vector2D(x, y);
-		this.angle = angle;
+		angle = theta;
+	}
+	
+	public String toString() {
+		return "[" + position.x + ", " + position.y + ", " + angle + "]";
 	}
 }
