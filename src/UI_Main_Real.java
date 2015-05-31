@@ -67,6 +67,38 @@ public class UI_Main_Real extends JFrame {
 		setVisible(true);
 	}
 	
+
+	
+	
+		
+	/**
+	 * Generate Split_Panel	 * - Top&Bottom, Left&Right, 3 Parts
+	 * 
+	 * @author Tae-in Kim
+	 */
+	public void generate_Panel() {
+		show_Stage();
+		generate_TabPanel();
+		generate_ListPanel();
+		root = this.getRootPane();
+		leftright = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treeList, play_panel);
+		updown = new JSplitPane(JSplitPane.VERTICAL_SPLIT, leftright, KeyFrame);		
+		contentPane = root.getContentPane();
+		contentPane.setLayout(new BorderLayout());
+		
+		leftright.setDividerLocation(200);
+		leftright.setDividerSize(2);
+		leftright.setEnabled(false);
+		
+		updown.setDividerLocation(350);
+		updown.setDividerSize(0);
+		updown.setEnabled(false);
+		
+		contentPane.add("Center",updown);
+	}
+
+	
+	
 	/**
 	 * Initialize the Variables
 	 * - JComponents
@@ -163,32 +195,7 @@ public class UI_Main_Real extends JFrame {
 		    return null;
 		}
 	}
-	
-	/**
-	 * Generate Split_Panel	 * - Top&Bottom, Left&Right, 3 Parts
-	 * 
-	 * @author Tae-in Kim
-	 */
-	public void generate_Panel() {
-		show_Stage();
-		generate_TabPanel();
-		generate_ListPanel();
-		root = this.getRootPane();
-		leftright = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treeList, play_panel);
-		updown = new JSplitPane(JSplitPane.VERTICAL_SPLIT, leftright, KeyFrame);		
-		contentPane = root.getContentPane();
-		contentPane.setLayout(new BorderLayout());
-		
-		leftright.setDividerLocation(200);
-		leftright.setDividerSize(2);
-		leftright.setEnabled(false);
-		
-		updown.setDividerLocation(350);
-		updown.setDividerSize(0);
-		updown.setEnabled(false);
-		
-		contentPane.add("Center",updown);
-	}
+
 	
 	/**
 	 * Generate MenuBar
