@@ -33,25 +33,31 @@ public class Text_List_Panel extends JPanel {
 		
 		tp.add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				load_Anchors();
-				lp.listModel.addElement("KeyFrame");
+				if(load_Anchors()) {
+					lp.listModel.addElement("KeyFrame");
+				} else {
+					JOptionPane.showMessageDialog(null, "Invalid Input. Check All Values.", "Error!", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
 		tp.delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				remove_KeyFrame(lp.option_list.getSelectedIndex());
-				lp.listModel.remove(lp.option_list.getSelectedIndex());
+				if(lp.option_list.getSelectedIndex() >= 0) {
+					remove_KeyFrame(lp.option_list.getSelectedIndex());
+					lp.listModel.remove(lp.option_list.getSelectedIndex());
+				} else {
+					JOptionPane.showMessageDialog(null, "Select the KeyFrame.", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
-		
 		add(lp);
 		add(tp);
 	}
 	
 	// Method for Load Anchor Values.
-	public void load_Anchors() {
-		tp.return_val(val_n, val_la, val_ra, val_ll, val_rl);
+	public boolean load_Anchors() {
+		return tp.return_val(val_n, val_la, val_ra, val_ll, val_rl);
 	}
 	
 	// Remove Object from ArrayList

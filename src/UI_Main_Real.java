@@ -84,7 +84,7 @@ public class UI_Main_Real extends JFrame {
 	 * @author Tae-in Kim
 	 */
 	public void show_Stage() {
-		bg = new ImageIcon("C:\\Users\\Ulnamsong\\Documents\\GitHub\\DancingRobot_OOP_HW\\image\\moodae.jpg");
+		bg = new ImageIcon("C:\\Users\\GAMMARU_2\\Documents\\GitHub\\DancingRobot_OOP_HW\\image\\moodae.jpg");
 		play_panel = new JPanel() {
 			public void paintComponent(Graphics g) {
 				Dimension d = getSize();

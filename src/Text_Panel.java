@@ -40,18 +40,45 @@ public class Text_Panel extends JPanel {
 		generate_TField();
 	}
 	
-	public void return_val(ArrayList<Integer> para1, ArrayList<Integer> para2, ArrayList<Integer> para3, ArrayList<Integer> para4, ArrayList<Integer> para5) {
+	// Decide the validity of anchor_value.
+	public boolean isValid(int input) {
+		if(input >= 0 && input < 360) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean return_val(ArrayList<Integer> para1, ArrayList<Integer> para2, ArrayList<Integer> para3, ArrayList<Integer> para4, ArrayList<Integer> para5) {
 		v_neck = Integer.parseInt(anchor_neck.getText());
 		v_larm = Integer.parseInt(anchor_larm.getText());
 		v_rarm = Integer.parseInt(anchor_rarm.getText());
 		v_lleg = Integer.parseInt(anchor_lleg.getText());
 		v_rleg = Integer.parseInt(anchor_rleg.getText());
-		
-		para1.add(v_neck);
-		para2.add(v_larm);
-		para3.add(v_rarm);
-		para4.add(v_lleg);
-		para5.add(v_rleg);
+		if(isValid(v_neck) && isValid(v_larm) && isValid(v_rarm) && isValid(v_lleg) && isValid(v_rleg)) {
+			para1.add(v_neck);
+			para2.add(v_larm);
+			para3.add(v_rarm);
+			para4.add(v_lleg);
+			para5.add(v_rleg);
+		}
+		return false;
+	}
+	
+	public boolean remove_val(int index, ArrayList<Integer> para1, ArrayList<Integer> para2, ArrayList<Integer> para3, ArrayList<Integer> para4, ArrayList<Integer> para5) {
+		v_neck = Integer.parseInt(anchor_neck.getText());
+		v_larm = Integer.parseInt(anchor_larm.getText());
+		v_rarm = Integer.parseInt(anchor_rarm.getText());
+		v_lleg = Integer.parseInt(anchor_lleg.getText());
+		v_rleg = Integer.parseInt(anchor_rleg.getText());
+		if(isValid(v_neck) && isValid(v_larm) && isValid(v_rarm) && isValid(v_lleg) && isValid(v_rleg)) {
+			para1.remove(index);
+			para2.remove(index);
+			para3.remove(index);
+			para4.remove(index);
+			para5.remove(index);
+		}
+		return false;
 	}
 	
 	public void generate_TField () {
