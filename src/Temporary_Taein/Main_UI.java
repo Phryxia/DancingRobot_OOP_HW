@@ -1,6 +1,5 @@
 package Temporary_Taein;
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -10,8 +9,10 @@ public class Main_UI extends JFrame{
 	private ImageIcon  bg;
 	private JPanel     play_panel;
 	private JPanel     image_panel;
+	
 	public  JSplitPane updown;
 	public  JSplitPane leftright;
+	
 	private JMenuItem  program_info;
 	private JMenuItem  saveItem;
 	private JMenuItem  exitItem;
@@ -22,7 +23,7 @@ public class Main_UI extends JFrame{
 	public Main_UI () {
 		generate_Menu ();
 		generate_panel ();
-		setSize(1000, 650);
+		setSize(950, 600);
 		setTitle("Dancing Robot (Taein & Sekyu)");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -37,7 +38,7 @@ public class Main_UI extends JFrame{
 		contentPane = root_panel.getContentPane();
 		contentPane.setLayout ( new BorderLayout ());
 		
-		leftright.setDividerLocation(300);
+		leftright.setDividerLocation(200);
 		leftright.setDividerSize(2);
 		leftright.setEnabled(false);
 		updown.   setDividerLocation(399);
@@ -60,7 +61,6 @@ public class Main_UI extends JFrame{
 	}
 	
 	public void generate_Menu() {
-
 		JMenuBar menuBar  = new JMenuBar ();
 		JMenu    fileMenu = new JMenu    ("File");
 		JMenu    editMenu = new JMenu    ("Edit");

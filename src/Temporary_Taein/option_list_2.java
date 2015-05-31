@@ -11,10 +11,9 @@ public class option_list_2 extends JPanel {
 	public JScrollPane               scroll_pan_2;
 	
 	public option_list_2 () {
-		//setLayout(new GridLayout(1, 1, 0, 0));
 		scroll_pan_2 = new JScrollPane(frame_list_2);
-		frame_list_2.setPreferredSize(new Dimension(90, 150));
-		scroll_pan_2.setPreferredSize(new Dimension(110, 170));
+		frame_list_2.setPreferredSize(new Dimension(70, 120));
+		scroll_pan_2.setPreferredSize(new Dimension(90, 120));
 		add(scroll_pan_2);
 	}
 }
