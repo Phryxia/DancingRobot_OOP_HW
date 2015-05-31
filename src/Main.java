@@ -1,7 +1,9 @@
+import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -28,29 +30,57 @@ public class Main {
  */
 class RobotDisplayer extends JComponent {
 	
+	BGM bgm;
 	GRobot myRobot;
-	GRobot youRobot;
 	
 	private int t;
+	Damper damper;
 	
 	public RobotDisplayer() {
+		damper = new Damper(0, 0.995);
 		
+		// Robot Initialization
 		myRobot = new SeKyuRobot("SeKyu!");
 		myRobot.move(200, 200);
 		
-		ArrayList <Instruction> iList = new ArrayList <Instruction> ();
+		// Sound Test bed
+		bgm = new BGM();
+		bgm.loadMP3("test.mp3");
+		bgm.play();
 		
-		myRobot.applyInstruction(iList);
-		
-		youRobot = new SeKyuRobot("JiSu!");
-		youRobot.move(300, 200);
-		
-		
+		// Loop Function
 		class THandler implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				t = (t + 1)%1000;
+				
+				damper.setDestination(Math.abs(bgm.getData(0)));
+				
+				// Se-Kyu Order : Body Arm Arm Head Leg Leg
+				ArrayList <Instruction> iList = new ArrayList <Instruction> ();
+					
+				// Maater
+				iList.add(new Instruction(0, 0, -1));
+					
+				// LArm
+				iList.add(new Instruction(0, 0, damper.getCurrent()*Math.PI + Math.PI/2));
+					
+				// RArm
+				iList.add(new Instruction(0, 0, -damper.getCurrent()*Math.PI + Math.PI/2));
+					
+				// Head
+				iList.add(new Instruction(0, 0, -1));
+				
+				// LLeg
+				if(damper.getDelta() > 0.2) {
+					double x = (0.5-Math.random())*Math.PI/2;
+				iList.add(new Instruction(0, 0, Math.PI/2 + x));
+				iList.add(new Instruction(0, 0, Math.PI/2 + x));	
+				}
+				
+				myRobot.applyInstruction(iList);
+				iList.clear();
 				
 				repaint();
 			}
@@ -68,6 +98,9 @@ class RobotDisplayer extends JComponent {
 		g2d.drawLine(0, 200, 400, 200);
 		
 		myRobot.draw(g2d);
-		youRobot.draw(g2d);
+	}
+	
+	private double map(double x, double xmin, double xmax, double ymin, double ymax) {
+		return (x-xmin)/(xmax-ymin)*(ymax-ymin) + ymin;
 	}
 }

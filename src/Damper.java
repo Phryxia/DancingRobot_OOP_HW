@@ -7,13 +7,14 @@ import javax.swing.Timer;
  * Damper class is a utility to control value
  * to change smoothly. 
  * 
- * @author Phryxia
+ * @author Se-Kyu-Kwon
  */
 public class Damper
 {
 	private double damp_rate;
 	private double destination;
 	private double current_value;
+	private double prev_value;
 	private Timer  timer;
 	
 	/**
@@ -26,12 +27,14 @@ public class Damper
 		setRate(init_rate);
 		setDestination(init_value);
 		current_value = destination;
+		prev_value = current_value;
 		
 		class DamperListener implements ActionListener
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
+				prev_value = current_value;
 				current_value += (destination - current_value)*damp_rate;
 			}	
 		}
@@ -74,6 +77,15 @@ public class Damper
 	public double getCurrent()
 	{
 		return current_value;
+	}
+	
+	/**
+	 * Return the difference between previous value.
+	 * @return
+	 */
+	public double getDelta()
+	{
+		return current_value - prev_value;
 	}
 	
 	/*

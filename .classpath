@@ -2,5 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Phryxia/Documents/GitHub/Minim-master/library/minim.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Phryxia/Documents/GitHub/Minim-master/library/jl1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Phryxia/Documents/GitHub/Minim-master/library/jsminim.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Phryxia/Documents/GitHub/Minim-master/library/mp3spi1.9.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Phryxia/Documents/GitHub/Minim-master/library/tritonus_aos.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Phryxia/Documents/GitHub/Minim-master/library/tritonus_share.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
