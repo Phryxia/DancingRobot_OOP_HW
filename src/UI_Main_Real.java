@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -23,19 +24,21 @@ public class UI_Main_Real extends JFrame {
 	 */
 	JFrame frame;
 	JTabbedPane tabPan;
-	DefaultListModel<String> listModel;
-	JList<String> list;
+	DefaultListModel<String> listModel_1;
+	DefaultListModel<String> listModel_2;
+	JList<String> list_r1;
+	JList<String> list_r2;
 	
-	JLabel leftLabel;
-	
-	JButton addFile;
-	JButton removeFile;
+	JLabel leftLabel_1;
+	JLabel leftLabel_2;
+
 	JButton play;
 	JButton stop;
 	
 	JMenuItem stuinfoItem;
 	JMenuItem exitItem;
 	JMenuItem proinfoItem;
+	JMenuItem saveItem;
 	
 	JPanel treeList;
 	JPanel Player;
@@ -59,10 +62,10 @@ public class UI_Main_Real extends JFrame {
 		generate_Panel();
 		generate_Menu();
 		setSize(800, 600);
+		setTitle("Dancing Robot (Taein & Sekyu)");
 		setResizable(false);
 		setVisible(true);
 	}
-	
 	
 	/**
 	 * Initialize the Variables
@@ -73,14 +76,7 @@ public class UI_Main_Real extends JFrame {
 	public void Initialize() {
 		play = new JButton("Play");
 		stop = new JButton("Stop");
-		addFile = new JButton("Add");
-		removeFile = new JButton("Remove");
-		play.setFont(new Font("Arial", Font.PLAIN, 15));
-		stop.setFont(new Font("Arial", Font.PLAIN, 15));
-		addFile.setFont(new Font("Arial", Font.PLAIN, 15));
-		removeFile.setFont(new Font("Arial", Font.PLAIN, 15));
-	}
-	
+	}	
 	/**
 	 * Print Stage Image
 	 * - By ContentPane
@@ -107,8 +103,8 @@ public class UI_Main_Real extends JFrame {
 	 * @author Tae-in Kim
 	 */
 	public void generate_TabPanel() {
-		Robot_Option ro1 = new Robot_Option("aaa");
-		Robot_Option ro2 = new Robot_Option("bbb");
+		Robot_Option ro1 = new Robot_Option("111");
+		Robot_Option ro2 = new Robot_Option("222");
 		
 		tabPan = new JTabbedPane();
 		tabPan.add("Anim : Robot1", ro1);
@@ -122,54 +118,42 @@ public class UI_Main_Real extends JFrame {
 	/**
 	 * Generate List_Panel
 	 * - Custom Options in List
-	 * 
-	 * @author Tae-in Kim
 	 */
 	public void generate_ListPanel() {
-		leftLabel = new JLabel("File List.");
-		listModel = new DefaultListModel<String>();
+		listModel_1 = new DefaultListModel<String>();
+		listModel_2 = new DefaultListModel<String>();
+		JScrollPane l_r1;
+		JScrollPane l_r2;
 		
-		list = new JList<String>(listModel);
-		list.setSize(200, 300);
+		list_r1 = new JList<String>();
+		list_r1.setSize(90, 300);
+		
+		list_r2 = new JList<String>();
+		list_r2.setSize(90, 300);
+		
+		l_r1 = new JScrollPane(list_r1);
+		l_r2 = new JScrollPane(list_r2);
+		l_r1.setSize(90, 300);
+		l_r2.setSize(90, 300);
+		
+		JPanel lists = new JPanel();
+		lists.setLayout(new FlowLayout());
+		lists.add(l_r1);
+		lists.add(l_r2);
 		
 		JPanel btns = new JPanel();
-		btns.setLayout(new GridLayout(2, 2, 1, 1));
-		
-		addFile.addMouseListener(new MouseListener() {
-			public void mouseClicked(MouseEvent e){
-				String name = promptForFile();
-				listModel.addElement(name);
-			}
-			
-			public void mouseEntered(MouseEvent arg0) {}
-			public void mouseExited(MouseEvent arg0) {}
-			public void mousePressed(MouseEvent arg0) {}
-			public void mouseReleased(MouseEvent arg0) {}
-		});
-		
-		removeFile.addMouseListener(new MouseListener() {
-			public void mouseClicked(MouseEvent e){
-				listModel.remove(list.getSelectedIndex());
-			}
-			
-			public void mouseEntered(MouseEvent arg0) {}
-			public void mouseExited(MouseEvent arg0) {}
-			public void mousePressed(MouseEvent arg0) {}
-			public void mouseReleased(MouseEvent arg0) {}
-		});
-		
+		btns.setLayout(new FlowLayout());
 		btns.add(play);
 		btns.add(stop);
-		btns.add(addFile);
-		btns.add(removeFile);
 		
 		treeList = new JPanel();
-		treeList.setLayout(new BorderLayout());
-		treeList.add(leftLabel, BorderLayout.NORTH);
-		treeList.add(list, BorderLayout.CENTER);
-		treeList.add(btns, BorderLayout.SOUTH);
+		treeList.setLayout(new FlowLayout());
+		treeList.add(lists);
+		treeList.add(btns);
 	}
 	
+	// File Open Dialog
+	@SuppressWarnings("unused")
 	private String promptForFile(){
 		fc=new JFileChooser();
 		int returnVal=fc.showOpenDialog(this);
@@ -179,7 +163,6 @@ public class UI_Main_Real extends JFrame {
 		    return null;
 		}
 	}
-	
 	
 	/**
 	 * Generate Split_Panel	 * - Top&Bottom, Left&Right, 3 Parts
@@ -220,28 +203,38 @@ public class UI_Main_Real extends JFrame {
 		// File Menu & Set Mnemonic 'F'
 		// Help Menu & Set Mnemonic 'H'
 		JMenu fileMenu = new JMenu("File");
+		JMenu editMenu = new JMenu("Edit");
 		JMenu helpMenu = new JMenu("Help");
 		fileMenu.setMnemonic(KeyEvent.VK_F);
+		editMenu.setMnemonic(KeyEvent.VK_E);
 		helpMenu.setMnemonic(KeyEvent.VK_H);
 		menuBar.add(fileMenu);
+		menuBar.add(editMenu);
 		menuBar.add(helpMenu);
 
 		// File->Item(Mnemonic : E)
 		// Help->Items(Mnemonic : S, P)
 		stuinfoItem = new JMenuItem("About Student..", KeyEvent.VK_S);
-		exitItem = new JMenuItem("Exit", KeyEvent.VK_E);
+		exitItem = new JMenuItem("Exit", KeyEvent.VK_X);
+		saveItem = new JMenuItem("Save to File", KeyEvent.VK_V);
 		proinfoItem = new JMenuItem("About Program..", KeyEvent.VK_P);
 
 		exitItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}
-		    	
 		});
-		    
+		
+		//saveItem.addActionListener
+		
+		//stuinfoItem.addActionListener
+		
+		//proinfoItem.addActionListener
+		
 		helpMenu.add(stuinfoItem);
 		helpMenu.add(proinfoItem);
 		fileMenu.add(exitItem);
+		editMenu.add(saveItem);
 
 		setJMenuBar(menuBar);
 	}

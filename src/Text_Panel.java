@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.util.ArrayList;
 import java.awt.*;
+import java.awt.event.*;
 
 @SuppressWarnings("serial")
 public class Text_Panel extends JPanel {
@@ -85,7 +86,7 @@ public class Text_Panel extends JPanel {
 		add(anchor_lleg);
 		add(rleg);
 		add(anchor_rleg);
-		add(new JLabel());
-		add(new JLabel());
+		add(add);
+		add(delete);
 	}
 }
