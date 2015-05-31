@@ -88,7 +88,7 @@ public class UI_Main_Real extends JFrame {
 	 * @author Tae-in Kim
 	 */
 	public void show_Stage() {
-		bg = new ImageIcon("C:\\Users\\Administrator\\Documents\\GitHub\\DancingRobot_OOP_HW\\image\\moodae.jpg");
+		bg = new ImageIcon("C:\\Users\\Ulnamsong\\Documents\\GitHub\\DancingRobot_OOP_HW\\image\\moodae.jpg");
 		play_panel = new JPanel() {
 			public void paintComponent(Graphics g) {
 				Dimension d = getSize();
@@ -98,6 +98,25 @@ public class UI_Main_Real extends JFrame {
 			}
 		};
 
+	}
+	
+	/**
+	 * Generate Tab_Panel
+	 * - Robot1 OptionTab, Robot2 OptionTab
+	 * 
+	 * @author Tae-in Kim
+	 */
+	public void generate_TabPanel() {
+		Robot_Option ro1 = new Robot_Option("aaa");
+		Robot_Option ro2 = new Robot_Option("bbb");
+		
+		tabPan = new JTabbedPane();
+		tabPan.add("Anim : Robot1", ro1);
+		tabPan.add("Anim : Robot2", ro2);
+
+		KeyFrame = new JPanel();
+		KeyFrame.setLayout(new BorderLayout());
+		KeyFrame.add(tabPan);
 	}
 	
 	/**
@@ -161,21 +180,6 @@ public class UI_Main_Real extends JFrame {
 		}
 	}
 	
-	/**
-	 * Generate Tab_Panel
-	 * - Robot1 OptionTab, Robot2 OptionTab
-	 * 
-	 * @author Tae-in Kim
-	 */
-	public void generate_TabPanel() {
-		tabPan = new JTabbedPane();
-		tabPan.add("Anim : Robot1", null);
-		tabPan.add("Anim : Robot2", null);
-		
-		KeyFrame = new JPanel();
-		KeyFrame.setLayout(new BorderLayout());
-		KeyFrame.add(tabPan);
-	}
 	
 	/**
 	 * Generate Split_Panel	 * - Top&Bottom, Left&Right, 3 Parts
