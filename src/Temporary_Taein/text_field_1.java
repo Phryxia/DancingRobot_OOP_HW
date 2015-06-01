@@ -12,24 +12,30 @@ public class text_field_1 extends JPanel {
 	private Color     tf_back    = new Color(30, 30, 30);
 	private Color     textcolor  = new Color(170, 170, 170);
 	
-	public  JTextField neck_1    = new JTextField(3);
-	public  JTextField larm_1    = new JTextField(3);
-	public  JTextField rarm_1    = new JTextField(3);
-	public  JTextField lleg_1    = new JTextField(3);
-	public  JTextField rleg_1    = new JTextField(3);
+	public  JTextField neck_1;
+	public  JTextField larm_1;
+	public  JTextField rarm_1;
+	public  JTextField lleg_1;
+	public  JTextField rleg_1;
 	
 	public  JLabel     neck      = new JLabel("Neck : ");
 	public  JLabel     larm      = new JLabel("Left Arm : ");
 	public  JLabel     rarm      = new JLabel("Right Arm : ");
 	public  JLabel     lleg      = new JLabel("Left Leg : ");
 	public  JLabel     rleg      = new JLabel("Right leg : ");
-	public  JLabel     title1    = new JLabel("<ROBOT 2>");
+	public  JLabel     title1    = new JLabel("<ROBOT 1>");
 
 	public  JButton    addbtn    = new JButton("Add");
 	public  JButton    rembtn    = new JButton("Remove");
 	
 	public text_field_1 () {
 		setLayout(new GridLayout(4, 4, 5, 5));
+		neck_1    = new JTextField(3);
+		larm_1    = new JTextField(3);
+		rarm_1    = new JTextField(3);
+		lleg_1    = new JTextField(3);
+		rleg_1    = new JTextField(3);
+		
 		setBackground(background);
 		
 		neck_1.setSelectionColor(new Color(255, 210, 0));

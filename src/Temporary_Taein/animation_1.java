@@ -1,45 +1,46 @@
 package Temporary_Taein;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 public class animation_1 extends JPanel {
 	public  option_list_1 ol1;
 	public  text_field_1  tf1;
-	private double        v_neck2;
-	private double        v_larm2;
-	private double        v_rarm2;
-	private double        v_lleg2;
-	private double        v_rleg2;
-	private String        keyname;
+	public  int           v_neck1;
+	public  int           v_larm1;
+	public  int           v_rarm1;
+	public  int           v_lleg1;
+	public  int           v_rleg1;
 	
 	public animation_1 () {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 		setBackground(new Color(50, 50, 50));
 		ol1 = new option_list_1 ();
 		tf1 = new text_field_1  ();
-		
-		addEvent();
 		add(ol1);
 		add(tf1);
 	}
 	
-	public void addEvent () {
-		tf1.addbtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				keyname = JOptionPane.showInputDialog("Enter KeyFrame Name.", "Name Input");
-				ol1.listMode_1.addElement(keyname);
-			}
-		});
-		
-		tf1.rembtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ol1.listMode_1.remove(ol1.frame_list_1.getSelectedIndex());
-			}
-		});
+	public void saveToVal () {
+		v_neck1 = Integer.parseInt(tf1.neck_1.getText());
+		v_larm1 = Integer.parseInt(tf1.larm_1.getText());
+		v_rarm1 = Integer.parseInt(tf1.rarm_1.getText());
+		v_lleg1 = Integer.parseInt(tf1.lleg_1.getText());
+		v_rleg1 = Integer.parseInt(tf1.rleg_1.getText());
 	}
+	
+	public void setData (ArrayList<Integer> para, int index) {
+		int pos = index * 5;
+		saveToVal();
+		para.add(pos + 0, v_neck1);
+		para.add(pos + 1, v_larm1);
+		para.add(pos + 2, v_rarm1);
+		para.add(pos + 3, v_lleg1);
+		para.add(pos + 4, v_rleg1);
+	}
+	
+	
 	
 }

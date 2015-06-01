@@ -12,11 +12,11 @@ public class text_field_2 extends JPanel {
 	private Color     tf_back    = new Color(30, 30, 30);
 	private Color     textcolor  = new Color(170, 170, 170);
 	
-	public JTextField neck_2 = new JTextField(3);
-	public JTextField larm_2 = new JTextField(3);
-	public JTextField rarm_2 = new JTextField(3);
-	public JTextField lleg_2 = new JTextField(3);
-	public JTextField rleg_2 = new JTextField(3);
+	public JTextField neck_2;
+	public JTextField larm_2;
+	public JTextField rarm_2;
+	public JTextField lleg_2;
+	public JTextField rleg_2;
 	
 	public JLabel     neck   = new JLabel("Neck : ");
 	public JLabel     larm   = new JLabel("Left Arm : ");
@@ -31,6 +31,11 @@ public class text_field_2 extends JPanel {
 	public text_field_2 () {
 		setBackground(new Color(50, 50, 50));
 		setLayout(new GridLayout(4, 4, 5, 5));
+		neck_2 = new JTextField(3);
+		larm_2 = new JTextField(3);
+		rarm_2 = new JTextField(3);
+		lleg_2 = new JTextField(3);
+		rleg_2 = new JTextField(3);
 		
 		neck_2.setSelectionColor(new Color(255, 210, 0));
 		neck_2.setSelectedTextColor(tf_back);
