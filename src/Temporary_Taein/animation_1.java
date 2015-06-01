@@ -1,24 +1,28 @@
+/**
+ * Animation_1.java
+ * 
+ *  @author Taein Kim
+ */
+
 package Temporary_Taein;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
-
 import javax.swing.*;
 
-public class animation_1 extends JPanel {
-	public  option_list_1 ol1;
-	public  text_field_1  tf1;
+public class Animation_1 extends JPanel {
+	public  Option_List_1 ol1;
+	public  Text_Field_1  tf1;
 	public  int           v_neck1;
 	public  int           v_larm1;
 	public  int           v_rarm1;
 	public  int           v_lleg1;
 	public  int           v_rleg1;
 	
-	public animation_1 () {
+	public Animation_1 () {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 		setBackground(new Color(50, 50, 50));
-		ol1 = new option_list_1 ();
-		tf1 = new text_field_1  ();
+		ol1 = new Option_List_1 ();
+		tf1 = new Text_Field_1  ();
 		add(ol1);
 		add(tf1);
 	}

@@ -17,12 +17,7 @@ public class FileOpenDialog extends JFrame {
 	private int returnVal;
 	
 	public FileOpenDialog () {
-			System.out.println(openFile());
-		
-	}
-	
-	public String getAddress() {
-		return chooser.getSelectedFile().getAbsolutePath();
+		System.out.println(openFile());
 	}
 	
 	/**

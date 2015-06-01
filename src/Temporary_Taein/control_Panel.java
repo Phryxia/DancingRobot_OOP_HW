@@ -1,16 +1,21 @@
+/**
+ * Control_Panel.java
+ * 
+ * @author Taein Kim
+ */
 package Temporary_Taein;
 import javax.swing.*;
 
 import java.awt.*;
 
-public class control_Panel extends JPanel {
+public class Control_Panel extends JPanel {
 	public JCheckBox r1_Active;
 	public JCheckBox r2_Active;
 	
 	public JButton   play_anim;
 	public JButton   stop_anim;
 	
-	public control_Panel () {
+	public Control_Panel () {
 		r1_Active = new JCheckBox(" ROBOT1 ACTIVE ");
 		r2_Active = new JCheckBox(" ROBOT2 ACTIVE ");
 		

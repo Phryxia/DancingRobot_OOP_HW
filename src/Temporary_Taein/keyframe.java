@@ -1,3 +1,8 @@
+/**
+ * keyframe.java
+ * 
+ * @author Taein Kim
+ */
 package Temporary_Taein;
 import javax.swing.*;
 
@@ -6,8 +11,8 @@ import java.util.ArrayList;
 import java.awt.*;
 
 public class keyframe extends JPanel {
-	public  animation_1 anim1 = new animation_1 ();
-	public  animation_2 anim2 = new animation_2 ();
+	public  Animation_1 anim1 = new Animation_1 ();
+	public  Animation_2 anim2 = new Animation_2 ();
 	public  ArrayList<Integer> robot_1 = new ArrayList<Integer> ();
 	public  ArrayList<Integer> robot_2 = new ArrayList<Integer> ();
 	

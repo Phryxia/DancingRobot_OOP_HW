@@ -1,3 +1,8 @@
+/**
+ * Text_Field_1.java
+ * 
+ * @author Taein Kim
+ */
 package Temporary_Taein;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -6,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class text_field_1 extends JPanel {
+public class Text_Field_1 extends JPanel {
 	
 	private Color     background = new Color(50, 50, 50);
 	private Color     tf_back    = new Color(30, 30, 30);
@@ -28,7 +33,7 @@ public class text_field_1 extends JPanel {
 	public  JButton    addbtn    = new JButton("Add");
 	public  JButton    rembtn    = new JButton("Remove");
 	
-	public text_field_1 () {
+	public Text_Field_1 () {
 		setLayout(new GridLayout(4, 4, 5, 5));
 		neck_1    = new JTextField(3);
 		larm_1    = new JTextField(3);

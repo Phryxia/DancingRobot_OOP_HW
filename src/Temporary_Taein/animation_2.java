@@ -1,3 +1,8 @@
+/**
+ * Animation_2.java
+ * 
+ * @author Taein Kim
+ */
 package Temporary_Taein;
 import java.awt.*;
 import java.awt.event.*;
@@ -5,20 +10,20 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class animation_2 extends JPanel {
-	public  option_list_2 ol2;
-	public  text_field_2  tf2;
+public class Animation_2 extends JPanel {
+	public  Option_List_2 ol2;
+	public  Text_Field_2  tf2;
 	private int           v_neck2;
 	private int           v_larm2;
 	private int           v_rarm2;
 	private int           v_lleg2;
 	private int           v_rleg2;
 	
-	public animation_2 () {
+	public Animation_2 () {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 		setBackground(new Color(50, 50, 50));
-		ol2 = new option_list_2 ();
-		tf2 = new text_field_2  ();
+		ol2 = new Option_List_2 ();
+		tf2 = new Text_Field_2  ();
 		add(ol2);
 		add(tf2);
 	}

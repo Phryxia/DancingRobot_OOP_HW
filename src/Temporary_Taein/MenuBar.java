@@ -1,9 +1,14 @@
+/**
+ * MenuBar.java
+ * 
+ * @author Taein Kim 
+ */
 package Temporary_Taein;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class TaeinMenuBar extends JMenuBar {
+public class MenuBar extends JMenuBar {
     Color bgColor=Color.WHITE;
 
     public void setColor(Color color) {

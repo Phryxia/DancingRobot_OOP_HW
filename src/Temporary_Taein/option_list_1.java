@@ -1,3 +1,8 @@
+/**
+ * Option_List_1.java
+ * 
+ * @author Taein Kim
+ */
 package Temporary_Taein;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,12 +13,12 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class option_list_1 extends JPanel {
+public class Option_List_1 extends JPanel {
 	public DefaultListModel <String> listMode_1   = new DefaultListModel <String>();
 	public JList            <String> frame_list_1 = new JList            <String>(listMode_1);
 	public JScrollPane               scroll_pan_1;
 	
-	public option_list_1 () {
+	public Option_List_1 () {
 		scroll_pan_1 = new JScrollPane(frame_list_1);
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		
