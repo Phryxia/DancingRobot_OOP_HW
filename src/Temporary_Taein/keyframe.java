@@ -39,9 +39,9 @@ public class keyframe extends JPanel {
 		anim1.tf1.addbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				keyname = JOptionPane.showInputDialog("Enter KeyFrame Name.", "Name Input");
 				int size = anim1.ol1.frame_list_1.getModel().getSize();
 				int cur_index = anim1.ol1.frame_list_1.getSelectedIndex();
+				keyname = JOptionPane.showInputDialog("Enter KeyFrame Name.", "Name Input");
 				if(cur_index == -1) {
 					anim1.setData(robot_1, size);
 					anim1.ol1.listMode_1.addElement(keyname);
@@ -49,6 +49,7 @@ public class keyframe extends JPanel {
 					anim1.setData(robot_1, cur_index);
 					anim1.ol1.listMode_1.add(cur_index, keyname);
 				}
+			
 				//Debug
 				System.out.println("Save test(Robot 1)");
 				System.out.println("Index : " + size);
@@ -81,9 +82,9 @@ public class keyframe extends JPanel {
 		anim2.tf2.addbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				keyname = JOptionPane.showInputDialog("Enter KeyFrame Name.", "Name Input");
 				int size = anim2.ol2.frame_list_2.getModel().getSize();
 				int cur_index = anim2.ol2.frame_list_2.getSelectedIndex();
+				keyname = JOptionPane.showInputDialog("Enter KeyFrame Name.", "Name Input");
 				if(cur_index == -1) {
 					anim2.setData(robot_2, size);
 					anim2.ol2.listMode_2.addElement(keyname);
@@ -91,7 +92,6 @@ public class keyframe extends JPanel {
 					anim2.setData(robot_2, cur_index);
 					anim2.ol2.listMode_2.add(cur_index, keyname);
 				}
-				
 				
 				//Debug
 				System.out.println("Save test(Robot 2)");

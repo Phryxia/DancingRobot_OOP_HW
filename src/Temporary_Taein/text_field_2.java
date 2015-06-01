@@ -15,7 +15,7 @@ public class Text_Field_2 extends JPanel {
 	
 	private Color     background = new Color(50, 50, 50);
 	private Color     tf_back    = new Color(30, 30, 30);
-	private Color     textcolor  = new Color(170, 170, 170);
+	private Color     textcolor  = new Color(220, 220, 220);
 	
 	public JTextField neck_2;
 	public JTextField larm_2;
