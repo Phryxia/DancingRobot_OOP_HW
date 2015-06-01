@@ -1,4 +1,5 @@
 package Temporary_Taein;
+import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -6,6 +7,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class text_field_2 extends JPanel {
+	
+	private Color     background = new Color(50, 50, 50);
+	private Color     tf_back    = new Color(30, 30, 30);
+	private Color     textcolor  = new Color(170, 170, 170);
 	
 	public JTextField neck_2 = new JTextField(3);
 	public JTextField larm_2 = new JTextField(3);
@@ -18,14 +23,54 @@ public class text_field_2 extends JPanel {
 	public JLabel     rarm   = new JLabel("Right Arm : ");
 	public JLabel     lleg   = new JLabel("Left Leg : ");
 	public JLabel     rleg   = new JLabel("Right leg : ");
+	public JLabel     title2 = new JLabel("<ROBOT 2>");
 	
 	public JButton    addbtn = new JButton("Add");
 	public JButton    rembtn = new JButton("Remove");
 	
 	public text_field_2 () {
-
+		setBackground(new Color(50, 50, 50));
 		setLayout(new GridLayout(4, 4, 5, 5));
-		add(new JLabel("<ROBOT 2>"));
+		
+		neck_2.setSelectionColor(new Color(255, 210, 0));
+		neck_2.setSelectedTextColor(tf_back);
+		neck_2.setForeground(textcolor);
+		neck_2.setBackground(tf_back);
+		
+		larm_2.setSelectionColor(new Color(255, 210, 0));
+		larm_2.setSelectedTextColor(tf_back);
+		larm_2.setForeground(textcolor);
+		larm_2.setBackground(tf_back);
+		
+		rarm_2.setBackground(tf_back);
+		rarm_2.setSelectionColor(new Color(255, 210, 0));
+		rarm_2.setSelectedTextColor(tf_back);
+		rarm_2.setForeground(textcolor);
+		
+		lleg_2.setSelectionColor(new Color(255, 210, 0));
+		lleg_2.setSelectedTextColor(tf_back);
+		lleg_2.setForeground(textcolor);
+		lleg_2.setBackground(tf_back);
+		
+		rleg_2.setSelectionColor(new Color(255, 210, 0));
+		rleg_2.setSelectedTextColor(tf_back);
+		rleg_2.setForeground(textcolor);
+		rleg_2.setBackground(tf_back);
+		
+		neck.  setForeground(textcolor);
+		larm.  setForeground(textcolor);
+		rarm.  setForeground(textcolor);
+		lleg.  setForeground(textcolor);
+		rleg.  setForeground(textcolor);
+		title2.setForeground(textcolor);
+		
+		addbtn.setBackground(new Color(0, 100, 147));
+		addbtn.setForeground(new Color(255, 255, 255));
+		
+		rembtn.setBackground(new Color(0, 100, 147));
+		rembtn.setForeground(new Color(255, 255, 255));
+		
+		add(title2);
 		add(new JLabel());
 		add(new JLabel());
 		add(new JLabel());

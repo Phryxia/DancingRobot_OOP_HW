@@ -1,5 +1,8 @@
 package Temporary_Taein;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -12,6 +15,11 @@ public class option_list_1 extends JPanel {
 	
 	public option_list_1 () {
 		scroll_pan_1 = new JScrollPane(frame_list_1);
+		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		
+		scroll_pan_1.setForeground(new Color(40, 40, 40));
+		frame_list_1.setForeground(new Color(170, 170, 170));
+		frame_list_1.setBackground(new Color(40, 40, 40));
 		frame_list_1.setPreferredSize(new Dimension(70, 120));
 		scroll_pan_1.setPreferredSize(new Dimension(90, 120));
 		add(scroll_pan_1);

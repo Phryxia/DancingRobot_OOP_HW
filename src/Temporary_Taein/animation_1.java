@@ -15,7 +15,8 @@ public class animation_1 extends JPanel {
 	private String        keyname;
 	
 	public animation_1 () {
-		setLayout(new FlowLayout());
+		setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+		setBackground(new Color(50, 50, 50));
 		ol1 = new option_list_1 ();
 		tf1 = new text_field_1  ();
 		

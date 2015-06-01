@@ -1,36 +1,76 @@
 package Temporary_Taein;
+import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class text_field_1 extends JPanel {
 	
-	public  JTextField neck_1 = new JTextField(3);
-	public  JTextField larm_1 = new JTextField(3);
-	public  JTextField rarm_1 = new JTextField(3);
-	public  JTextField lleg_1 = new JTextField(3);
-	public  JTextField rleg_1 = new JTextField(3);
+	private Color     background = new Color(50, 50, 50);
+	private Color     tf_back    = new Color(30, 30, 30);
+	private Color     textcolor  = new Color(170, 170, 170);
 	
-	public  JLabel     neck   = new JLabel("Neck : ");
-	public  JLabel     larm   = new JLabel("Left Arm : ");
-	public  JLabel     rarm   = new JLabel("Right Arm : ");
-	public  JLabel     lleg   = new JLabel("Left Leg : ");
-	public  JLabel     rleg   = new JLabel("Right leg : ");
+	public  JTextField neck_1    = new JTextField(3);
+	public  JTextField larm_1    = new JTextField(3);
+	public  JTextField rarm_1    = new JTextField(3);
+	public  JTextField lleg_1    = new JTextField(3);
+	public  JTextField rleg_1    = new JTextField(3);
 	
-	public  JButton    addbtn = new JButton("Add");
-	public  JButton    rembtn = new JButton("Remove");
+	public  JLabel     neck      = new JLabel("Neck : ");
+	public  JLabel     larm      = new JLabel("Left Arm : ");
+	public  JLabel     rarm      = new JLabel("Right Arm : ");
+	public  JLabel     lleg      = new JLabel("Left Leg : ");
+	public  JLabel     rleg      = new JLabel("Right leg : ");
+	public  JLabel     title1    = new JLabel("<ROBOT 2>");
+
+	public  JButton    addbtn    = new JButton("Add");
+	public  JButton    rembtn    = new JButton("Remove");
 	
 	public text_field_1 () {
-
 		setLayout(new GridLayout(4, 4, 5, 5));
+		setBackground(background);
 		
-		add(new JLabel("<ROBOT 1>"));
+		neck_1.setSelectionColor(new Color(255, 210, 0));
+		neck_1.setSelectedTextColor(tf_back);
+		neck_1.setForeground(textcolor);
+		neck_1.setBackground(tf_back);
+		
+		larm_1.setSelectionColor(new Color(255, 210, 0));
+		larm_1.setSelectedTextColor(tf_back);
+		larm_1.setForeground(textcolor);
+		larm_1.setBackground(tf_back);
+		
+		rarm_1.setBackground(tf_back);
+		rarm_1.setSelectionColor(new Color(255, 210, 0));
+		rarm_1.setSelectedTextColor(tf_back);
+		rarm_1.setForeground(textcolor);
+		
+		lleg_1.setSelectionColor(new Color(255, 210, 0));
+		lleg_1.setSelectedTextColor(tf_back);
+		lleg_1.setForeground(textcolor);
+		lleg_1.setBackground(tf_back);
+		
+		rleg_1.setSelectionColor(new Color(255, 210, 0));
+		rleg_1.setSelectedTextColor(tf_back);
+		rleg_1.setForeground(textcolor);
+		rleg_1.setBackground(tf_back);
+		
+		neck.setForeground(textcolor);
+		larm.setForeground(textcolor);
+		rarm.setForeground(textcolor);
+		lleg.setForeground(textcolor);
+		rleg.setForeground(textcolor);
+		title1.setForeground(textcolor);
+		
+		addbtn.setBackground(new Color(0, 100, 147));
+		addbtn.setForeground(new Color(255, 255, 255));
+		
+		rembtn.setBackground(new Color(0, 100, 147));
+		rembtn.setForeground(new Color(255, 255, 255));
+		
+		add(title1);
 		add(new JLabel());
 		add(new JLabel());
 		add(new JLabel());
