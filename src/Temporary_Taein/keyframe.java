@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.awt.*;
 
 public class keyframe extends JPanel {
+	/**
+	 * Animation : Robot Option Setting Panel
+	 * ArrayList<Integer> robot_1 / robot_2 : Store the data of Robot Setting.
+	 * ArrayList<Integer> debug : Temporary ArrayList for Debugging
+	 */
 	public  Animation_1 anim1 = new Animation_1 ();
 	public  Animation_2 anim2 = new Animation_2 ();
 	public  ArrayList<Integer> robot_1 = new ArrayList<Integer> ();
@@ -19,6 +24,7 @@ public class keyframe extends JPanel {
 	public  ArrayList<Integer> debug1 = new ArrayList<Integer> ();
 	public  ArrayList<Integer> debug2 = new ArrayList<Integer> ();
 	
+	// Item Name which is added in the JList.
 	private String      keyname;
 	
 	public keyframe (ArrayList<Integer> para) {
@@ -41,7 +47,7 @@ public class keyframe extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int size = anim1.ol1.frame_list_1.getModel().getSize();
 				int cur_index = anim1.ol1.frame_list_1.getSelectedIndex();
-				keyname = JOptionPane.showInputDialog("Enter KeyFrame Name.", "Name Input");
+				keyname = JOptionPane.showInputDialog("키프레임 이름을 입력하십시오.", "키프레임 이름 입력");
 				if(cur_index == -1) {
 					anim1.setData(robot_1, size);
 					anim1.ol1.listMode_1.addElement(keyname);
@@ -69,7 +75,7 @@ public class keyframe extends JPanel {
 				if(anim1.ol1.frame_list_1.getModel().getSize() > 0) {
 					anim1.ol1.listMode_1.remove(anim1.ol1.frame_list_1.getSelectedIndex());
 				} else {
-					JOptionPane.showMessageDialog(null, "There are no Keys to remove.", "Remove Error", JOptionPane.ERROR_MESSAGE, null);
+					JOptionPane.showMessageDialog(null, "제거할 키프레임이 존재하지 않습니다.", "제거 오류", JOptionPane.ERROR_MESSAGE, null);
 				}
 			}
 		});
@@ -84,7 +90,7 @@ public class keyframe extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				int size = anim2.ol2.frame_list_2.getModel().getSize();
 				int cur_index = anim2.ol2.frame_list_2.getSelectedIndex();
-				keyname = JOptionPane.showInputDialog("Enter KeyFrame Name.", "Name Input");
+				keyname = JOptionPane.showInputDialog("키프레임 이름을 입력하십시오.", "키프레임 이름 입력");
 				if(cur_index == -1) {
 					anim2.setData(robot_2, size);
 					anim2.ol2.listMode_2.addElement(keyname);
@@ -112,7 +118,7 @@ public class keyframe extends JPanel {
 				if(anim2.ol2.frame_list_2.getModel().getSize() > 0) {
 					anim2.ol2.listMode_2.remove(anim2.ol2.frame_list_2.getSelectedIndex());
 				} else {
-					JOptionPane.showMessageDialog(null, "There are no Keys to remove.", "Remove Error", JOptionPane.ERROR_MESSAGE, null);
+					JOptionPane.showMessageDialog(null, "제거할 키프레임이 존재하지 않습니다.", "제거 오류", JOptionPane.ERROR_MESSAGE, null);
 				}
 			}
 		});

@@ -11,6 +11,10 @@ import java.awt.event.*;
 public class MenuBar extends JMenuBar {
     Color bgColor=Color.WHITE;
 
+    /**
+     * Method setColor : Set the menu background color.
+     * @param color
+     */
     public void setColor(Color color) {
         bgColor=color;
     }
