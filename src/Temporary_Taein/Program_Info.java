@@ -52,7 +52,7 @@ public class Program_Info extends JFrame {
 	}
 	
 	public void show_icon () throws IOException {
-		String path = "C:\\icon.png";
+		String path = "C:\\icon_bg.png";
         File file = new File(path);
         img = ImageIO.read(file);
         JLabel label = new JLabel(new ImageIcon(img));
