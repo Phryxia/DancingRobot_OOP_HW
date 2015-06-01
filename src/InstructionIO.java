@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 	/**
 	 * Much easier method to add multiple things
+	 * Null elements would be considered as new Instruction(0, 0, -1)
 	 * 
 	 * @param iList
 	 */
@@ -26,7 +27,15 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 			ArrayList <Instruction> temp = new ArrayList <Instruction> (iList.length);
 		
 			for(Instruction i : iList) {
-				temp.add(i);
+				// Null Check
+				if(i != null)
+				{
+					temp.add(i);
+				}
+				else
+				{
+					temp.add(new Instruction(Instruction.NO_CHANGE));
+				}
 			}
 		
 			add(temp);
@@ -35,15 +44,24 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 	
 	/**
 	 * Save current InstructionIO sequence.
+	 * Null filename will terminate saving sequence.
 	 * 
 	 * @param filename
 	 */
 	public void save(String filename) {
+		// Check null filename or empty filename
+		if(filename == null || filename.equals("")) {
+			System.out.println("[InstructionIO : save] Null filename Argument. User might canceled to save it");
+			
+			return;
+		}
+		
+		// Save file
 		try {
 			// Initialize File
 			PrintStream oStream = new PrintStream(filename);
 			
-			// Total Sequence Length
+			// Print Total Sequence Length
 			oStream.println(size());
 			
 			// Iterate every sequence
@@ -66,11 +84,19 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 	}
 	
 	/**
-	 * Load File!
+	 * Load File! Null filename will terminate loading sequence.
 	 * 
 	 * @param filename
 	 */
 	public void load(String filename) {
+		// Check null filename or empty filename
+		if(filename == null || filename.equals("")) {
+			System.out.println("[InstructionIO : load] Null filename Argument. User might canceled to load it");
+			
+			return;
+		}
+		
+		// Try loading
 		try {
 			// Open File
 			Scanner iStream = new Scanner(new FileInputStream(filename));
@@ -100,13 +126,20 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 			iStream.close();
 		}
 		catch(FileNotFoundException e) {
-			System.out.println("There is no such file : " + filename);
+			System.out.println("[InstructionIO : load] There is no such file : " + filename);
+		}
+		catch(IllegalArgumentException e) {
+			System.out.println("[InstructionIO : load] The file is corrupted");
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * For Debugging Purpose.
+	 * Print out it's contents.
+	 */
 	public void print() {
 		for(ArrayList <Instruction> iList : this) {
 			for(Instruction i : iList) {

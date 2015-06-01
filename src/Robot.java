@@ -100,9 +100,16 @@ public abstract class Robot {
 	 * The order of what part is applied first is determined
 	 * by BFS traversal.
 	 * 
+	 * Null list will be ignored.
+	 * 
 	 * @param list
 	 */
 	public void applyInstruction(ArrayList <Instruction> list) {
+		// Null Check
+		if(list == null) {
+			return ;
+		}
+		
 		Queue <RobotPart> bfs = new LinkedList <RobotPart> ();
 		int itr = 0; // Iteartor Number
 		

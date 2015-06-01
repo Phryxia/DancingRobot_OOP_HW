@@ -18,6 +18,8 @@ public class Main {
 		aFrame.add(new RobotDisplayer());
 		
 		aFrame.setVisible(true);
+		
+		System.out.println("Ignore Minim Libraries Error : Just internal error");
 	}
 }
 
@@ -31,62 +33,50 @@ class RobotDisplayer extends JComponent {
 	
 	BGM bgm;
 	GRobot myRobot;
+	InstructionIO io;
+	RobotController rc;
 	
 	private int t;
-	Damper damper;
 	
 	public RobotDisplayer() {
-		damper = new Damper(0, 0.995);
+		// Instruction IO Test
+		io = new InstructionIO();
+		
+		// Make Random Sequence
+		ArrayList <Instruction> temp;
+		for(int i=0; i<4; ++i) {
+			temp = new ArrayList <Instruction> (5);
+			for(int j=0; j<5; ++j) {
+				temp.add(new Instruction(0, 0, (int)(Math.random()*360)));
+			}
+			io.add(temp);
+		}
 		
 		// Robot Initialization
 		myRobot = new SeKyuRobot("SeKyu!");
 		myRobot.move(200, 200);
 		
+		rc = new RobotController(myRobot, io, 500);
+		
 		// Sound Test bed
 		bgm = new BGM();
 		bgm.loadMP3("test.mp3");
-		bgm.play();
 		
-		// Loop Function
-		class THandler implements ActionListener {
-
+		// Some annoying looping machine
+		(new Timer(10, new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				t = (t + 1)%1000;
-				
-				damper.setDestination(Math.abs(bgm.getData(0)));
-				
-				// Se-Kyu Order : Body Arm Arm Head Leg Leg
-				ArrayList <Instruction> iList = new ArrayList <Instruction> ();
-					
-				// Maater
-				iList.add(new Instruction(0, 0, -1));
-					
-				// LArm
-				iList.add(new Instruction(0, 0, (int)(damper.getCurrent()*90 + 90)));
-					
-				// RArm
-				iList.add(new Instruction(0, 0, -(int)(damper.getCurrent()*90 + 90)));
-					
-				// Head
-				iList.add(new Instruction(0, 0, -1));
-				
-				// LLeg
-				if(damper.getDelta() > 0.2) {
-					double x = (0.5-Math.random())*Math.PI/2;
-					iList.add(new Instruction(0, 0, (int)(Math.PI/2 + x)));
-					iList.add(new Instruction(0, 0, (int)(Math.PI/2 + x)));	
-				}
-				
-				myRobot.applyInstruction(iList);
-				iList.clear();
-				
+			public void actionPerformed(ActionEvent e) {
+				loop();
 				repaint();
 			}
-			
-		}
+		})).start();
+	}
+	
+	/**
+	 * Loop
+	 */
+	public void loop() {
 		
-		(new Timer(1, new THandler())).start();
 	}
 	
 	public void paintComponent(Graphics g) {

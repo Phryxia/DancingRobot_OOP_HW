@@ -47,6 +47,26 @@ public class Vector2D {
 	}
 	
 	/**
+	 * Simple accessor of x
+	 * 
+	 * @return
+	 */
+	public double x()
+	{
+		return x;
+	}
+	
+	/**
+	 * Simple accessor of y
+	 * 
+	 * @return
+	 */
+	public double y()
+	{
+		return y;
+	}
+	
+	/**
 	 * Copy this vector.
 	 * 
 	 * @return

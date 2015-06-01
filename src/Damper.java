@@ -9,7 +9,7 @@ import javax.swing.Timer;
  * 
  * @author Se-Kyu-Kwon
  */
-public class Damper
+public class Damper extends Thread
 {
 	private double damp_rate;
 	private double destination;
@@ -29,18 +29,46 @@ public class Damper
 		current_value = destination;
 		prev_value = current_value;
 		
-		class DamperListener implements ActionListener
+		start();
+	}
+	
+	/**
+	 * Safely start this with singletonalized this method.
+	 * Start should never be called again, and this thread
+	 * always starts automatically.
+	 */
+	private boolean hasBooted = false;
+	@Override
+	public void start()
+	{
+		if(!hasBooted)
 		{
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				prev_value = current_value;
-				current_value += (destination - current_value)*damp_rate;
-			}	
+			hasBooted = true;
+			super.start();
 		}
-		
-		timer = new Timer(10, new DamperListener());
-		timer.start();
+	}
+	
+	/**
+	 * Run this thread. Don't use this manually.
+	 * Constructor will automatically start & run.
+	 */
+	@Override
+	public void run()
+	{
+		while(true)
+		{
+			prev_value = current_value;
+			current_value += (destination - current_value)*damp_rate;
+			
+			try
+			{
+				sleep(10);
+			}
+			catch(Exception e)
+			{
+				
+			}
+		}
 	}
 	
 	/**

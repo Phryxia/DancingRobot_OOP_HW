@@ -11,6 +11,10 @@ public class SeKyuRobot extends GRobot {
 
 	@Override
 	public void setAppearance(String name) {
+		// Null Pointer Check
+		if(name == null) {
+			name = "null";
+		}
 		root = new SeKyuRobotBody(name + "_body", 0, 0, 100, 100);
 		
 		SeKyuRobotArm larm = (SeKyuRobotArm)root.add(new SeKyuRobotArm(name + "_left_arm", -50, -35, 80, 20));

@@ -21,7 +21,7 @@ public abstract class RobotPart implements Servo {
 	protected RobotPart root;
 	protected ArrayList <RobotPart> subParts;
 	
-	private Damper angle;
+	protected Damper angle; // in Radian
 	
 	/**
 	 * Constructor with name. (name is used to search part)
@@ -31,6 +31,11 @@ public abstract class RobotPart implements Servo {
 	 * @param y
 	 */
 	public RobotPart(String name, double x, double y) {
+		// Null Check
+		if(name == null) {
+			throw new NullPointerException("[RobotPart : Constructor] Null name cannot be used");
+		}
+		
 		this.name = name;
 		position = new Vector2D(x, y);
 		root     = null;
@@ -50,13 +55,18 @@ public abstract class RobotPart implements Servo {
 	
 	/**
 	 * Search and return RobotPart which name is 'targetName'
-	 * If there is no such element, null will be returned
+	 * If there is no such element, null will be returned.
+	 * Null input will return null reference.
 	 * 
 	 * @param targetName
 	 * @return
 	 */
 	public RobotPart search(String targetName) {
-		if(targetName.equals(name)) {
+		// Null Check
+		if(targetName == null) {
+			return null;
+		}
+		else if(targetName.equals(name)) {
 			return this;
 		}
 		else {
@@ -80,8 +90,12 @@ public abstract class RobotPart implements Servo {
 	 * @return newPart
 	 */
 	public RobotPart add(RobotPart newPart) {
+		// Null Check
+		if(newPart == null) {
+			throw new NullPointerException("[RobotPart : add] You can't add null object");
+		}
 		if(search(newPart.name) != null) {
-			throw new IllegalArgumentException("[RobotPart] Can't have duplicated name : " + newPart.name);
+			throw new IllegalArgumentException("[RobotPart : add] Can't have duplicated name : " + newPart.name);
 		}
 		else {	
 			subParts.add(newPart);
@@ -96,6 +110,11 @@ public abstract class RobotPart implements Servo {
 	 * Other wise false will be returned.
 	 */
 	public boolean remove(String targetName) {
+		// Null Pointer Handling
+		if(targetName == null) {
+			return false;
+		}
+		
 		/*
 		 * Search from my subParts
 		 */
@@ -196,24 +215,42 @@ public abstract class RobotPart implements Servo {
 		return position;
 	}
 
+	/**
+	 * Null reference will be ignored.
+	 */
 	@Override
 	public void setCenter(Vector2D center)
 	{
-		position.set(center);
+		// Null pointer handling	
+		if(center == null) {
+			System.out.println("[RobotPart : setCenter] Note : A null argument was ignored.");
+		}
+		else {
+			position.set(center);
+		}
+		
 	}
-
+	
+	/**
+	 * Use radian unit.
+	 */
 	@Override
 	public double getCurrentAngle()
 	{
 		return angle.getCurrent();
 	}
-
+	/**
+	 * Use radian unit.
+	 */
 	@Override
 	public void setCurrentAngle(double theta)
 	{
 		angle.setDestination(theta);
 	}
 
+	/**
+	 * Use radian unit.
+	 */
 	@Override
 	public void rotate(double theta)
 	{
@@ -227,9 +264,15 @@ public abstract class RobotPart implements Servo {
 	 * Note that Instruction has 60-degree angle so that you
 	 * have to convert it in radian.
 	 * 
+	 * Null instruction will be ignored.
+	 * 
 	 * @param ins
 	 */
 	public void applyInstruction(Instruction ins) {
+		// Null Pointer Check : Just ignore null argument.
+		if(ins == null) {
+			return ;
+		}
 		position.add(ins.position);
 		
 		if(ins.angle != -1) {

@@ -100,6 +100,12 @@ public class BGM
 		 */
 		String folder = null;
 		
+		// Check Null Exception
+		if(where == null)
+		{
+			throw new NullPointerException("[BGM : sketchPath] Null argument error");
+		}
+		
 		// Check whether the path starts C:\ kinds name...
 		if(where.matches("[A-Z]:(.)*")) {
 			return where;
