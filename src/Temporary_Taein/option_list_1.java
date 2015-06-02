@@ -13,11 +13,19 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+@SuppressWarnings("serial")
 public class Option_List_1 extends JPanel {
 	public DefaultListModel <String> listMode_1   = new DefaultListModel <String>();
 	public JList            <String> frame_list_1 = new JList            <String>(listMode_1);
 	public JScrollPane               scroll_pan_1;
 	
+	/**
+	 * Constructor
+	 * 
+	 * Initial the Scroll Pane and Add to Panel.
+	 * 
+	 * @author Taein Kim
+	 */
 	public Option_List_1 () {
 		scroll_pan_1 = new JScrollPane(frame_list_1);
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));

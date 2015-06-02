@@ -5,11 +5,11 @@
  */
 package Temporary_Taein;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class Animation_2 extends JPanel {
 	public  Option_List_2 ol2;
 	public  Text_Field_2  tf2;

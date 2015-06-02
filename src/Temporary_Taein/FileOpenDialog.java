@@ -7,17 +7,18 @@ package Temporary_Taein;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
-import java.awt.event.*;
 
+@SuppressWarnings("serial")
 public class FileOpenDialog extends JFrame {
-	FileFilter filter = new FileNameExtensionFilter("DancingRobot File","iwbtr");
+	FileFilter filter;
+	String filename;
+	String filepath;
 	JFileChooser chooser = new JFileChooser();
-	private String filename;
-	private int returnVal;
 	
-	public FileOpenDialog () {
-		System.out.println(openFile());
+	public FileOpenDialog (String input1, String input2) {
+		filter = new FileNameExtensionFilter(input1, input2);
+		filepath = openFile(1);
+		filename = openFile(2);
 	}
 	
 	/**
@@ -25,13 +26,27 @@ public class FileOpenDialog extends JFrame {
 	 * 
 	 * @return Absolute Path of File or null.
 	 */
-	public String openFile () {
+	public String openFile (int option) {
 		chooser.setFileFilter(filter);
 		if(chooser.showOpenDialog(null) == 1)
 			return null;
 		else {
-			return chooser.getSelectedFile().getAbsolutePath();
+			if(option == 1) {
+				return chooser.getSelectedFile().getAbsolutePath();
+			} else if(option == 2) {
+				return chooser.getSelectedFile().getName();
+			}
 		}
+		
+		return null;
+	}
+	
+	public String getFileInfo (int option) {
+		if(option == 1)
+			return filepath;
+		else if(option == 2)
+			return filename;
+		return null;
 	}
 
 }

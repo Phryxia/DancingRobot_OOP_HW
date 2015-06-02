@@ -5,9 +5,10 @@
  */
 package Temporary_Taein;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 
+import java.awt.*;
+
+@SuppressWarnings("serial")
 public class MenuBar extends JMenuBar {
     Color bgColor=Color.WHITE;
 

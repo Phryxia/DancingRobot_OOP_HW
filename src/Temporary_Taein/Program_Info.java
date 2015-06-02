@@ -1,7 +1,6 @@
 package Temporary_Taein;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,8 +8,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Program_Info.java
+ * 
+ * Show the Program information 
+ * @author Taein Kim
+ */
 @SuppressWarnings("serial")
 public class Program_Info extends JFrame {
+	// Components which is construct frame.
 	private JLabel  version;
 	private JLabel  date;
 	private JLabel  name1;
@@ -18,16 +24,24 @@ public class Program_Info extends JFrame {
 	private JLabel  info1;
 	private JLabel  info2;
 	private JLabel  license;
-	
 	private JButton button; 
 	
-	private Color  text  = new Color(170, 170, 170);
-	private JPanel panel = new JPanel();
+	// Style Options.
+	private Color  text         = new Color(170, 170, 170);
+	private JPanel panel        = new JPanel();
+	private Font   clear_gothic = new Font("맑은 고딕", Font.BOLD, 12);
+
 	Toolkit theKit = getToolkit();
 	Dimension screenSize = theKit.getScreenSize();
+	
 	BufferedImage img = null;
 	ImageIcon icon = new ImageIcon("C:\\icon.png");
 	
+	/**
+	 * Constructor
+	 * 
+	 * @author Taein Kim
+	 */
 	public Program_Info () {
 		
 		setTitle("프로그램 정보");
@@ -37,11 +51,15 @@ public class Program_Info extends JFrame {
 		
 		addLabel();
 		addButton();
+		
+		// Process Exception
 		try {
 			show_icon();
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
+		// Set the Frame Style.
 		panel.setBackground(new Color(50, 50, 50));
 		panel.setLayout(null);
 		
@@ -51,16 +69,35 @@ public class Program_Info extends JFrame {
 		setVisible(true);
 	}
 	
+	/**
+	 * Load the icon image and set Font to all Components.
+	 * 
+	 * @throws IOException
+	 */
 	public void show_icon () throws IOException {
 		String path = "C:\\icon_bg.png";
         File file = new File(path);
         img = ImageIO.read(file);
         JLabel label = new JLabel(new ImageIcon(img));
         label.setBounds(225, 70, 110, 150);
+        
+        version.setFont(clear_gothic);
+        date.setFont(clear_gothic);
+        name1.setFont(clear_gothic);
+        name2.setFont(clear_gothic);
+        info1.setFont(clear_gothic);
+        info2.setFont(clear_gothic);
+        license.setFont(clear_gothic);
+        
         panel.add(label);
 
 	}
 	
+	/**
+	 * Set the content of all label.
+	 * 
+	 * @author Taein Kim
+	 */
 	public void addLabel () {
 		version = new JLabel("Dancing Robot (버전 : 0.9.1)");
 		date    = new JLabel("2015. 06");
@@ -95,12 +132,15 @@ public class Program_Info extends JFrame {
 		panel  .add(license);
 	}
 	
+	/**
+	 * Add the OK Button.
+	 */
 	public void addButton () {
 		button = new JButton("확인");
 		button.setBackground(new Color(0, 100, 147));
 		button.setForeground(new Color(255, 255, 255));
 		button.setBounds(240, 30, 90, 25);
-		
+		button.setFont(clear_gothic);
 		button.addActionListener(new ActionListener() {
 			
 			@Override

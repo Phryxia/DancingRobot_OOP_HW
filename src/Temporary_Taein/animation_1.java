@@ -3,12 +3,13 @@
  * 
  *  @author Taein Kim
  */
-
 package Temporary_Taein;
 import java.awt.*;
 import java.util.ArrayList;
+
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class Animation_1 extends JPanel {
 	public  Option_List_1 ol1;
 	public  Text_Field_1  tf1;
@@ -44,7 +45,5 @@ public class Animation_1 extends JPanel {
 		para.add(pos + 3, v_lleg1);
 		para.add(pos + 4, v_rleg1);
 	}
-	
-	
 	
 }

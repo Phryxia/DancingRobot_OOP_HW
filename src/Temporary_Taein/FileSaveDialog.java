@@ -4,7 +4,6 @@
  * @author Taein Kim
  */
 package Temporary_Taein;
-import java.awt.*;
 import java.io.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -22,7 +21,6 @@ public class FileSaveDialog {
 	
 	public String showDialog () {
 		fileChooser.setFileFilter(filter);
-		Component parent = null;
 		if(fileChooser.showSaveDialog(null) == 1)
 			return null;
 		else {

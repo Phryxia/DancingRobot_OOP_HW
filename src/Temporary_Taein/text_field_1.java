@@ -5,14 +5,20 @@
  */
 package Temporary_Taein;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class Text_Field_1 extends JPanel {
-	
+
+	/**
+	 * Set Style (Background, Foreground Color)
+	 */
 	private Color     background = new Color(50, 50, 50);
 	private Color     tf_back    = new Color(30, 30, 30);
 	private Color     textcolor  = new Color(220, 220, 220);
@@ -30,9 +36,11 @@ public class Text_Field_1 extends JPanel {
 	public  JLabel     rleg      = new JLabel("Right leg : ");
 	public  JLabel     title1    = new JLabel("<ROBOT 1>");
 
-	public  JButton    addbtn    = new JButton("Add");
-	public  JButton    rembtn    = new JButton("Remove");
+	public  JButton    addbtn    = new JButton("Ãß°¡");
+	public  JButton    rembtn    = new JButton("Á¦°Å");
 	
+	private Font clear_gothic = new Font("¸¼Àº °íµñ", Font.BOLD, 12);
+
 	public Text_Field_1 () {
 		setLayout(new GridLayout(4, 4, 5, 5));
 		neck_1    = new JTextField(3);
@@ -43,6 +51,9 @@ public class Text_Field_1 extends JPanel {
 		
 		setBackground(background);
 		
+		/**
+		 * The Code Below : Set Component Style & Design.
+		 */
 		neck_1.setSelectionColor(new Color(255, 210, 0));
 		neck_1.setSelectedTextColor(tf_back);
 		neck_1.setForeground(textcolor);
@@ -77,9 +88,11 @@ public class Text_Field_1 extends JPanel {
 		
 		addbtn.setBackground(new Color(0, 100, 147));
 		addbtn.setForeground(new Color(255, 255, 255));
+		addbtn.setFont(clear_gothic);
 		
 		rembtn.setBackground(new Color(0, 100, 147));
 		rembtn.setForeground(new Color(255, 255, 255));
+		rembtn.setFont(clear_gothic);
 		
 		add(title1);
 		add(new JLabel());
