@@ -16,6 +16,7 @@ public class Main_UI extends JFrame {
 	private  JRootPane  root_panel;
 	private  ImageIcon  bg;
 	private  JPanel     play_panel;
+	public static boolean isPlay = false;
 	
 	private  ArrayList<Integer> robot1_anchor = new ArrayList<Integer>();
 	private  ArrayList<Integer> robot2_anchor = new ArrayList<Integer>();
@@ -40,19 +41,22 @@ public class Main_UI extends JFrame {
 	private JMenuItem  exitItem;
 	private JMenuItem  howToUse;
 	
-	FileSaveDialog sf;
-	Control_Panel  cp = new Control_Panel ();
-	keyframe       kf = new keyframe      (robot1_anchor);
-	Manual_Frame   mf;
-	Program_Info   pi;
-	Toolkit theKit = getToolkit();
-	Dimension screenSize = theKit.getScreenSize();
-	ImageIcon img = new ImageIcon("C:\\icon.png");
-	ImageIcon htu_img = new ImageIcon("C:\\DancingRobot\\Images\\Use_Icon.png");
+	FileSaveDialog     sf;
+	Control_Panel      cp         = new Control_Panel ();
+	keyframe           kf         = new keyframe      (robot1_anchor);
+	Manual_Frame       mf;
+	Program_Info       pi;
+	Test_Add_Component tac;
+	Toolkit            theKit     = getToolkit();
+	Dimension          screenSize = theKit.getScreenSize();
+	
+	ImageIcon img      = new ImageIcon("C:\\icon.png");
+	ImageIcon htu_img  = new ImageIcon("C:\\DancingRobot\\Images\\Use_Icon.png");
 	ImageIcon exit_img = new ImageIcon("C:\\DancingRobot\\Images\\Exit_Icon.png");
 	ImageIcon load_img = new ImageIcon("C:\\DancingRobot\\Images\\Load_Icon.png");
 	ImageIcon info_img = new ImageIcon("C:\\DancingRobot\\Images\\Info_Icon.png");
 	ImageIcon save_img = new ImageIcon("C:\\DancingRobot\\Images\\Save_Icon.png");
+	
 	/**
 	 * Constructor
 	 * 
@@ -62,8 +66,10 @@ public class Main_UI extends JFrame {
 		robot1_anchor.ensureCapacity(100);
 		robot2_anchor.ensureCapacity(100);
 		
-		generate_Menu ();
-		generate_panel ();
+		generate_Menu   ();
+		generate_panel  ();
+		chkBox_control();
+		button_Control();
 		
 		setIconImage(img.getImage());
 		setBackground(new Color(50, 50, 50));
@@ -74,6 +80,62 @@ public class Main_UI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
+	}
+	
+	/**
+	 * Animation Play & Stop Button Control
+	 * 
+	 * @author Taein Kim
+	 */
+	public void button_Control () {
+		cp.play_anim.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!isPlay) {
+					System.out.println("Play_Button Clicked");
+					isPlay = true;
+				}
+			}
+		});
+		
+		cp.stop_anim.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(isPlay) {
+					System.out.println("Stop_ButtonClicked");
+					isPlay = false;
+				}
+			}
+		});
+	}
+	
+	/**
+	 * Robot Activation CheckBox Control
+	 * 
+	 * @author Taein Kim
+	 */
+	public void chkBox_control () {
+		cp.r1_Active.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(cp.r1_Active.isSelected()) {
+					System.out.println("chkbox1 Check true");
+				} else {
+					System.out.println("chkbox1 Check false");
+				}
+			}
+		});
+		
+		cp.r2_Active.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(cp.r2_Active.isSelected()) {
+					System.out.println("chkbox2 Check true");
+				} else {
+					System.out.println("chkbox2 Check false");
+				}
+			}
+		});
 	}
 	
 	/**

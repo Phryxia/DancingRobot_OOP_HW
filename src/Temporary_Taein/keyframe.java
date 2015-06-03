@@ -32,11 +32,18 @@ public class keyframe extends JPanel {
 	private int size;
 	private int cur_index;
 	
+	private Color back    = new Color(50, 50, 50);
+	private Color btn     = new Color(0, 100, 147);
+	private Color btn_txt = new Color(255, 255, 255);
+	private Color msg_txt = new Color(170, 170,170);
+	Font    clear_gothic  = new Font("¸¼Àº °íµñ", Font.BOLD, 12);
+	
 	// Item Name which is added in the JList.
 	private  String      keyname;
 	
 	public keyframe (ArrayList<Integer> para) {
 		setLayout(new GridLayout(1, 2, 0, 0));
+		optionpanel_Setting ();
 		robot_1.ensureCapacity(100);
 		robot_2.ensureCapacity(100);
 		this.robot_1 = para;
@@ -44,6 +51,24 @@ public class keyframe extends JPanel {
 		addEvent_2();
 		add(anim1);
 		add(anim2);
+	}
+	
+	@SuppressWarnings("static-access")
+	public void optionpanel_Setting () {
+		UIManager UI = new UIManager();
+		
+		UI.put("OptionPane.background", back);
+		UI.put("OptionPane.foreground", msg_txt);
+		UI.put("OptionPane.messageForeground", msg_txt);
+		UI.put("OptionPane.foreground", msg_txt);
+		UI.put("OptionPane.errorDialog.border.background",back);
+		UI.put("OptionPane.font", clear_gothic);
+		
+		UI.put("Button.background", btn);
+		UI.put("Button.foreground", btn_txt);
+		
+		UI.put("Panel.background", back);
+		UI.put("Panel.font", clear_gothic);
 	}
 	
 	/**

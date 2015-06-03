@@ -6,7 +6,6 @@
 package Temporary_Taein;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,12 +27,12 @@ public class Control_Panel extends JPanel {
 	public JLabel    empty_space;
 	public String    music_name = "Ãß°¡µÈ ÆÄÀÏ ¾øÀ½";
 	
-	FileOpenDialog fod;
-	Font clear_gothic = new Font("¸¼Àº °íµñ", Font.BOLD, 12);
-	Color btn_bg      = new Color(0, 100, 147);
-	Color btn_txt     = new Color(255, 255, 255);
-	BufferedImage img;
-	ImageIcon pic     = new ImageIcon("C:\\icon_bg.png");
+	FileOpenDialog     fod;
+	Font               clear_gothic = new Font("¸¼Àº °íµñ", Font.BOLD, 12);
+	Color              btn_bg       = new Color(0, 100, 147);
+	Color              btn_txt      = new Color(255, 255, 255);
+	BufferedImage      img;
+	ImageIcon          pic          = new ImageIcon("C:\\icon_bg.png");
 	
 	//MP3 File Name which is loaded.
 	String file_name;
