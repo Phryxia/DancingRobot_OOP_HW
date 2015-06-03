@@ -56,6 +56,9 @@ public class keyframe extends JPanel {
 	@SuppressWarnings("static-access")
 	public void optionpanel_Setting () {
 		UIManager UI = new UIManager();
+		UI.put("Label.background", back);
+		UI.put("Label.foreground", msg_txt);
+		UI.put("Label.font", clear_gothic);
 		
 		UI.put("OptionPane.background", back);
 		UI.put("OptionPane.foreground", msg_txt);
@@ -66,7 +69,9 @@ public class keyframe extends JPanel {
 		
 		UI.put("Button.background", btn);
 		UI.put("Button.foreground", btn_txt);
+		UI.put("Button.font", clear_gothic);
 		
+		UI.put("ToggleButton.Background", btn_txt);
 		UI.put("Panel.background", back);
 		UI.put("Panel.font", clear_gothic);
 	}

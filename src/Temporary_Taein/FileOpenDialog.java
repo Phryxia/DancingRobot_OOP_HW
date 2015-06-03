@@ -17,8 +17,12 @@ public class FileOpenDialog extends JFrame {
 	
 	public FileOpenDialog (String input1, String input2) {
 		filter = new FileNameExtensionFilter(input1, input2);
-		filepath = openFile(1);
-		filename = openFile(2);
+		if(openFile() == 0) {
+			filename = getFile(1);
+			filepath = getFile(2);
+			System.out.println(getFileInfo(1));
+			System.out.println(getFileInfo(2));
+		}
 	}
 	
 	/**
@@ -26,19 +30,19 @@ public class FileOpenDialog extends JFrame {
 	 * 
 	 * @return Absolute Path of File or null.
 	 */
-	public String openFile (int option) {
+	public int openFile () {
 		chooser.setFileFilter(filter);
 		if(chooser.showOpenDialog(null) == 1)
-			return null;
-		else {
-			if(option == 1) {
-				return chooser.getSelectedFile().getAbsolutePath();
-			} else if(option == 2) {
-				return chooser.getSelectedFile().getName();
-			}
+			return 1;
+		return 0;
+	}
+	
+	public String getFile(int option) {
+		if(option == 1) {
+			return chooser.getSelectedFile().getName();
+		} else {
+			return chooser.getSelectedFile().getAbsolutePath();
 		}
-		
-		return null;
 	}
 	
 	public String getFileInfo (int option) {
