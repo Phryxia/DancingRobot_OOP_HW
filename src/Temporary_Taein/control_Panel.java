@@ -20,8 +20,8 @@ public class Control_Panel extends JPanel {
 	
 	public JButton   play_anim;
 	public JButton   stop_anim;
-	
 	public JButton   load_music;
+	
 	public JLabel    what_name;
 	public JLabel    cur_music;
 	public JLabel    empty_space;
