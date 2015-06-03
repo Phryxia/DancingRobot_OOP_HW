@@ -27,14 +27,14 @@ public abstract class GRobotPart extends RobotPart implements Drawable {
 		Vector2D absolutePos = getAbsolutePosition();
 		
 		// Transformation
-		g2d.translate(absolutePos.x, absolutePos.y);
+		g2d.translate(absolutePos.x(), absolutePos.y());
 		g2d.rotate(temp_angle);
 		
 		drawDefine(g2d);
 		
 		// Inverse-Transformation
 		g2d.rotate(-temp_angle);
-		g2d.translate(-absolutePos.x, -absolutePos.y);
+		g2d.translate(-absolutePos.x(), -absolutePos.y());
 		
 		// Draw attached subParts
 		for(RobotPart e : subParts) {

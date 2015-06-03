@@ -70,6 +70,6 @@ public class Instruction {
 	 */
 	@Override
 	public String toString() {
-		return "[" + position.x + ", " + position.y + ", " + angle + "]";
+		return "[" + position.x() + ", " + position.y() + ", " + angle + "]";
 	}
 }

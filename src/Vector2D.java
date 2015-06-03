@@ -5,13 +5,20 @@
  * Rotation also obey that rule, so clock-wise direction is
  * positive theta.
  * 
+ * + 20150602 Patch
+ * Now vector can do lerping. Previous methods are not changed.
+ * 
  * @author Se-Kyu-Kwon
  *
  */
 public class Vector2D {
+	/*
+	 * Invariant. Do NOT change damper's current data.
+	 * That's not desirable.
+	 */
 	// Data
-	public double x;
-	public double y;
+	private double x;
+	private double y;
 	
 	// Basic Vector
 	public static final Vector2D ZERO_VECTOR = new Vector2D(0, 0);
@@ -20,7 +27,8 @@ public class Vector2D {
 	/**
 	 * Simple Constructor
 	 */
-	public Vector2D() {
+	public Vector2D()
+	{
 		x = 0.0;
 		y = 0.0;
 	}
@@ -31,7 +39,8 @@ public class Vector2D {
 	 * @param x
 	 * @param y
 	 */
-	public Vector2D(double x, double y) {
+	public Vector2D(double x, double y)
+	{
 		this.x = x;
 		this.y = y;
 	}
@@ -41,7 +50,8 @@ public class Vector2D {
 	 * 
 	 * @param v
 	 */
-	public Vector2D(Vector2D v) {
+	public Vector2D(Vector2D v)
+	{
 		x = v.x;
 		y = v.y;
 	}
@@ -71,7 +81,8 @@ public class Vector2D {
 	 * 
 	 * @return
 	 */
-	public Vector2D get() {
+	public Vector2D get()
+	{
 		return new Vector2D(this);
 	}
 	
@@ -95,7 +106,7 @@ public class Vector2D {
 	 */
 	public Vector2D set(Vector2D v) {
 		x = v.x;
-		y=  v.y;
+		y = v.y;
 		return this;
 	}
 	
@@ -126,8 +137,8 @@ public class Vector2D {
 	 */
 	public Vector2D setDirection(double theta) {
 		double mag = size();
-		x = Math.cos(theta) * mag;
-		y = Math.sin(theta) * mag;
+		x = (Math.cos(theta) * mag);
+		y = (Math.sin(theta) * mag);
 		return this;
 	}
 	
@@ -223,7 +234,7 @@ public class Vector2D {
 	 * @return k*v1
 	 */
 	public static Vector2D mul(Vector2D v1, double k) {
-		return new Vector2D(k*v1.x, k*v1.y);
+		return new Vector2D(v1.x * k, v1.y * k);
 	}
 	
 	/**

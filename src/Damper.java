@@ -15,7 +15,6 @@ public class Damper extends Thread
 	private double destination;
 	private double current_value;
 	private double prev_value;
-	private Timer  timer;
 	
 	/**
 	 * Constructor with specified initial value.
@@ -26,6 +25,20 @@ public class Damper extends Thread
 	{
 		setRate(init_rate);
 		setDestination(init_value);
+		current_value = destination;
+		prev_value = current_value;
+		
+		start();
+	}
+	
+	/**
+	 * Copy Constructor. Null reference will be ignored as 0
+	 * 
+	 * @param d
+	 */
+	public Damper(Damper d) {
+		setRate(d.damp_rate);
+		setDestination(d.getDestination());
 		current_value = destination;
 		prev_value = current_value;
 		

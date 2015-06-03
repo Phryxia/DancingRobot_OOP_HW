@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public abstract class RobotPart implements Servo {
 	// Attribute
 	protected String    name;
-	protected Vector2D  position;
+	protected VDamper   position;
 	protected RobotPart root;
 	protected ArrayList <RobotPart> subParts;
 	
@@ -37,7 +37,7 @@ public abstract class RobotPart implements Servo {
 		}
 		
 		this.name = name;
-		position = new Vector2D(x, y);
+		position = new VDamper(new Vector2D(x, y), 0.5);
 		root     = null;
 		subParts = new ArrayList <RobotPart> (5);
 		
@@ -150,7 +150,7 @@ public abstract class RobotPart implements Servo {
 	 * @param dy
 	 */
 	public void move(double dx, double dy) {
-		position.translate(dx, dy);
+		position.getDestination().translate(dx, dy);
 	}
 	
 	/**
@@ -159,7 +159,7 @@ public abstract class RobotPart implements Servo {
 	 * @return
 	 */
 	public Vector2D getRelativePosition() {
-		return new Vector2D(position);
+		return new Vector2D(position.getCurrent());
 	}
 	
 	/**
@@ -170,7 +170,7 @@ public abstract class RobotPart implements Servo {
 	 * @return
 	 */
 	public Vector2D getAbsolutePosition() {
-		Vector2D result = new Vector2D(position);
+		Vector2D result = new Vector2D(position.getCurrent());
 		
 		// Calculate from root's position.
 		if(root != null) {
@@ -212,7 +212,7 @@ public abstract class RobotPart implements Servo {
 	@Override
 	public Vector2D getCenter()
 	{
-		return position;
+		return position.getCurrent();
 	}
 
 	/**
@@ -226,7 +226,7 @@ public abstract class RobotPart implements Servo {
 			System.out.println("[RobotPart : setCenter] Note : A null argument was ignored.");
 		}
 		else {
-			position.set(center);
+			position.getDestination().set(center);
 		}
 		
 	}
@@ -259,7 +259,7 @@ public abstract class RobotPart implements Servo {
 	
 	/**
 	 * Apply single instruction to current RobotPart.
-	 * Note that angle must wihtin 0 ~ 360 otherwise no change.
+	 * Note that angle must within 0 ~ 360 otherwise no change.
 	 * 
 	 * Note that Instruction has 60-degree angle so that you
 	 * have to convert it in radian.
@@ -273,7 +273,7 @@ public abstract class RobotPart implements Servo {
 		if(ins == null) {
 			return ;
 		}
-		position.add(ins.position);
+		position.getDestination().add(ins.position);
 		
 		if(ins.angle != -1) {
 			setCurrentAngle(Math.PI/180*ins.angle);

@@ -19,7 +19,8 @@ public class BGM
 	/**
 	 * Constructor.
 	 */
-	public BGM() {
+	public BGM()
+	{
 		minim  = new Minim(this);
 		player = null;
 		fs     = null;
@@ -30,17 +31,21 @@ public class BGM
 	 * 
 	 * @param filename
 	 */
-	public void loadMP3(String filename) {
+	public void loadMP3(String filename)
+	{
 		// Check the extension
-		if(filename.matches("(.)*\\.mp3")) {
+		if(filename.matches("(.)*\\.mp3"))
+		{
 			// Close AudioPlayer before load new one.
-			if(player != null) {
+			if(player != null)
+			{
 				player.close();
 			}
 			
 			player = minim.loadFile(filename);
 		}
-		else {
+		else
+		{
 			System.out.println("This is not a mp3 file : " + filename);
 		}
 	}
@@ -48,8 +53,10 @@ public class BGM
 	/**
 	 * Play current loaded music.
 	 */
-	public void play() {
-		if(player != null) {
+	public void play()
+	{
+		if(player != null)
+		{
 			player.play();
 		}
 	}
@@ -57,9 +64,23 @@ public class BGM
 	/**
 	 * Stop current playing music.
 	 */
-	public void stop() {
-		if(player != null) {
+	public void stop()
+	{
+		if(player != null)
+		{
 			player.rewind();
+		}
+	}
+	
+	public int getBufferSize()
+	{
+		if(player != null)
+		{
+			return player.left.size();
+		}
+		else
+		{
+			return 0;
 		}
 	}
 	
@@ -69,11 +90,14 @@ public class BGM
 	 * @param index
 	 * @return
 	 */
-	public float getData(int index) {
-		if(player != null) {
+	public float getData(int index)
+	{
+		if(player != null)
+		{
 			return player.left.get(index);
 		}
-		else {
+		else
+		{
 			return 0;
 		}
 	}
@@ -91,7 +115,8 @@ public class BGM
 	 * @param where
 	 * @return
 	 */
-	public String sketchPath(String where) {
+	public String sketchPath(String where)
+	{
 		/*
 		 * There are some different cases to handle.
 		 * 
@@ -107,15 +132,19 @@ public class BGM
 		}
 		
 		// Check whether the path starts C:\ kinds name...
-		if(where.matches("[A-Z]:(.)*")) {
+		if(where.matches("[A-Z]:(.)*"))
+		{
 			return where;
 		}
-		else {
+		else
+		{
 			// If it's not absolute path, then you have to add project path.
-			try	{
+			try
+			{
 				folder = System.getProperty("user.dir");
 			}
-			catch(Exception e) {
+			catch(Exception e)
+			{
 				e.printStackTrace();
 			}
 		
@@ -131,7 +160,8 @@ public class BGM
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	public InputStream createInput(String filename) throws FileNotFoundException {
+	public InputStream createInput(String filename) throws FileNotFoundException
+	{
 		fs = new FileInputStream(sketchPath(filename));
 		return fs;
 	}
@@ -142,12 +172,15 @@ public class BGM
 	 * 
 	 * @throws IOException
 	 */
-	public void shutdown() throws IOException {
-		if(player != null) {
+	public void shutdown() throws IOException
+	{
+		if(player != null)
+		{
 			player.close();
 		}
 		
-		if(fs != null) {
+		if(fs != null)
+		{
 			fs.close();
 		}
 	}
