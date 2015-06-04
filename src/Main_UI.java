@@ -165,7 +165,7 @@ public class Main_UI extends JFrame {
 	 */
 	public void show_Background () {
 		
-		//bg = new ImageIcon(System.getProperty("user.dir") + "\\image\\moodae.jpg");
+		bg = new ImageIcon(System.getProperty("user.dir") + "\\image\\moodae.jpg");
 		play_panel = new JPanel() {
 			public void paintComponent(Graphics g) {
 				// Draw Image with Handling NullPointerException

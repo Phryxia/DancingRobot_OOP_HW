@@ -30,6 +30,7 @@ public class keyframe extends JPanel {
 	private int index;
 	private int pos;
 	private int size;
+	private int i_size;
 	private int cur_index;
 	
 	private Color back    = new Color(50, 50, 50);
@@ -53,6 +54,19 @@ public class keyframe extends JPanel {
 		add(anim2);
 	}
 	
+	/**
+	 * UI Setting for Frame.
+	 * 
+	 * Label : Background, Foreground
+	 * OptionPane : Background, Foreground
+	 * Button : Background, Foreground
+	 * ToggleButton : Background
+	 * Panel : Background
+	 * 
+	 * All Fonts to Clear Gothic
+	 * 
+	 * @author UlnamSong
+	 */
 	@SuppressWarnings("static-access")
 	public void optionpanel_Setting () {
 		UIManager UI = new UIManager();
@@ -86,18 +100,21 @@ public class keyframe extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
 					index = anim1.ol1.frame_list_1.getSelectedIndex();
-					pos = index * 5;
-	                  anim1.tf1.neck_1.setText(
-	                		  debug1.get(pos + 0).toString());
-	                  anim1.tf1.larm_1.setText(
-	                		  debug1.get(pos + 1).toString());
-	                  anim1.tf1.rarm_1.setText(
-	                		  debug1.get(pos + 2).toString());
-	                  anim1.tf1.lleg_1.setText(
-	                		  debug1.get(pos + 3).toString());
-	                  anim1.tf1.rleg_1.setText(
-	                		  debug1.get(pos + 4).toString());
-	              }
+					System.out.println("selected index : " + (index+1));
+					if(index != -1) {
+						pos = index * 5;
+	                  	anim1.tf1.neck_1.setText(
+	                		  robot_1.get(pos + 0).toString());
+	                  	anim1.tf1.larm_1.setText(
+	                		  robot_1.get(pos + 1).toString());
+	                  	anim1.tf1.rarm_1.setText(
+	                		  robot_1.get(pos + 2).toString());
+	                  	anim1.tf1.lleg_1.setText(
+	                		  robot_1.get(pos + 3).toString());
+	                  	anim1.tf1.rleg_1.setText(
+	                		  robot_1.get(pos + 4).toString());
+					}
+	            }
 			}
 		});
 		
@@ -115,35 +132,49 @@ public class keyframe extends JPanel {
 							anim1.setData(robot_1, size);
 							anim1.ol1.listMode_1.addElement(keyname);
 						} else {
-							anim1.setData(robot_1, cur_index);
-							anim1.ol1.listMode_1.add(cur_index, keyname);
+							anim1.setData(robot_1, (cur_index+1));
+							anim1.ol1.listMode_1.add((cur_index+1), keyname);
 						}
-					
-						//Debug
-						System.out.println("Save test(Robot 1)");
-						System.out.println("Index : " + size);
-				
-						getData(debug1, robot_1, size);
-						int pos_i = size * 5;
-						System.out.println(debug1.get(pos_i + 0));
-						System.out.println(debug1.get(pos_i + 1));
-						System.out.println(debug1.get(pos_i + 2));
-						System.out.println(debug1.get(pos_i + 3));
-						System.out.println(debug1.get(pos_i + 4));
+						size = anim1.ol1.frame_list_1.getModel().getSize();
+						
+						//Print Log
+						System.out.println("---Added(Robot_1)---");
+						for(int i = 0; i < robot_1.size(); i++) {
+							System.out.println(robot_1.get(i));
+						}
+						System.out.println("--------------------");
 					}
 				}
-			
 			}
 		});
 		
+		// Event - When Remove Button is Clicked
 		anim1.tf1.rembtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(anim1.ol1.frame_list_1.getModel().getSize() > 0) {
-					anim1.ol1.listMode_1.remove(anim1.ol1.frame_list_1.getSelectedIndex());
+				i_size = anim1.ol1.frame_list_1.getModel().getSize();
+				cur_index = anim1.ol1.frame_list_1.getSelectedIndex();
+				
+				if(i_size > 0) {
+					int pos = (cur_index) * 5;
+					System.out.println("pos : " + pos);
+					for(int i = 0; i < 5; i++) {
+						robot_1.remove(pos + 0);
+					}
+					System.out.println("Removed.");
+					anim1.ol1.listMode_1.removeElementAt(cur_index);
 				} else {
 					JOptionPane.showMessageDialog(null, "제거할 키프레임이 존재하지 않습니다.", "제거 오류", JOptionPane.ERROR_MESSAGE, null);
 				}
+				
+				i_size = anim1.ol1.frame_list_1.getModel().getSize();
+				
+				//Debug
+				System.out.println("---Romoved(Robot_1)---");
+				for(int i = 0; i < robot_1.size(); i++) {
+					System.out.println(robot_1.get(i));
+				}
+				System.out.println("----------------------");
 			}
 		});
 	}
@@ -157,19 +188,22 @@ public class keyframe extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
-					int index = anim2.ol2.frame_list_2.getSelectedIndex();
-					int pos = index * 5;
-	                  anim2.tf2.neck_2.setText(
-	                		  debug2.get(pos + 0).toString());
-	                  anim2.tf2.larm_2.setText(
-	                		  debug2.get(pos + 1).toString());
-	                  anim2.tf2.rarm_2.setText(
-	                		  debug2.get(pos + 2).toString());
-	                  anim2.tf2.lleg_2.setText(
-	                		  debug2.get(pos + 3).toString());
-	                  anim2.tf2.rleg_2.setText(
-	                		  debug2.get(pos + 4).toString());
-	              }
+					index = anim2.ol2.frame_list_2.getSelectedIndex();
+					System.out.println("selected index : " + (index+1));
+					if(index != -1) {
+						pos = index * 5;
+	                  	anim2.tf2.neck_2.setText(
+	                		  robot_2.get(pos + 0).toString());
+	                  	anim2.tf2.larm_2.setText(
+	                		  robot_2.get(pos + 1).toString());
+	                  	anim2.tf2.rarm_2.setText(
+	                		  robot_2.get(pos + 2).toString());
+	                  	anim2.tf2.lleg_2.setText(
+	                		  robot_2.get(pos + 3).toString());
+	                  	anim2.tf2.rleg_2.setText(
+	                		  robot_2.get(pos + 4).toString());
+					}
+	            }
 			}
 		});
 		
@@ -177,45 +211,34 @@ public class keyframe extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				/**
-				 * size : The number of list elements
-				 * cur_index : selected list element's index
-				 */
-				
 				size = anim2.ol2.frame_list_2.getModel().getSize();
 				cur_index = anim2.ol2.frame_list_2.getSelectedIndex();
 				
-				/**
-				 * Check whether all TextFields is filled.
-				 */
-				if(anim1.tf1.neck_1.getText().length() == 0 || anim1.tf1.larm_1.getText().length() == 0 || anim1.tf1.rarm_1.getText().length() == 0 || anim1.tf1.lleg_1.getText().length() == 0 || anim1.tf1.rleg_1.getText().length() == 0) {
+				if(anim2.tf2.neck_2.getText().length() == 0 || anim2.tf2.larm_2.getText().length() == 0 || 
+						anim2.tf2.rarm_2.getText().length() == 0 || anim2.tf2.lleg_2.getText().length() == 0 || 
+							anim2.tf2.rleg_2.getText().length() == 0) {
 					JOptionPane.showMessageDialog(null, "입력공간을 모두 채우십시오.", "입력 오류", JOptionPane.ERROR_MESSAGE, null);
 				} else {
-					// Print Error Message
 					keyname = JOptionPane.showInputDialog("키프레임 이름을 입력하십시오.", "키프레임 이름 입력");
 					if(keyname != null) {
 						if(cur_index == -1) {
 							anim2.setData(robot_2, size);
 							anim2.ol2.listMode_2.addElement(keyname);
 						} else {
-							anim2.setData(robot_2, cur_index);
-							anim2.ol2.listMode_2.add(cur_index, keyname);
+							anim2.setData(robot_2, (cur_index+1));
+							anim2.ol2.listMode_2.add((cur_index+1), keyname);
 						}
-				
-						/**
-						 * Debugging Code.
-						 * If you want to view the value, you can use code below.
-						 */
-						System.out.println("Save test(Robot 2)");
-						System.out.println("Index : " + size);
-				
-						getData(debug2, robot_2, size);
-						int pos_i = size * 5;
-						System.out.println(debug2.get(pos_i + 0));
-						System.out.println(debug2.get(pos_i + 1));
-						System.out.println(debug2.get(pos_i + 2));
-						System.out.println(debug2.get(pos_i + 3));
-						System.out.println(debug2.get(pos_i + 4));
+						size = anim2.ol2.frame_list_2.getModel().getSize();
+						
+						//Print Log
+						System.out.println("---Added(Robot_2)---");
+						
+						// Print Elements of ArrayList.
+						for(int i = 0; i < robot_2.size(); i++) {
+							System.out.println(robot_2.get(i));
+						}
+						//Separator Line
+						System.out.println("-------------------");
 					}
 				}
 			}
@@ -224,11 +247,33 @@ public class keyframe extends JPanel {
 		anim2.tf2.rembtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(anim2.ol2.frame_list_2.getModel().getSize() > 0) {
-					anim2.ol2.listMode_2.remove(anim2.ol2.frame_list_2.getSelectedIndex());
+				i_size = anim2.ol2.frame_list_2.getModel().getSize();
+				cur_index = anim2.ol2.frame_list_2.getSelectedIndex();
+				
+				if(i_size > 0) {
+					int pos = (cur_index) * 5;
+					
+					//Log
+					System.out.println("pos : " + pos);
+					
+					for(int i = 0; i < 5; i++) {
+						robot_2.remove(pos + 0);
+					}
+					
+					//Log
+					System.out.println("Removed.");
+					anim2.ol2.listMode_2.removeElementAt(cur_index);
 				} else {
 					JOptionPane.showMessageDialog(null, "제거할 키프레임이 존재하지 않습니다.", "제거 오류", JOptionPane.ERROR_MESSAGE, null);
 				}
+				i_size = anim2.ol2.frame_list_2.getModel().getSize();
+				
+				//Log
+				System.out.println("---Romoved(Robot_2)---");
+				for(int i = 0; i < robot_2.size(); i++) {
+					System.out.println(robot_2.get(i));
+				}
+				System.out.println("----------------------");
 			}
 		});
 	}
