@@ -109,12 +109,21 @@ public class Control_Panel extends JPanel {
 		
 		Dimension space_size = new Dimension(150, 200);
 
+		/*
+		 * Load Icon
+		 */
 		String path = "C:\\icon_bg.png";
-        File file = new File(path);
-        img = ImageIO.read(file);
-        empty_space = new JLabel(new ImageIcon(img));
-        empty_space.setPreferredSize(space_size);
-        //empty_space.setPreferredSize(space_size);
+		try
+		{
+        	empty_space = new JLabel(new ImageIcon(ImageIO.read(new File(path))));
+		}
+		catch(Exception e)
+		{
+			System.out.println("There is no such icon in : " + path);
+			empty_space = new JLabel();
+		}
+		
+    	empty_space.setPreferredSize(space_size);
 		empty_space.setBackground(new Color(50, 50, 50));
 		empty_space.setForeground(new Color(170, 170, 170));
 	}

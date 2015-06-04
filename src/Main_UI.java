@@ -164,11 +164,15 @@ public class Main_UI extends JFrame {
 	 * Load the stage image, set the background of player_panel.
 	 */
 	public void show_Background () {
-		bg = new ImageIcon("C:\\Users\\Ulnamsong\\Documents\\GitHub\\DancingRobot_OOP_HW\\image\\moodae.jpg");
+		
+		//bg = new ImageIcon(System.getProperty("user.dir") + "\\image\\moodae.jpg");
 		play_panel = new JPanel() {
 			public void paintComponent(Graphics g) {
-				Dimension d = getSize();
-            	g.drawImage(bg.getImage(), 0, 0, d.width, d.height, null);
+				// Draw Image with Handling NullPointerException
+				if(bg != null && bg.getImage() != null)
+				{
+					g.drawImage(bg.getImage(), 0, 0, getWidth(), getHeight(), null);
+				}
             	setOpaque(false);
             	super.paintComponent(g);
 			}
