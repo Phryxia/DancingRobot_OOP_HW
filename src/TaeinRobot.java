@@ -11,7 +11,7 @@ public class TaeinRobot extends GRobot {
 
 	@Override
 	public void setAppearance(String name) {
-		// Null Pointer Check
+		// Check whether Null Pointer Exception is occured
 		if(name == null) {
 			name = "null";
 		}
@@ -23,12 +23,12 @@ public class TaeinRobot extends GRobot {
 		TaeinRobotArm rarm = (TaeinRobotArm)root.add(new TaeinRobotArm(name + "_right_arm", 50, -35, 70, 10));
 		rarm.setCurrentAngle(Math.PI/2);
 		
-		TaeinRobotHead head = (TaeinRobotHead)root.add(new TaeinRobotHead(name + "_head", 0, -80, 60));
+		TaeinRobotHead head = (TaeinRobotHead)root.add(new TaeinRobotHead(name + "_head", 0, -80, 110));
 		
-		TaeinRobotArm lleg = (TaeinRobotArm)root.add(new TaeinRobotArm(name + "_left_leg", -30, 50, 70, 10));
+		TaeinRobotArm lleg = (TaeinRobotArm)root.add(new TaeinRobotArm(name + "_left_leg", -30, 100, 70, 10));
 		lleg.setCurrentAngle(Math.PI/2);
 		
-		TaeinRobotArm rleg = (TaeinRobotArm)root.add(new TaeinRobotArm(name + "_right_leg", 30, 50, 70, 10));
+		TaeinRobotArm rleg = (TaeinRobotArm)root.add(new TaeinRobotArm(name + "_right_leg", 30, 100, 70, 10));
 		rleg.setCurrentAngle(Math.PI/2);
 	}
 }

@@ -44,16 +44,40 @@ class RobotDisplayer extends JComponent
 		// Instruction IO Test
 		io = new InstructionIO();
 		
+		
+		
 		// Make Random Sequence
 		ArrayList <Instruction> temp;
-		for(int i=0; i<4; ++i)
+		for(int i=0; i<64; ++i)
 		{
-			temp = new ArrayList <Instruction> (5);
+			temp = new ArrayList <Instruction> (6);
 			temp.add(new Instruction(0, Math.pow(-1, i)*50, -1));
-			for(int j=0; j<4; ++j)
+			/*
+			for(int j=0; j<5; ++j)
 			{
 				temp.add(new Instruction(0, 0, (int)(Math.random()*360)));
 			}
+			*/
+			
+			
+			// LH
+			temp.add(new Instruction(0, 0, 90 + (int)(Math.random()*135)));
+			
+			// RH
+			temp.add(new Instruction(0, 0, (90 - (int)(Math.random()*135) + 360)%360));
+			
+			// H
+			temp.add(Instruction.NO_CHANGE);
+			
+			// LL
+			temp.add(new Instruction(0, 0, 60 + (int)(Math.random()*60)));
+			
+			// RL
+			temp.add(new Instruction(0, 0, 120 - (int)(Math.random()*60)));
+			
+			temp.add(new Instruction(0, 0, (int)(Math.random()*360)));
+			temp.add(new Instruction(0, 0, (int)(Math.random()*360)));
+			
 			io.add(temp);
 		}
 		
@@ -63,7 +87,8 @@ class RobotDisplayer extends JComponent
 			
 		// Sound Test bed
 		bgm = new BGM();
-		bgm.loadMP3("test.mp3");
+		//bgm.loadMP3("test.mp3");
+		bgm.loadMP3("C:\\Users\\Public\\Music\\Sample Music\\Apink-02-My My.mp3");
 		bgm.play();
 		
 		rc = new RobotController(myRobot, io, bgm, 1000);

@@ -37,11 +37,11 @@ public abstract class RobotPart implements Servo {
 		}
 		
 		this.name = name;
-		position = new VDamper(new Vector2D(x, y), 0.5);
+		position = new VDamper(new Vector2D(x, y), 0.07);
 		root     = null;
 		subParts = new ArrayList <RobotPart> (5);
 		
-		angle = new Damper(0, 0.1);
+		angle = new Damper(0, 0.07);
 	}
 	
 	/**

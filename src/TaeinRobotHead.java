@@ -61,7 +61,7 @@ public class TaeinRobotHead extends GRobotPart implements ColorModule {
 	public void drawDefine(Graphics2D g2d) {
 		// Start Drawing
 		g2d.setColor(cList[BODY_LINE]);
-		g2d.drawOval((int)(-radius/2), (int)((-radius/2) + (radius/2)) , (int)radius + 50, (int)radius + 50);
+		g2d.drawOval((int)(-radius/2), (int)((-radius/2) + (radius/2)) , (int)radius, (int)radius);
 		g2d.setColor(cList[BODY_FILL]);
 		g2d.fillOval((int)(-radius/2), (int)(-radius/2), (int)radius, (int)radius);
 	}
