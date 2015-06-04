@@ -1,8 +1,12 @@
 /**
  * Main_UI.java
  * 
- * @author Taein Kim
+ * Class for Main UI
+ * Main Frame of Application
+ * 
+ * @author UlnamSong
  */
+
 
 import javax.swing.*;
 
@@ -50,6 +54,11 @@ public class Main_UI extends JFrame {
 	Toolkit            theKit     = getToolkit();
 	Dimension          screenSize = theKit.getScreenSize();
 	
+	/**
+	 * Icon Images for icon which is in the MenuBar
+	 * 
+	 * @author UlnamSong
+	 */
 	ImageIcon htu_img  = new ImageIcon(RelativePath.getAbsolutePath("image\\icon_help.jpg"));
 	ImageIcon exit_img = new ImageIcon(RelativePath.getAbsolutePath("image\\icon_exit.jpg"));
 	ImageIcon load_img = new ImageIcon(RelativePath.getAbsolutePath("image\\icon_load.jpg"));
@@ -59,7 +68,11 @@ public class Main_UI extends JFrame {
 	/**
 	 * Constructor
 	 * 
-	 * @author Taein Kim
+	 *  - Ensure Capacity of Robot_1 & Robot_2 ArrayList
+	 *  - Generate Panels & Split main panel.
+	 *  - Assign events to checkBox & Button.
+	 * 
+	 * @author UlnamSong
 	 */
 	public Main_UI () {
 		
@@ -119,7 +132,7 @@ public class Main_UI extends JFrame {
 	/**
 	 * Robot Activation CheckBox Control
 	 * 
-	 * @author Taein Kim
+	 * @author UlnamSong
 	 */
 	public void chkBox_control () {
 		cp.r1_Active.addActionListener(new ActionListener() {
