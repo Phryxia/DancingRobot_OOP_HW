@@ -5,7 +5,7 @@
  */
 package Temporary_Taein;
 
-public class generator {
+public class Generator {
 
 	public static void main(String[] args) {
 		new Main_UI();
