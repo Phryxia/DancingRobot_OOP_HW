@@ -81,16 +81,18 @@ public class Control_Panel extends JPanel {
 		add(cur_music);
 	}
 	
+	/*
+	 * This part will draw UIs about playing & stop music.
+	 */
 	public void music_Control () throws IOException {
 		what_name = new JLabel("음악 삽입 : ");
 		what_name.setFont(clear_gothic);
 		what_name.setForeground(new Color(170, 170, 170));
 		what_name.setBackground(new Color(50, 50, 50));
 		
-		Dimension label_size = new Dimension(155, 15);
 		cur_music = new JLabel("파일명 :  " + music_name);
 		cur_music.setFont(clear_gothic);
-		cur_music.setPreferredSize(label_size);
+		cur_music.setPreferredSize(new Dimension(155, 15));
 		cur_music.setBackground(new Color(50, 50, 50));
 		cur_music.setForeground(new Color(170, 170, 170));
 		
@@ -99,30 +101,23 @@ public class Control_Panel extends JPanel {
 		load_music.setBackground(btn_bg);
 		load_music.setForeground(btn_txt);
 		load_music.addActionListener(new ActionListener() {
+			/**
+			 * This will open the dialog which get music file's
+			 * absolute path.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				fod = new FileOpenDialog("MP3 File", "mp3");
-				file_name = fod.getFileInfo(2);
-				cur_music.setText("파일명 :  " + file_name);
+				cur_music.setText("파일명 :  " + fod.getFileInfo(2));
 			}
 		});
 		
 		Dimension space_size = new Dimension(150, 200);
 
 		/*
-		 * Load Icon
+		 * Load TS Robot image to the left side of main UI
 		 */
-		String path = "C:\\icon_bg.png";
-		try
-		{
-        	empty_space = new JLabel(new ImageIcon(ImageIO.read(new File(path))));
-		}
-		catch(Exception e)
-		{
-			System.out.println("There is no such icon in : " + path);
-			empty_space = new JLabel();
-		}
-		
+		empty_space = new JLabel(new ImageIcon(RelativePath.getAbsolutePath("image\\icon_main.jpg")));
     	empty_space.setPreferredSize(space_size);
 		empty_space.setBackground(new Color(50, 50, 50));
 		empty_space.setForeground(new Color(170, 170, 170));

@@ -50,12 +50,11 @@ public class Main_UI extends JFrame {
 	Toolkit            theKit     = getToolkit();
 	Dimension          screenSize = theKit.getScreenSize();
 	
-	ImageIcon img      = new ImageIcon("C:\\icon.png");
-	ImageIcon htu_img  = new ImageIcon("C:\\DancingRobot\\Images\\Use_Icon.png");
-	ImageIcon exit_img = new ImageIcon("C:\\DancingRobot\\Images\\Exit_Icon.png");
-	ImageIcon load_img = new ImageIcon("C:\\DancingRobot\\Images\\Load_Icon.png");
-	ImageIcon info_img = new ImageIcon("C:\\DancingRobot\\Images\\Info_Icon.png");
-	ImageIcon save_img = new ImageIcon("C:\\DancingRobot\\Images\\Save_Icon.png");
+	ImageIcon htu_img  = new ImageIcon(RelativePath.getAbsolutePath("image\\icon_help.jpg"));
+	ImageIcon exit_img = new ImageIcon(RelativePath.getAbsolutePath("image\\icon_exit.jpg"));
+	ImageIcon load_img = new ImageIcon(RelativePath.getAbsolutePath("image\\icon_load.jpg"));
+	ImageIcon info_img = new ImageIcon(RelativePath.getAbsolutePath("image\\icon_info.jpg"));
+	ImageIcon save_img = new ImageIcon(RelativePath.getAbsolutePath("image\\icon_save.jpg"));
 	
 	/**
 	 * Constructor
@@ -63,15 +62,17 @@ public class Main_UI extends JFrame {
 	 * @author Taein Kim
 	 */
 	public Main_UI () {
+		
 		robot1_anchor.ensureCapacity(100);
 		robot2_anchor.ensureCapacity(100);
 		
-		generate_Menu   ();
-		generate_panel  ();
+		generate_Menu ();
+		generate_panel();
 		chkBox_control();
 		button_Control();
 		
-		setIconImage(img.getImage());
+		// Set this window's icon
+		setIconImage((new ImageIcon(RelativePath.getAbsolutePath("image\\icon_main.jpg"))).getImage());
 		setBackground(new Color(50, 50, 50));
 		setSize(950, 600);
 		setTitle("Dancing Robot (Taein & Sekyu)");
@@ -88,21 +89,27 @@ public class Main_UI extends JFrame {
 	 * @author Taein Kim
 	 */
 	public void button_Control () {
+		/*
+		 * This button should play BGM & RobotDance.
+		 */
 		cp.play_anim.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!isPlay) {
-					System.out.println("Play_Button Clicked");
+					System.out.println("[Main_UI] Notice : Play_Button is clicked");
 					isPlay = true;
 				}
 			}
 		});
 		
+		/*
+		 * This button should stop BGM & RobotDance.
+		 */
 		cp.stop_anim.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(isPlay) {
-					System.out.println("Stop_ButtonClicked");
+					System.out.println("[Main_UI] Notice : Stop_Button is clicked");
 					isPlay = false;
 				}
 			}
@@ -161,17 +168,20 @@ public class Main_UI extends JFrame {
 	}
 	
 	/**
-	 * Load the stage image, set the background of player_panel.
+	 * Load the stage image to the background.
 	 */
 	public void show_Background () {
-		
-		//bg = new ImageIcon(System.getProperty("user.dir") + "\\image\\moodae.jpg");
+		bg = new ImageIcon(RelativePath.getAbsolutePath("image\\bg_stage.jpg"));
 		play_panel = new JPanel() {
 			public void paintComponent(Graphics g) {
 				// Draw Image with Handling NullPointerException
-				if(bg != null && bg.getImage() != null)
+				try
 				{
 					g.drawImage(bg.getImage(), 0, 0, getWidth(), getHeight(), null);
+				}
+				catch(NullPointerException e)
+				{
+					System.out.println("[Main_UI : show_background] No such image error");
 				}
             	setOpaque(false);
             	super.paintComponent(g);
