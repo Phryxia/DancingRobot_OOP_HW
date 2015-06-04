@@ -1,7 +1,8 @@
 /**
  * Animation_1.java
  * 
- *  @author Taein Kim
+ * 
+ *  @author Ulnamsong
  */
 package Temporary_Taein;
 import java.awt.*;
