@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.geom.*;
 
+import com.sun.prism.BasicStroke;
+
 /**
  * Drawing class of RobotArm.
  * Extends GRobotPart to this class and remove draw function
@@ -23,15 +25,15 @@ public class TaeinRobotArm extends GRobotPart implements ColorModule {
 	 * @param length
 	 * @param weight
 	 */
-	public TaeinRobotArm(String name, double x, double y, double length, double weight) {
+	public TaeinRobotArm(String name, Color line, Color fill, double x, double y, double length, double weight) {
 		super(name, x, y);
 		
 		this.length = length;
 		this.weight = weight;
 		
 		cList = new Color[4];
-		cList[BODY_LINE] = new Color(0, 0, 0);
-		cList[BODY_FILL] = new Color(100, 100, 100);
+		cList[BODY_LINE] = line;
+		cList[BODY_FILL] = fill;
 	}
 	
 	protected double length;
@@ -65,8 +67,8 @@ public class TaeinRobotArm extends GRobotPart implements ColorModule {
 	public void drawDefine(Graphics2D g2d) {
 		// Start Drawing
 		g2d.setColor(cList[BODY_LINE]);
-		g2d.drawRoundRect(-20, (int)(-weight/2), (int)length, (int)weight, 20, 20);
+		g2d.drawRoundRect(-20, (int)(-weight/2), (int)length, (int)weight, 15, 15);
 		g2d.setColor(cList[BODY_FILL]);
-		g2d.fillRoundRect(-20, (int)(-weight/2), (int)length, (int)weight, 20, 20);
+		g2d.fillRoundRect(-20, (int)(-weight/2), (int)length, (int)weight, 15, 15);
 	}
 }
