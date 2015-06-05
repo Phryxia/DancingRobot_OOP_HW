@@ -65,8 +65,8 @@ public class TaeinRobotArm extends GRobotPart implements ColorModule {
 	public void drawDefine(Graphics2D g2d) {
 		// Start Drawing
 		g2d.setColor(cList[BODY_LINE]);
-		g2d.drawRect(-20, (int)(-weight/2), (int)length, (int)weight);
+		g2d.drawRoundRect(-20, (int)(-weight/2), (int)length, (int)weight, 20, 20);
 		g2d.setColor(cList[BODY_FILL]);
-		g2d.fillRect(-20, (int)(-weight/2), (int)length, (int)weight);
+		g2d.fillRoundRect(-20, (int)(-weight/2), (int)length, (int)weight, 20, 20);
 	}
 }

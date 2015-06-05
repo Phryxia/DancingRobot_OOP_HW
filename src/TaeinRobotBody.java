@@ -69,13 +69,13 @@ public class TaeinRobotBody extends GRobotPart implements ColorModule {
 	public void drawDefine(Graphics2D g2d) {
 		// Draw Body
 		g2d.setColor(cList[BODY_LINE]);
-		g2d.drawRoundRect((int)(-width/2), (int)(-height/2), (int)width, (int)height + 50, 3, 3);
+		g2d.drawRoundRect((int)(-width/2), (int)(-height/2), (int)width, (int)height, 30, 30);
 		g2d.setColor(cList[BODY_FILL]);
-		g2d.fillRoundRect((int)(-width/2), (int)(-height/2), (int)width, (int)height + 50, 3, 3);
+		g2d.fillRoundRect((int)(-width/2), (int)(-height/2), (int)width, (int)height, 30, 30);
 				
 		// Draw Text
 		g2d.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		g2d.setColor(Color.WHITE);
-		g2d.drawString("²ÞÀÌ ÀÖ¾î¿ä", -45, 0);
+		g2d.drawString("  HUBO", -45, 0);
 	}
 }

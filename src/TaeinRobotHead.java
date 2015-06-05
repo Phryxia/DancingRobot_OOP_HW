@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
@@ -61,8 +62,12 @@ public class TaeinRobotHead extends GRobotPart implements ColorModule {
 	public void drawDefine(Graphics2D g2d) {
 		// Start Drawing
 		g2d.setColor(cList[BODY_LINE]);
-		g2d.drawOval((int)(-radius/2), (int)((-radius/2) + (radius/2)) , (int)radius, (int)radius);
+		g2d.drawRoundRect((int)(-radius/2), (int)(-radius/2) , (int)radius, (int)radius, 20, 20);
 		g2d.setColor(cList[BODY_FILL]);
-		g2d.fillOval((int)(-radius/2), (int)(-radius/2), (int)radius, (int)radius);
+		g2d.fillRoundRect((int)(-radius/2), (int)(-radius/2), (int)radius, (int)radius, 20, 20);
+		g2d.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
+		g2d.setColor(new Color(209, 220, 232));
+		g2d.drawString("    ^ ^", -45, 0);
+		g2d.drawString("¤Ñ", -10, 25);
 	}
 }
