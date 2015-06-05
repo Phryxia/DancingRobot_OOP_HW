@@ -47,7 +47,7 @@ public class Main_UI extends JFrame {
 	
 	FileSaveDialog     sf;
 	Control_Panel      cp         = new Control_Panel ();
-	keyframe           kf         = new keyframe      (robot1_anchor);
+	keyframe           kf;
 	Manual_Frame       mf;
 	Program_Info       pi;
 	Test_Add_Component tac;
