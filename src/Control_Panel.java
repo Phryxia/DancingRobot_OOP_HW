@@ -81,6 +81,10 @@ public class Control_Panel extends JPanel {
 		add(cur_music);
 	}
 	
+	public String ret_music () {
+		return music_name;
+	}
+	
 	/*
 	 * This part will draw UIs about playing & stop music.
 	 */
@@ -108,6 +112,7 @@ public class Control_Panel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				fod = new FileOpenDialog("MP3 File", "mp3");
+				music_name = fod.getFile(2);
 				cur_music.setText("ÆÄÀÏ¸í :  " + fod.getFileInfo(2));
 			}
 		});
@@ -117,7 +122,7 @@ public class Control_Panel extends JPanel {
 		/*
 		 * Load TS Robot image to the left side of main UI
 		 */
-		empty_space = new JLabel(new ImageIcon(RelativePath.getAbsolutePath("image\\icon_main.jpg")));
+		empty_space = new JLabel(new ImageIcon(RelativePath.getAbsolutePath("image\\icon_noname.jpg")));
     	empty_space.setPreferredSize(space_size);
 		empty_space.setBackground(new Color(50, 50, 50));
 		empty_space.setForeground(new Color(170, 170, 170));

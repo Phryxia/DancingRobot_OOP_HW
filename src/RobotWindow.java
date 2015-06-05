@@ -53,6 +53,9 @@ public class RobotWindow extends JComponent
 		SeKyuRobot seKyuRobot = new SeKyuRobot("Se Kyu Kwon");
 		robotList.add(seKyuRobot);
 		
+		TaeinRobot taeinRobot = new TaeinRobot("Tae in Kim");
+		robotList.add(taeinRobot);
+		
 		//robotList.add(new TaeInRobot("Tae In Kim"));
 		
 		// *** *** *** ***

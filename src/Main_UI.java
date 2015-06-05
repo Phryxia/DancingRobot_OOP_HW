@@ -18,8 +18,6 @@ import java.awt.event.*;
 public class Main_UI extends JFrame {
 	private  Container  contentPane;
 	private  JRootPane  root_panel;
-	private  ImageIcon  bg;
-	private  JPanel     play_panel;
 	public static boolean isPlay = false;
 	
 	private  ArrayList<Integer> robot1_anchor = new ArrayList<Integer>();
@@ -45,6 +43,7 @@ public class Main_UI extends JFrame {
 	private JMenuItem  exitItem;
 	private JMenuItem  howToUse;
 	
+	JLabel label;
 	FileSaveDialog     sf;
 	Control_Panel      cp         = new Control_Panel ();
 	keyframe           kf;
@@ -53,6 +52,9 @@ public class Main_UI extends JFrame {
 	Test_Add_Component tac;
 	Toolkit            theKit     = getToolkit();
 	Dimension          screenSize = theKit.getScreenSize();
+	
+	ImagePanel panel;
+	RobotWindow rw1 = new RobotWindow(741, 396);
 	
 	/**
 	 * Icon Images for icon which is in the MenuBar
@@ -84,6 +86,8 @@ public class Main_UI extends JFrame {
 		chkBox_control();
 		button_Control();
 		
+		panel.add(rw1);
+
 		// Set this window's icon
 		setIconImage((new ImageIcon(RelativePath.getAbsolutePath("image\\icon_main.jpg"))).getImage());
 		setBackground(new Color(50, 50, 50));
@@ -110,6 +114,9 @@ public class Main_UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(!isPlay) {
 					System.out.println("[Main_UI] Notice : Play_Button is clicked");
+					rw1.setBGM(cp.ret_music());
+					rw1.setMode(true);
+					rw1.startDancing();
 					isPlay = true;
 				}
 			}
@@ -123,6 +130,7 @@ public class Main_UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(isPlay) {
 					System.out.println("[Main_UI] Notice : Stop_Button is clicked");
+					rw1.stopDancing();
 					isPlay = false;
 				}
 			}
@@ -140,8 +148,10 @@ public class Main_UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(cp.r1_Active.isSelected()) {
 					System.out.println("chkbox1 Check true");
+					
 				} else {
 					System.out.println("chkbox1 Check false");
+					
 				}
 			}
 		});
@@ -151,8 +161,10 @@ public class Main_UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(cp.r2_Active.isSelected()) {
 					System.out.println("chkbox2 Check true");
+					
 				} else {
 					System.out.println("chkbox2 Check false");
+					
 				}
 			}
 		});
@@ -165,7 +177,7 @@ public class Main_UI extends JFrame {
 		show_Background ();
 		setBackground(new Color(50, 50, 50));
 		root_panel  = this.getRootPane ();
-		leftright   = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, cp, play_panel);
+		leftright   = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, cp, panel);
 		updown      = new JSplitPane(JSplitPane.VERTICAL_SPLIT, leftright, kf);
 		contentPane = root_panel.getContentPane();
 		contentPane.setLayout ( new BorderLayout ());
@@ -184,6 +196,14 @@ public class Main_UI extends JFrame {
 	 * Load the stage image to the background.
 	 */
 	public void show_Background () {
+		panel = new ImagePanel(new ImageIcon("image\\bg_stage.jpg").getImage());
+		add(panel);
+		
+		
+		
+		
+		
+		/*
 		bg = new ImageIcon(RelativePath.getAbsolutePath("image\\bg_stage.jpg"));
 		play_panel = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -200,6 +220,7 @@ public class Main_UI extends JFrame {
             	super.paintComponent(g);
 			}
 		};
+		*/
 	}
 	
 	/**
