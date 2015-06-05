@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * RobotController class handle specific robot's motion.
  * This is kind of factory class which does some central
@@ -8,7 +10,7 @@
  */
 public class RobotController extends Thread implements DancingRobot
 {
-	private Robot robot;
+	private GRobot robot;
 	private InstructionIO iSequence;
 	private int period = 100;
 	private int pointer = 0;
@@ -21,9 +23,12 @@ public class RobotController extends Thread implements DancingRobot
 	 * You can't link null reference, so the entire code doesn't
 	 * need null-pointer exception check.
 	 * 
+	 * Note that this class doesn't change InstructionIO, BGM.
+	 * It only controls robot from 
+	 * 
 	 * @param robotReference
 	 */
-	public RobotController(Robot robotReference, InstructionIO iSeqReference, BGM music, int period)
+	public RobotController(GRobot robotReference, InstructionIO iSeqReference, BGM music, int period)
 	{
 		// Null Pointer Check
 		if(robotReference == null || iSeqReference == null || music == null)
@@ -133,5 +138,10 @@ public class RobotController extends Thread implements DancingRobot
 	public void setMusicMode(boolean t)
 	{
 		musicMode = t;
+	}
+	
+	public void draw(Graphics2D g2d)
+	{
+		robot.draw(g2d);
 	}
 }

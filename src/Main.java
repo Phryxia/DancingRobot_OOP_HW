@@ -15,118 +15,16 @@ public class Main {
 		aFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		aFrame.setResizable(false);
 		
-		aFrame.add(new RobotDisplayer());
+		//aFrame.add(new RobotDisplayer());
+		RobotWindow rw = new RobotWindow(400, 400);
+		aFrame.add(rw);
+		
+		rw.setBGM("test.mp3");
+		rw.setMode(true);
+		rw.startDancing();
 		
 		aFrame.setVisible(true);
 		
 		System.out.println("Ignore Minim Libraries Error : Just internal error");
-	}
-}
-
-/*
- * Test Bed
- * 
- * This class is just test application.
- * You may want to create your own canvas.
- */
-class RobotDisplayer extends JComponent
-{
-	
-	BGM bgm;
-	GRobot myRobot;
-	InstructionIO io;
-	RobotController rc;
-	
-	private int t;
-	
-	public RobotDisplayer()
-	{
-		// Instruction IO Test
-		io = new InstructionIO();
-		
-		
-		
-		// Make Random Sequence
-		ArrayList <Instruction> temp;
-		for(int i=0; i<64; ++i)
-		{
-			temp = new ArrayList <Instruction> (6);
-			temp.add(new Instruction(0, Math.pow(-1, i)*50, -1));
-			/*
-			for(int j=0; j<5; ++j)
-			{
-				temp.add(new Instruction(0, 0, (int)(Math.random()*360)));
-			}
-			*/
-			
-			
-			// LH
-			temp.add(new Instruction(0, 0, 90 + (int)(Math.random()*135)));
-			
-			// RH
-			temp.add(new Instruction(0, 0, (90 - (int)(Math.random()*135) + 360)%360));
-			
-			// H
-			temp.add(Instruction.NO_CHANGE);
-			
-			// LL
-			temp.add(new Instruction(0, 0, 60 + (int)(Math.random()*60)));
-			
-			// RL
-			temp.add(new Instruction(0, 0, 120 - (int)(Math.random()*60)));
-			
-			temp.add(new Instruction(0, 0, (int)(Math.random()*360)));
-			temp.add(new Instruction(0, 0, (int)(Math.random()*360)));
-			
-			io.add(temp);
-		}
-		
-		// Robot Initialization
-		myRobot = new SeKyuRobot("SeKyu!");
-		myRobot.move(200, 200);
-			
-		// Sound Test bed
-		bgm = new BGM();
-		//bgm.loadMP3("test.mp3");
-		bgm.loadMP3("C:\\Users\\Public\\Music\\Sample Music\\Apink-02-My My.mp3");
-		bgm.play();
-		
-		rc = new RobotController(myRobot, io, bgm, 1000);
-		rc.setMusicMode(true);
-		rc.startDancing();
-		
-		// Some annoying looping machine
-		(new Timer(10, new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				loop();
-				repaint();
-			}
-		})).start();
-	}
-	
-	/**
-	 * Loop
-	 */
-	public void loop()
-	{
-	}
-	
-	public void paintComponent(Graphics g)
-	{
-		Graphics2D g2d = (Graphics2D)g;
-		
-		g2d.setColor(Color.BLACK);
-		g2d.drawLine(200, 0, 200, 400);
-		g2d.drawLine(0, 200, 400, 200);
-		
-		myRobot.draw(g2d);
-	}
-	
-	private double map(double x, double xmin, double xmax, double ymin, double ymax)
-	{
-		return (x-xmin)/(xmax-ymin)*(ymax-ymin) + ymin;
 	}
 }
