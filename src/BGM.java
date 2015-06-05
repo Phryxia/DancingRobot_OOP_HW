@@ -68,6 +68,7 @@ public class BGM
 	{
 		if(player != null)
 		{
+			player.pause();
 			player.rewind();
 		}
 	}
