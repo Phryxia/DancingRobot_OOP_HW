@@ -16,6 +16,8 @@ public class Damper extends Thread
 	private double current_value;
 	private double prev_value;
 	
+	private double circular_length;
+	
 	/**
 	 * Constructor with specified initial value.
 	 * @param init_value
@@ -27,6 +29,7 @@ public class Damper extends Thread
 		setDestination(init_value);
 		current_value = destination;
 		prev_value = current_value;
+		circular_length = 0.0;
 		
 		start();
 	}
@@ -36,7 +39,8 @@ public class Damper extends Thread
 	 * 
 	 * @param d
 	 */
-	public Damper(Damper d) {
+	public Damper(Damper d)
+	{
 		setRate(d.damp_rate);
 		setDestination(d.getDestination());
 		current_value = destination;
@@ -71,7 +75,15 @@ public class Damper extends Thread
 		while(true)
 		{
 			prev_value = current_value;
-			current_value += (destination - current_value)*damp_rate;
+			
+			if(!isMoving())
+			{
+				current_value = destination;
+			}
+			else
+			{
+				current_value += (destination - current_value)*damp_rate;
+			}
 			
 			try
 			{
@@ -90,7 +102,43 @@ public class Damper extends Thread
 	 */
 	public void setDestination(double x)
 	{
-		destination = x;
+		if(circular_length != 0.0)
+		{
+			x = dmode(x, circular_length);
+			
+			if(x - destination > circular_length/2.0)
+			{
+				destination = x - circular_length;
+			}
+			else if(destination - x > circular_length/2.0)
+			{
+				destination = x + circular_length;
+			}
+			else
+			{
+				destination = x;
+			}
+		}
+		else
+		{
+			destination = x;
+		}
+	}
+	
+	private double dmode(double x, double m)
+	{
+		if(x > 0)
+		{
+			return x -= Math.floor(x/m)*m;
+		}
+		else if(x < 0)
+		{
+			return x += (Math.ceil(x/m)+1.0)*m;
+		}
+		else
+		{
+			return x;
+		}
 	}
 	
 	/**
@@ -129,11 +177,36 @@ public class Damper extends Thread
 		return current_value - prev_value;
 	}
 	
-	/*
+	/**
 	 * Whether this damper is changing or not.
 	 */
 	public boolean isMoving()
 	{
-		return Math.abs(current_value - destination) > 0.00001;
+		return Math.abs(current_value - destination) > 0.0005;
+	}
+	
+	/**
+	 * Set circularity. If you set length as 0.0
+	 * the you discard circularity.
+	 * 
+	 * Circularity makes damper to assume that
+	 * value is bounded under circularLength.
+	 * 
+	 * For example, if the circularLength = TWO_PI
+	 * then, changing more then PI will reverse the
+	 * direction.
+	 * 
+	 * @param length
+	 */
+	public void setCircularLength(double length)
+	{
+		if(length < 0)
+		{
+			throw new IllegalArgumentException();
+		}
+		else
+		{
+			circular_length = length;
+		}
 	}
 }

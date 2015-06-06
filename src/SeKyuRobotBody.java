@@ -1,16 +1,21 @@
 import java.awt.*;
 
+import ddf.minim.*;
+import ddf.minim.analysis.FFT;
+
 /**
  * Drawing class of RobotBody. (Owner : Se Kyu Kwon)
  * 
  * @author Se-Kyu-Kwon
  */
-public class SeKyuRobotBody extends GRobotPart implements ColorModule {
+public class SeKyuRobotBody extends GRobotPart implements ColorModule, BGMListener {
 	
 	public static final int BODY_LINE = 0;
 	public static final int BODY_FILL = 1;
 	
 	private Color[] cList;
+	private AudioPlayer audioPlayer;
+	private FFT fft;
 	
 	// Attribute
 	protected double width;
@@ -33,6 +38,48 @@ public class SeKyuRobotBody extends GRobotPart implements ColorModule {
 		cList = new Color[4];
 		cList[BODY_LINE] = Color.BLACK;
 		cList[BODY_FILL] = Color.RED;
+		
+		audioPlayer = null;
+		fft         = null;
+	}
+	
+	public void musicStarted(BGM bgm)
+	{
+		// Also do with subPart's handling
+		for(RobotPart e : subParts)
+		{
+			if(e instanceof BGMListener)
+			{
+				((BGMListener) e).musicStarted(bgm);
+			}
+		}
+	}
+	
+	public void musicStopped(BGM bgm)
+	{
+		// Also do with subPart's handling
+		for(RobotPart e : subParts)
+		{
+			if(e instanceof BGMListener)
+			{
+				((BGMListener) e).musicStopped(bgm);
+			}
+		}
+	}
+	
+	public void musicChanged(BGM bgm)
+	{
+		audioPlayer = bgm.getPlayer();
+		fft = bgm.getFFT();
+		
+		// Also do with subPart's handling
+		for(RobotPart e : subParts)
+		{
+			if(e instanceof BGMListener)
+			{
+				((BGMListener) e).musicChanged(bgm);
+			}
+		}
 	}
 	
 	/**
@@ -74,5 +121,16 @@ public class SeKyuRobotBody extends GRobotPart implements ColorModule {
 		g2d.setFont(new Font("Gulim", Font.PLAIN, 25));
 		g2d.setColor(Color.WHITE);
 		g2d.drawString("I ¢¾ Robot", -45, 0);
+		
+		// Draw Spectrum
+		if(fft != null)
+		{
+			fft.forward(audioPlayer.mix);
+			g2d.setColor(Color.YELLOW);
+			
+			double lo = fft.calcAvg(100, 600);
+			
+			g2d.fillRect(-30, (int)(-20 - lo), 10, (int)(lo));
+		}
 	}
 }

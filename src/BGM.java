@@ -2,11 +2,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+
 import ddf.minim.*;
+import ddf.minim.analysis.FFT;
 
 /**
  * This class manage dancing robot's bgm.
  * It can be played using some public method.
+ * 
+ * This is also designed for Observer Pattern.
  * 
  * @author Se-Kyu-Kwon
  */
@@ -16,6 +21,8 @@ public class BGM
 	private AudioPlayer player;
 	private FileInputStream fs;
 	
+	private ArrayList <BGMListener> bgmListener;
+	
 	/**
 	 * Constructor.
 	 */
@@ -24,6 +31,8 @@ public class BGM
 		minim  = new Minim(this);
 		player = null;
 		fs     = null;
+		
+		bgmListener = new ArrayList <BGMListener> (16);
 	}
 	
 	/**
@@ -42,11 +51,35 @@ public class BGM
 				player.close();
 			}
 			
+			// Load new mp3 to the audioFactory
 			player = minim.loadFile(filename);
+			
+			// Call musicChanged Handler.
+			for(BGMListener bl : bgmListener)
+			{
+				bl.musicChanged(this);
+			}
 		}
 		else
 		{
-			System.out.println("This is not a mp3 file : " + filename);
+			System.out.println("[BGM : loadMP3] Warning : Invalid input file willi be ignored : " + filename);
+		}
+	}
+	
+	/**
+	 * Add bgmListener to handle music event.
+	 * 
+	 * @param b
+	 */
+	public void addBGMListener(BGMListener b)
+	{
+		if(b != null)
+		{
+			bgmListener.add(b);
+		}
+		else
+		{
+			System.out.println("[BGM : addBGMListener] Warning : Null listener will be ignored");
 		}
 	}
 	
@@ -58,6 +91,12 @@ public class BGM
 		if(player != null)
 		{
 			player.play();
+			
+			// Call musicStarted Handler.
+			for(BGMListener bl : bgmListener)
+			{
+				bl.musicStarted(this);
+			}
 		}
 	}
 	
@@ -70,9 +109,19 @@ public class BGM
 		{
 			player.pause();
 			player.rewind();
+			
+			// Call musicStopped Handler.
+			for(BGMListener bl : bgmListener)
+			{
+				bl.musicStopped(this);
+			}			
 		}
 	}
 	
+	/**
+	 * Return current audio player's buffer size
+	 * @return
+	 */
 	public int getBufferSize()
 	{
 		if(player != null)
@@ -85,21 +134,20 @@ public class BGM
 		}
 	}
 	
-	/**
-	 * Get wavedata at specified index in current buffer.
-	 * 
-	 * @param index
-	 * @return
-	 */
-	public float getData(int index)
+	public AudioPlayer getPlayer()
+	{
+		return player;
+	}
+	
+	public FFT getFFT()
 	{
 		if(player != null)
 		{
-			return player.left.get(index);
+			return new FFT(player.bufferSize(), player.sampleRate());
 		}
 		else
 		{
-			return 0;
+			return null;
 		}
 	}
 	

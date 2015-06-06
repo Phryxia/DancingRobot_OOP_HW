@@ -14,7 +14,8 @@ import java.util.ArrayList;
  * 
  * @author Se-Kyu-Kwon
  */
-public abstract class RobotPart implements Servo {
+public abstract class RobotPart implements Servo
+{
 	// Attribute
 	protected String    name;
 	protected VDamper   position;
@@ -30,9 +31,11 @@ public abstract class RobotPart implements Servo {
 	 * @param x
 	 * @param y
 	 */
-	public RobotPart(String name, double x, double y) {
+	public RobotPart(String name, double x, double y)
+	{
 		// Null Check
-		if(name == null) {
+		if(name == null)
+		{
 			throw new NullPointerException("[RobotPart : Constructor] Null name cannot be used");
 		}
 		
@@ -42,6 +45,7 @@ public abstract class RobotPart implements Servo {
 		subParts = new ArrayList <RobotPart> (5);
 		
 		angle = new Damper(0, 0.07);
+		angle.setCircularLength(Math.PI*2);
 	}
 	
 	/**
@@ -49,7 +53,8 @@ public abstract class RobotPart implements Servo {
 	 * 
 	 * @return
 	 */
-	public ArrayList <RobotPart> getSubParts() {
+	public ArrayList <RobotPart> getSubParts()
+	{
 		return subParts;
 	}
 	
@@ -61,20 +66,26 @@ public abstract class RobotPart implements Servo {
 	 * @param targetName
 	 * @return
 	 */
-	public RobotPart search(String targetName) {
+	public RobotPart search(String targetName)
+	{
 		// Null Check
-		if(targetName == null) {
+		if(targetName == null)
+		{
 			return null;
 		}
-		else if(targetName.equals(name)) {
+		else if(targetName.equals(name))
+		{
 			return this;
 		}
-		else {
+		else
+		{
 			RobotPart temp;
-			for(RobotPart e : subParts) {
+			for(RobotPart e : subParts)
+			{
 				temp = e.search(targetName);
 				
-				if(temp != null) {
+				if(temp != null)
+				{
 					return temp;
 				}
 			}
@@ -89,15 +100,19 @@ public abstract class RobotPart implements Servo {
 	 * @param newPart
 	 * @return newPart
 	 */
-	public RobotPart add(RobotPart newPart) {
+	public RobotPart add(RobotPart newPart)
+	{
 		// Null Check
-		if(newPart == null) {
+		if(newPart == null)
+		{
 			throw new NullPointerException("[RobotPart : add] You can't add null object");
 		}
-		if(search(newPart.name) != null) {
+		if(search(newPart.name) != null)
+		{
 			throw new IllegalArgumentException("[RobotPart : add] Can't have duplicated name : " + newPart.name);
 		}
-		else {	
+		else
+		{	
 			subParts.add(newPart);
 			newPart.root = this;
 			return newPart;
@@ -109,19 +124,24 @@ public abstract class RobotPart implements Servo {
 	 * If removing completed, true will be returnend.
 	 * Other wise false will be returned.
 	 */
-	public boolean remove(String targetName) {
+	public boolean remove(String targetName)
+	{
 		// Null Pointer Handling
-		if(targetName == null) {
+		if(targetName == null)
+		{
 			return false;
 		}
 		
 		/*
 		 * Search from my subParts
 		 */
-		for(int i=0; i<subParts.size(); ++i) {
-			if(subParts.get(i).name.equals(targetName)) {
+		for(int i=0; i<subParts.size(); ++i)
+		{
+			if(subParts.get(i).name.equals(targetName))
+			{
 				// First, change root of target's childs
-				for(RobotPart e : subParts.get(i).subParts) {
+				for(RobotPart e : subParts.get(i).subParts)
+				{
 					e.root = this;
 				}
 				subParts.remove(i);
@@ -133,10 +153,12 @@ public abstract class RobotPart implements Servo {
 		 * Search from child's subParts
 		 */
 		boolean flag;
-		for(int i=0; i<subParts.size(); ++i) {
+		for(int i=0; i<subParts.size(); ++i)
+		{
 			flag = subParts.get(i).remove(targetName);
 			
-			if(flag) {
+			if(flag)
+			{
 				return true;
 			}
 		}
@@ -149,7 +171,8 @@ public abstract class RobotPart implements Servo {
 	 * @param dx
 	 * @param dy
 	 */
-	public void move(double dx, double dy) {
+	public void move(double dx, double dy)
+	{
 		position.getDestination().translate(dx, dy);
 	}
 	
@@ -158,7 +181,8 @@ public abstract class RobotPart implements Servo {
 	 * 
 	 * @return
 	 */
-	public Vector2D getRelativePosition() {
+	public Vector2D getRelativePosition()
+	{
 		return new Vector2D(position.getCurrent());
 	}
 	
@@ -169,12 +193,14 @@ public abstract class RobotPart implements Servo {
 	 * 
 	 * @return
 	 */
-	public Vector2D getAbsolutePosition() {
+	public Vector2D getAbsolutePosition()
+	{
 		Vector2D result = new Vector2D(position.getCurrent());
 		
 		// Calculate from root's position.
-		if(root != null) {
-			result.rotate(root.angle.getCurrent()); // Follow root's angle
+		if(root != null)
+		{
+			result.rotate(root.getAbsoluteAngle()); // Follow root's angle
 			result.add(root.getAbsolutePosition());
 		}
 		
@@ -187,7 +213,8 @@ public abstract class RobotPart implements Servo {
 	 * 
 	 * @return
 	 */
-	public double getRelativeAngle() {
+	public double getRelativeAngle()
+	{
 		return getCurrentAngle();
 	}
 	
@@ -197,11 +224,14 @@ public abstract class RobotPart implements Servo {
 	 * 
 	 * @return
 	 */
-	public double getAbsoluteAngle() {
-		if(root == null) {
+	public double getAbsoluteAngle()
+	{
+		if(root == null)
+		{
 			return getCurrentAngle();
 		}
-		else {
+		else
+		{
 			return getCurrentAngle() + root.getAbsoluteAngle();
 		}
 	}
@@ -222,10 +252,12 @@ public abstract class RobotPart implements Servo {
 	public void setCenter(Vector2D center)
 	{
 		// Null pointer handling	
-		if(center == null) {
+		if(center == null)
+		{
 			System.out.println("[RobotPart : setCenter] Note : A null argument was ignored.");
 		}
-		else {
+		else
+		{
 			position.getDestination().set(center);
 		}
 		
@@ -268,15 +300,18 @@ public abstract class RobotPart implements Servo {
 	 * 
 	 * @param ins
 	 */
-	public void applyInstruction(Instruction ins) {
+	public void applyInstruction(Instruction ins)
+	{
 		// Null Pointer Check : Just ignore null argument.
-		if(ins == null) {
+		if(ins == null)
+		{
 			return ;
 		}
 		position.getDestination().add(ins.position);
 		
-		if(ins.angle != -1) {
-			setCurrentAngle(Math.PI/180*ins.angle);
+		if(ins.angle != -1)
+		{
+			setCurrentAngle(Math.PI/180.0*ins.angle);
 		}
 	}
 	
@@ -286,9 +321,11 @@ public abstract class RobotPart implements Servo {
 	 * 
 	 * @return
 	 */
-	public int size() {
+	public int size()
+	{
 		int result = 1; // Count itself
-		for(RobotPart rp : subParts) {
+		for(RobotPart rp : subParts)
+		{
 			result += rp.size();
 		}
 		return result;

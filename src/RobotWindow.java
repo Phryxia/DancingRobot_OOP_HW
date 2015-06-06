@@ -68,7 +68,7 @@ public class RobotWindow extends JComponent
 		
 		// Assign new robot controller for them
 		InstructionIO rm_temp;
-		double gap = xsize/(robotList.size()+1.0);
+		double gap = xsize/(robotList.size());
 		double xpos = gap/2;
 		for(GRobot r : robotList)
 		{
@@ -80,7 +80,7 @@ public class RobotWindow extends JComponent
 			robotMotion.add((rm_temp = new InstructionIO()));
 			
 			// Each robot has it's controller, which manage their motion.
-			robotFactory.add(new RobotController(r, rm_temp, audioFactory, 450));
+			robotFactory.add(new RobotController(r, rm_temp, audioFactory, 650));
 			
 			// In default, every robot should be deactivated.
 			robotActivity.add(false);
