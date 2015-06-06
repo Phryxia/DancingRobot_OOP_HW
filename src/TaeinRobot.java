@@ -41,6 +41,8 @@ public class TaeinRobot extends GRobot {
 		TaeinRobotArm lfoot = (TaeinRobotArm)lleg.add(new TaeinRobotArm(name + "_left_hand", new Color(0, 0, 0), new Color(50, 50, 50), 90, 11, 10, 40));
 		
 		TaeinRobotArm rfoot = (TaeinRobotArm)rleg.add(new TaeinRobotArm(name + "_right_hand", new Color(0, 0, 0), new Color(50, 50, 50), 90, -11, 10, 40));
+		
+		reset();
 	}
 	
 	/**

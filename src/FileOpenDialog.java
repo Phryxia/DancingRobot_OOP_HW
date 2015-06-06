@@ -20,8 +20,8 @@ public class FileOpenDialog extends JFrame {
 		if(openFile() == 0) {
 			filename = getFile(1);
 			filepath = getFile(2);
-			System.out.println(getFileInfo(1));
-			System.out.println(getFileInfo(2));
+			//System.out.println(getFileInfo(1));
+			//System.out.println(getFileInfo(2));
 		}
 	}
 	
@@ -52,5 +52,19 @@ public class FileOpenDialog extends JFrame {
 			return filename;
 		return null;
 	}
-
+	
+	public static String openFile(String comment, String extension)
+	{
+		JFileChooser fileChooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(comment, extension);
+		
+		fileChooser.setFileFilter(filter);
+		switch(fileChooser.showOpenDialog(null))
+		{
+		case JFileChooser.APPROVE_OPTION:
+			return fileChooser.getSelectedFile().getAbsolutePath();
+		default:
+			return null;
+		}
+	}
 }

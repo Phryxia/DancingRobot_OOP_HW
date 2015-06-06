@@ -6,14 +6,26 @@ import java.util.ArrayList;
  * Robot Window is a master set of Robot, InstructionIO, RobotController.
  * This only provides minimal features to user.
  * 
+ * Also this draws several robots above the stage panel.
+ * 
+ * Every robot-related origin references are stored here.
+ * (It means this is the main control tower of robot)
+ * 
  * @author Se-Kyu-Kwon
  */
 @SuppressWarnings("serial")
 public class RobotWindow extends JComponent
 {
-	private BGM audioFactory;
-	private ArrayList <InstructionIO>   robotMotion;
-	private ArrayList <RobotController> robotFactory;
+	/*
+	 * Unlike other class, this class's member is opned to public
+	 * because too many separated UI class want to share them.
+	 * 
+	 * And even, there is no way to separate these objects from
+	 * this class, because they need some event handler.
+	 */
+	public BGM audioFactory;
+	public ArrayList <InstructionIO>   robotMotion;
+	public ArrayList <RobotController> robotFactory;
 	
 	private double xsize, ysize;
 	
@@ -132,7 +144,7 @@ public class RobotWindow extends JComponent
 		}
 		catch(Exception e)
 		{
-			System.out.println("There is no such file : " + filename);
+			System.out.println("[RobotWindow : setBGM] Warning : Null music file will be ignored : " + filename);
 		}
 	}
 	

@@ -54,7 +54,8 @@ public class Main_UI extends JFrame {
 	private JMenuItem  howToUse;
 	
 	JLabel label;
-	Control_Panel      cp         = new Control_Panel ();
+	RobotWindow rw1;
+	Control_Panel      cp;
 	keyframe           kf;
 	Manual_Frame       mf;
 	Program_Info       pi;
@@ -63,7 +64,7 @@ public class Main_UI extends JFrame {
 	Dimension          screenSize = theKit.getScreenSize();
 	
 	ImagePanel panel;
-	RobotWindow rw1;
+	
 	
 	/**
 	 * Icon Images for icon which is in the MenuBar
@@ -83,12 +84,17 @@ public class Main_UI extends JFrame {
 	 *  - Generate Panels & Split main panel.
 	 *  - Assign events to checkBox & Button.
 	 * 
+	 * You must follow this construction chain below
+	 *  1. RobotWindow : This holds everything about robot.
+	 *  2. 
+	 * 
 	 * @author UlnamSong
 	 */
 	public Main_UI () {
 		rw1 = new RobotWindow(741, 396);
 		rw1.startDancing();
 		
+		cp = new Control_Panel(rw1);
 		
 		kf  = new keyframe(rw1);
 		
@@ -98,7 +104,6 @@ public class Main_UI extends JFrame {
 		generate_Menu ();
 		generate_panel();
 		chkBox_control();
-		button_Control();
 		
 		panel.add(rw1);
 
@@ -112,43 +117,6 @@ public class Main_UI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
-	}
-	
-	/**
-	 * Animation Play & Stop Button Control
-	 * 
-	 * @author Taein Kim
-	 */
-	public void button_Control () {
-		/*
-		 * This button play BGM & RobotDance.
-		 */
-		cp.play_anim.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(!isPlay) {
-					System.out.println("[Main_UI] Notice : Play_Button is clicked");
-					rw1.setBGM(cp.ret_music());
-					rw1.setMode(false);
-					rw1.startDancing();
-					isPlay = true;
-				}
-			}
-		});
-		
-		/*
-		 * This button stop BGM & RobotDance.
-		 */
-		cp.stop_anim.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(isPlay) {
-					System.out.println("[Main_UI] Notice : Stop_Button is clicked");
-					rw1.stopDancing();
-					isPlay = false;
-				}
-			}
-		});
 	}
 	
 	/**
@@ -192,8 +160,10 @@ public class Main_UI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(cp.music_Mode.isSelected()) {
+					rw1.setMode(true);
 					System.out.println("[Control Panel] Music Mode On");
 				} else {
+					rw1.setMode(false);
 					System.out.println("[Control Panel] Music Mode Off");
 				}
 			}
