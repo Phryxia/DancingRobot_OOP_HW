@@ -41,6 +41,11 @@ public class RobotController extends Thread implements DancingRobot
 			iSequence = iSeqReference;
 			bgm       = music;
 			setPeriod(period);
+			
+			if(robot instanceof BGMListener)
+			{
+				bgm.addBGMListener((BGMListener)robot);
+			}
 		}
 		
 		// Start the clock
@@ -67,7 +72,7 @@ public class RobotController extends Thread implements DancingRobot
 				}
 				
 				// Move pointer to next one.
-				if(!musicMode || (musicMode && bgm.getData(0) > 0.4))
+				if(!musicMode || (musicMode && bgm.getPlayer().left.get(0) > 0.4))
 				{
 					// Do some nice things
 					robot.applyInstruction(iSequence.get(pointer));

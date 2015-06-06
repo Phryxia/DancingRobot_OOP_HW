@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * 
  * @author Se-Kyu-Kwon
  */
-public class SeKyuRobot extends GRobot {
+public class SeKyuRobot extends GRobot implements BGMListener {
 	
 	private static ArrayList <Instruction> DEFAULT_STATE = null;
 	
@@ -22,24 +22,18 @@ public class SeKyuRobot extends GRobot {
 		root = new SeKyuRobotBody(name + "_body", 0, 0, 100, 100);
 		
 		SeKyuRobotArm larm = (SeKyuRobotArm)root.add(new SeKyuRobotArm(name + "_left_arm", -50, -35, 80, 20));
-		//larm.setCurrentAngle(Math.PI/2);
 		
 		SeKyuRobotArm rarm = (SeKyuRobotArm)root.add(new SeKyuRobotArm(name + "_right_arm", 50, -35, 80, 20));
-		//rarm.setCurrentAngle(Math.PI/2);
 		
 		SeKyuRobotHead head = (SeKyuRobotHead)root.add(new SeKyuRobotHead(name + "_head", 0, -80, 60));
 		
 		SeKyuRobotArm lleg = (SeKyuRobotArm)root.add(new SeKyuRobotArm(name + "_left_leg", -30, 50, 100, 20));
-		//lleg.setCurrentAngle(Math.PI/2);
 		
 		SeKyuRobotArm rleg = (SeKyuRobotArm)root.add(new SeKyuRobotArm(name + "_right_leg", 30, 50, 100, 20));
-		//rleg.setCurrentAngle(Math.PI/2);
 		
 		SeKyuRobotArm larm_arm1 = (SeKyuRobotArm)larm.add(new SeKyuRobotArm(name + "_left_armarm", 70, 0, 20, 20));
-		//larm_arm1.setCurrentAngle(0);
 		
 		SeKyuRobotArm rarm_arm1 = (SeKyuRobotArm)rarm.add(new SeKyuRobotArm(name + "_right_armarm", 70, 0, 20, 20));
-		//rarm_arm1.setCurrentAngle(0);
 		
 		reset();
 	}
@@ -63,5 +57,29 @@ public class SeKyuRobot extends GRobot {
 		}
 		
 		applyInstruction(DEFAULT_STATE);
+	}
+	
+	public void musicStarted(BGM bgm)
+	{
+		if(root instanceof BGMListener)
+		{
+			((BGMListener)root).musicStarted(bgm);
+		}
+	}
+	
+	public void musicStopped(BGM bgm)
+	{
+		if(root instanceof BGMListener)
+		{
+			((BGMListener)root).musicStopped(bgm);
+		}
+	}
+	
+	public void musicChanged(BGM bgm)
+	{
+		if(root instanceof BGMListener)
+		{
+			((BGMListener)root).musicChanged(bgm);
+		}
 	}
 }

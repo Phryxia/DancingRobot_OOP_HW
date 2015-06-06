@@ -10,7 +10,7 @@ import java.awt.geom.*;
  * 
  * @author Se-Kyu-Kwon
  */
-public class SeKyuRobotArm extends GRobotPart implements ColorModule {
+public class SeKyuRobotArm extends GRobotPart implements ColorModule, BGMListener {
 	// Attribution
 	public static final int BODY_LINE = 0;
 	public static final int BODY_FILL = 1;
@@ -71,8 +71,44 @@ public class SeKyuRobotArm extends GRobotPart implements ColorModule {
 	public void drawDefine(Graphics2D g2d) {
 		// Start Drawing
 		g2d.setColor(cList[BODY_LINE]);
-		g2d.drawRect(-20, (int)(-weight/2), (int)length, (int)weight);
+		g2d.drawRect(0, (int)Math.round(-weight/2.0), (int)length, (int)weight);
 		g2d.setColor(cList[BODY_FILL]);
-		g2d.fillRect(-20, (int)(-weight/2), (int)length, (int)weight);
+		g2d.fillRect(0, (int)Math.round(-weight/2.0), (int)length, (int)weight);
+	}
+	
+	public void musicStarted(BGM bgm)
+	{
+		// Also do with subPart's handling
+		for(RobotPart e : subParts)
+		{
+			if(e instanceof BGMListener)
+			{
+				((BGMListener) e).musicStarted(bgm);
+			}
+		}
+	}
+	
+	public void musicStopped(BGM bgm)
+	{
+		// Also do with subPart's handling
+		for(RobotPart e : subParts)
+		{
+			if(e instanceof BGMListener)
+			{
+				((BGMListener) e).musicStopped(bgm);
+			}
+		}
+	}
+	
+	public void musicChanged(BGM bgm)
+	{	
+		// Also do with subPart's handling
+		for(RobotPart e : subParts)
+		{
+			if(e instanceof BGMListener)
+			{
+				((BGMListener) e).musicChanged(bgm);
+			}
+		}
 	}
 }

@@ -22,11 +22,14 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 	 * 
 	 * @param iList
 	 */
-	public void add(Instruction ... iList) {
-		if(iList.length > 0) {
+	public void add(Instruction ... iList)
+	{
+		if(iList.length > 0)
+		{
 			ArrayList <Instruction> temp = new ArrayList <Instruction> (iList.length);
 		
-			for(Instruction i : iList) {
+			for(Instruction i : iList)
+			{
 				// Null Check
 				if(i != null)
 				{
@@ -48,16 +51,19 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 	 * 
 	 * @param filename
 	 */
-	public void save(String filename) {
+	public void save(String filename)
+	{
 		// Check null filename or empty filename
-		if(filename == null || filename.equals("")) {
+		if(filename == null || filename.equals(""))
+		{
 			System.out.println("[InstructionIO : save] Null filename Argument. User might canceled to save it");
 			
 			return;
 		}
 		
 		// Save file
-		try {
+		try
+		{
 			// Initialize File
 			PrintStream oStream = new PrintStream(filename);
 			
@@ -65,10 +71,12 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 			oStream.println(size());
 			
 			// Iterate every sequence
-			for(ArrayList <Instruction> iList : this) {
+			for(ArrayList <Instruction> iList : this)
+			{
 				oStream.print(iList.size());
 				
-				for(Instruction ins : iList) {
+				for(Instruction ins : iList)
+				{
 					oStream.print(" "+ins.angle);
 				}
 				
@@ -78,7 +86,8 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 			// Close File
 			oStream.close();
 		}
-		catch(Exception e) {
+		catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -88,16 +97,19 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 	 * 
 	 * @param filename
 	 */
-	public void load(String filename) {
+	public void load(String filename)
+	{
 		// Check null filename or empty filename
-		if(filename == null || filename.equals("")) {
+		if(filename == null || filename.equals(""))
+		{
 			System.out.println("[InstructionIO : load] Null filename Argument. User might canceled to load it");
 			
 			return;
 		}
 		
 		// Try loading
-		try {
+		try
+		{
 			// Open File
 			Scanner iStream = new Scanner(new FileInputStream(filename));
 			
@@ -107,7 +119,8 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 			
 			// Read each line
 			ArrayList <Instruction> tempLine;
-			for(int i=0; i<sequenceSize; ++i) {
+			for(int i=0; i<sequenceSize; ++i)
+			{
 				// Initialize line list
 				tempLine = new ArrayList <Instruction> (6);
 				
@@ -115,7 +128,8 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 				int iSize = iStream.nextInt();
 				
 				// Iterate
-				for(int j=0; j<iSize; ++j) {
+				for(int j=0; j<iSize; ++j)
+				{
 					tempLine.add(new Instruction(0, 0, iStream.nextInt()));
 				}
 				
@@ -125,10 +139,12 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 			// Close File
 			iStream.close();
 		}
-		catch(FileNotFoundException e) {
+		catch(FileNotFoundException e)
+		{
 			System.out.println("[InstructionIO : load] There is no such file : " + filename);
 		}
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException e)
+		{
 			System.out.println("[InstructionIO : load] The file is corrupted");
 		}
 		catch(Exception e) {
@@ -140,9 +156,12 @@ public class InstructionIO extends ArrayList <ArrayList <Instruction>> {
 	 * For Debugging Purpose.
 	 * Print out it's contents.
 	 */
-	public void print() {
-		for(ArrayList <Instruction> iList : this) {
-			for(Instruction i : iList) {
+	public void print()
+	{
+		for(ArrayList <Instruction> iList : this)
+		{
+			for(Instruction i : iList)
+			{
 				System.out.print(i+" ");
 			}
 			System.out.println();
