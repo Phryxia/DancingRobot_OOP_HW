@@ -20,7 +20,7 @@ import javax.swing.event.ListSelectionListener;
 public class Animation extends JPanel implements StandardPartName {
 	
 	private Color c_background = new Color(50, 50, 50);
-	
+	private int num;
 	public  OptionList       optionList;
 	public  OptionListEditor optionListEditor;
 	
@@ -30,7 +30,8 @@ public class Animation extends JPanel implements StandardPartName {
 	 * You must pass valid iReference. Otherwise NullPointerException will
 	 * be thrown.
 	 */
-	public Animation (InstructionIO iReference) {
+	public Animation (InstructionIO iReference, int num) {
+		this.num = num;
 		// NullPointer Check
 		if(iReference == null)
 		{
@@ -46,7 +47,7 @@ public class Animation extends JPanel implements StandardPartName {
 		add(optionList);
 		
 		// Construct OptionListEditor
-		optionListEditor = new OptionListEditor(optionList);
+		optionListEditor = new OptionListEditor(optionList, num);
 		add(optionListEditor);
 	}
 }

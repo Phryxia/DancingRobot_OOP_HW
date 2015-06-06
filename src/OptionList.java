@@ -1,9 +1,3 @@
-/**
- * Option_List_1.java
- * 
- * @author Taein Kim
- */
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;

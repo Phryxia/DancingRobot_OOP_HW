@@ -29,6 +29,7 @@ import java.util.ArrayList;
 public class OptionListEditor extends JPanel implements StandardPartName {
 	// List Reference
 	private OptionList listReference;
+	private int num;
 	
 	// Attribution
 	private Color     c_selected = new Color(255, 210, 0);
@@ -42,7 +43,7 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 	// Editor UI Components
 	private JLabel[]     ptNameField; // Stores part name label
 	private JTextField[] numberField; // Stores number editor
-	private JLabel       title     = new JLabel("<ROBOT 1>");
+	private JLabel       title;
 	private JButton      addbtn    = new JButton("추가");
 	private JButton      rembtn    = new JButton("제거");
 	
@@ -52,7 +53,10 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 	 * Invariant : You must link listReference.
 	 * Otherwise NullPointerException will be occurred.
 	 */
-	public OptionListEditor (OptionList listReference) {
+	public OptionListEditor (OptionList listReference, int num) {
+		this.num = num;
+	    title = new JLabel("<ROBOT " + num + ">");
+		
 		// Assign Link
 		if(listReference == null)
 		{

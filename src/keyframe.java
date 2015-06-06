@@ -45,8 +45,8 @@ public class keyframe extends JPanel {
 	
 	public keyframe (RobotWindow robotWindow) {
 		
-		anim1 = new Animation(robotWindow.getMotionList(0));
-		anim2 = new Animation(robotWindow.getMotionList(1));
+		anim1 = new Animation(robotWindow.getMotionList(0), 1);
+		anim2 = new Animation(robotWindow.getMotionList(1), 2);
 		
 		setLayout(new GridLayout(1, 2, 0, 0));
 		optionpanel_Setting ();
