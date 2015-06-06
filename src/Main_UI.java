@@ -27,8 +27,11 @@ public class Main_UI extends JFrame {
 	
 	@SuppressWarnings("unused")
 	private  FileOpenDialog fod1;
+	@SuppressWarnings("unused")
 	private  FileOpenDialog fod2;
+	@SuppressWarnings("unused")
 	private  FileSaveDialog sf1;
+	@SuppressWarnings("unused")
 	private  FileSaveDialog sf2;
 	Font clear_gothic = new Font("¸¼Àº °íµñ", Font.BOLD, 12);
 

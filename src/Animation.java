@@ -10,16 +10,14 @@
  * @comment Se-Kyu-Kwon
  */
 import java.awt.*;
-import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 @SuppressWarnings("serial")
 public class Animation extends JPanel implements StandardPartName {
 	
 	private Color c_background = new Color(50, 50, 50);
+	@SuppressWarnings("unused")
 	private int num;
 	public  OptionList       optionList;
 	public  OptionListEditor optionListEditor;

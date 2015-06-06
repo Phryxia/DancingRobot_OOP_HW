@@ -5,10 +5,6 @@
  */
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.awt.*;
 
@@ -23,26 +19,14 @@ public class keyframe extends JPanel {
 	private Animation anim2;
 	//private ArrayList <Integer> robot_1 = new ArrayList<Integer> ();
 	private ArrayList <Integer> robot_2 = new ArrayList<Integer> ();
-	
-	private ArrayList <Integer> debug1 = new ArrayList<Integer> ();
-	private ArrayList <Integer> debug2 = new ArrayList<Integer> ();
-	
-	private int index;
-	private int pos;
-	private int size;
-	private int i_size;
-	private int cur_index;
-	
+
 	// Attribution
 	private Color back    = new Color(50, 50, 50);
 	private Color btn     = new Color(0, 100, 147);
 	private Color btn_txt = new Color(255, 255, 255);
 	private Color msg_txt = new Color(170, 170,170);
 	Font    clear_gothic  = new Font("¸¼Àº °íµñ", Font.BOLD, 12);
-	
-	// Item Name which is added in the JList.
-	private  String      keyname;
-	
+
 	public keyframe (RobotWindow robotWindow) {
 		
 		anim1 = new Animation(robotWindow.getMotionList(0), 1);

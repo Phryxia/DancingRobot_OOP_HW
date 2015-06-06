@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 
+@SuppressWarnings("serial")
 public class ImagePanel extends JPanel {
 
 	private Image img;
@@ -22,7 +23,6 @@ public class ImagePanel extends JPanel {
 		setMaximumSize(size);
 		setSize(size);
 		setLayout(overlay);
-		//setLayout();
 	}
 
 	public void paintComponent(Graphics g) {

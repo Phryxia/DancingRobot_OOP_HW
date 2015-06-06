@@ -1,7 +1,3 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.Timer;
 
 /**
  * Damper class is a utility to control value

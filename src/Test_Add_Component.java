@@ -1,8 +1,7 @@
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
+@SuppressWarnings("serial")
 public class Test_Add_Component extends JPanel{
 	public void paintComponent (Graphics g) {
         g.setColor(new Color(53, 176, 186));

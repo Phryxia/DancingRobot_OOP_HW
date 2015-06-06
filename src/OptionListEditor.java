@@ -29,6 +29,7 @@ import java.util.ArrayList;
 public class OptionListEditor extends JPanel implements StandardPartName {
 	// List Reference
 	private OptionList listReference;
+	@SuppressWarnings("unused")
 	private int num;
 	
 	// Attribution
@@ -53,6 +54,7 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 	 * Invariant : You must link listReference.
 	 * Otherwise NullPointerException will be occurred.
 	 */
+	@SuppressWarnings("deprecation")
 	public OptionListEditor (OptionList listReference, int num) {
 		this.num = num;
 	    title = new JLabel("<ROBOT " + num + ">");
