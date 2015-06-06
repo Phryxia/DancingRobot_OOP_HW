@@ -38,8 +38,8 @@ public class Main_UI extends JFrame {
 	 * Variables for MenuBar, JMenu
 	 */
 	private JMenuItem  program_info;
-	private JMenuItem  saveItem;
-	private JMenuItem  loadItem;
+	private JMenuItem  saveItem1;
+	private JMenuItem  loadItem1;
 	private JMenuItem  exitItem;
 	private JMenuItem  howToUse;
 	
@@ -152,10 +152,10 @@ public class Main_UI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(cp.r1_Active.isSelected()) {
-					System.out.println("chkbox1 Check true");
+					System.out.println("[Main UI] Notice : ROBOT1 activated.");
 					rw1.activeRobot(0);
 				} else {
-					System.out.println("chkbox1 Check false");
+					System.out.println("[Main UI] Notice : ROBOT1 deactivated.");
 					rw1.deactiveRobot(0);
 					
 				}
@@ -166,11 +166,26 @@ public class Main_UI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(cp.r2_Active.isSelected()) {
-					System.out.println("chkbox2 Check true");
+					System.out.println("[Main UI] Notice : ROBOT2 activated.");
 					rw1.activeRobot(1);
 				} else {
-					System.out.println("chkbox2 Check false");
+					System.out.println("[Main UI] Notice : ROBOT2 deactivated.");
 					rw1.deactiveRobot(1);
+				}
+			}
+		});
+		
+		/**
+		 * Decide whether Music Mode is Active.
+		 * Print Log of Activation
+		 */
+		cp.music_Mode.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(cp.music_Mode.isSelected()) {
+					System.out.println("[Control Panel] Music Mode On");
+				} else {
+					System.out.println("[Control Panel] Music Mode Off");
 				}
 			}
 		});
@@ -231,48 +246,56 @@ public class Main_UI extends JFrame {
 	 * 
 	 */
 	public void generate_Menu() {
-		MenuBar menuBar  = new MenuBar ();
-		JMenu    fileMenu = new JMenu    ("파일(File)");
-		JMenu    helpMenu = new JMenu    ("도움말(Help)");
+		MenuBar  menuBar    = new MenuBar ();
+		JMenu    fileMenu   = new JMenu    ("파일(File)");
+		JMenu    roboCtrl_1 = new JMenu    ("ROBO1 관리");
+		JMenu    roboCtrl_2 = new JMenu    ("ROBO2 관리");
+		JMenu    helpMenu   = new JMenu    ("도움말(Help)");
 		
 		fileMenu.setMnemonic (KeyEvent.VK_F);
 		helpMenu.setMnemonic (KeyEvent.VK_H);
 		menuBar.add (fileMenu);
+		menuBar.add (roboCtrl_1);
+		menuBar.add (roboCtrl_2);
 		menuBar.add (helpMenu);
 		
 		howToUse     = new JMenuItem ("사용법(How to Use)", KeyEvent.VK_U);
 		exitItem     = new JMenuItem ("종료(Exit)",  KeyEvent.VK_E);
-		loadItem     = new JMenuItem ("불러오기(Load)",  KeyEvent.VK_L);
-		saveItem     = new JMenuItem ("저장하기(Save)",  KeyEvent.VK_S);
+		loadItem1    = new JMenuItem ("불러오기(Load)",  KeyEvent.VK_L);
+		saveItem1    = new JMenuItem ("저장하기(Save)",  KeyEvent.VK_S);
 		program_info = new JMenuItem ("프로그램 정보(About)", KeyEvent.VK_A);
 
 		howToUse    .setIcon(htu_img);
-		loadItem    .setIcon(load_img);
-		saveItem    .setIcon(save_img);
+		loadItem1   .setIcon(load_img);
+		saveItem1   .setIcon(save_img);
 		program_info.setIcon(info_img);
 		exitItem    .setIcon(exit_img);
 		
 		fileMenu    .setFont(clear_gothic);
 		helpMenu    .setFont(clear_gothic);
+		roboCtrl_1  .setFont(clear_gothic);
+		roboCtrl_2  .setFont(clear_gothic);
 		exitItem    .setFont(clear_gothic);
-		loadItem    .setFont(clear_gothic);
-		saveItem    .setFont(clear_gothic);
+		loadItem1   .setFont(clear_gothic);
+		saveItem1   .setFont(clear_gothic);
 		howToUse    .setFont(clear_gothic);
 		program_info.setFont(clear_gothic);
 		
-		fileMenu.setForeground(new Color(170, 170, 170));
-		helpMenu.setForeground(new Color(170, 170, 170));
+		fileMenu    .setForeground(new Color(170, 170, 170));
+		helpMenu    .setForeground(new Color(170, 170, 170));
+		roboCtrl_1  .setForeground(new Color(170, 170, 170));
+		roboCtrl_2  .setForeground(new Color(170, 170, 170));
 		
-		exitItem.    setBackground(new Color(50, 50, 50));
-		saveItem.    setBackground(new Color(50, 50, 50));
-		loadItem.    setBackground(new Color(50, 50, 50));
-		howToUse.    setBackground(new Color(50, 50, 50));
+		exitItem    .setBackground(new Color(50, 50, 50));
+		saveItem1   .setBackground(new Color(50, 50, 50));
+		loadItem1   .setBackground(new Color(50, 50, 50));
+		howToUse    .setBackground(new Color(50, 50, 50));
 		program_info.setBackground(new Color(50, 50, 50));
 		
-		exitItem.    setForeground(new Color(170, 170, 170));
-		saveItem.    setForeground(new Color(170, 170, 170));
-		loadItem.    setForeground(new Color(170, 170, 170));	
-		howToUse.    setForeground(new Color(170, 170, 170));
+		exitItem    .setForeground(new Color(170, 170, 170));
+		saveItem1   .setForeground(new Color(170, 170, 170));
+		loadItem1   .setForeground(new Color(170, 170, 170));	
+		howToUse    .setForeground(new Color(170, 170, 170));
 		program_info.setForeground(new Color(170, 170, 170));
 		
 		/**
@@ -284,13 +307,13 @@ public class Main_UI extends JFrame {
 			}
 		});
 		
-		loadItem.addActionListener(new ActionListener() {
+		loadItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 fod = new FileOpenDialog("Dancing Robot File", "iwbtr");
 			}
 		 });
 		
-		saveItem.addActionListener(new ActionListener() {
+		saveItem1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sf = new FileSaveDialog ();
@@ -312,12 +335,12 @@ public class Main_UI extends JFrame {
 		});
 		
 		menuBar.setColor(new Color(50, 50, 50));
-		helpMenu.add(howToUse);
-		helpMenu.add(program_info);
-		fileMenu.add(loadItem);
-		fileMenu.add(saveItem);
-		fileMenu.addSeparator();
-		fileMenu.add(exitItem);
+		helpMenu  .add(howToUse);
+		helpMenu  .add(program_info);
+		roboCtrl_1.add(loadItem1);
+		roboCtrl_1.add(saveItem1);
+		fileMenu  .addSeparator();
+		fileMenu  .add(exitItem);
 		
 		// Insert the menuBar to the top of the frame.
 		setJMenuBar(menuBar);

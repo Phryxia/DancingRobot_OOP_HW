@@ -59,8 +59,8 @@ public class TaeinRobot extends GRobot {
 			DEFAULT_STATE.add(new Instruction(0, 0, 0));
 			DEFAULT_STATE.add(new Instruction(0, 0, 90));
 			DEFAULT_STATE.add(new Instruction(0, 0, 90));
-			DEFAULT_STATE.add(new Instruction(0, 90, 90));
-			DEFAULT_STATE.add(new Instruction(0, 90, 90));
+			DEFAULT_STATE.add(new Instruction(0, 0, 90));
+			DEFAULT_STATE.add(new Instruction(0, 0, 90));
 		}
 		
 		applyInstruction(DEFAULT_STATE);

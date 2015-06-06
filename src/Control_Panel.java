@@ -17,6 +17,7 @@ import java.io.IOException;
 public class Control_Panel extends JPanel {
 	public JCheckBox r1_Active;
 	public JCheckBox r2_Active;
+	public JCheckBox music_Mode;
 	
 	public JButton   play_anim;
 	public JButton   stop_anim;
@@ -29,20 +30,31 @@ public class Control_Panel extends JPanel {
 	
 	FileOpenDialog     fod;
 	Font               clear_gothic = new Font("맑은 고딕", Font.BOLD, 12);
+	
 	Color              btn_bg       = new Color(0, 100, 147);
 	Color              btn_txt      = new Color(255, 255, 255);
+	Color              chk_bg       = new Color(50, 50, 50);
+	Color              chk_txt      = new Color(170, 170, 170);
+	
 	BufferedImage      img;
 	ImageIcon          pic          = new ImageIcon("C:\\icon_bg.png");
 	
 	//MP3 File Name which is loaded.
 	String file_name;
 	
+	/**
+	 * Constructor
+	 * 
+	 * Situate components to the Control Panel.
+	 * @author Taein Kim
+	 */
 	public Control_Panel () {
-		r1_Active = new JCheckBox("  ROBOT1 활성화  ");
-		r2_Active = new JCheckBox("  ROBOT2 활성화  ");
+		r1_Active  = new JCheckBox("  ROBOT1 활성화  ");
+		r2_Active  = new JCheckBox("  ROBOT2 활성화  ");
+		music_Mode = new JCheckBox("  음악 모드 활성화 ");
 		
-		play_anim = new JButton("    재생 (PLAY)    ");
-		stop_anim = new JButton("    정지 (STOP)    ");
+		play_anim  = new JButton("    재생 (PLAY)    ");
+		stop_anim  = new JButton("    정지 (STOP)    ");
 		
 		setBackground(new Color(50, 50, 50));
 		r1_Active.setBackground(new Color(50, 50, 50));
@@ -51,16 +63,20 @@ public class Control_Panel extends JPanel {
 		r2_Active.setBackground(new Color(50, 50, 50));
 		r2_Active.setForeground(new Color(170, 170, 170));
 		
+		music_Mode.setForeground(new Color(170, 170, 170));
+		music_Mode.setBackground(new Color(50, 50, 50));
+		
 		play_anim.setBackground(new Color(0, 100, 147));
 		play_anim.setForeground(new Color(255, 255, 255));
 		
 		stop_anim.setBackground(new Color(0, 100, 147));
 		stop_anim.setForeground(new Color(255, 255, 255));
 		
-		r1_Active.setFont(clear_gothic);
-		r2_Active.setFont(clear_gothic);
-		play_anim.setFont(clear_gothic);
-		stop_anim.setFont(clear_gothic);
+		r1_Active .setFont(clear_gothic);
+		r2_Active .setFont(clear_gothic);
+		music_Mode.setFont(clear_gothic);
+		play_anim .setFont(clear_gothic);
+		stop_anim .setFont(clear_gothic);
 		
 		try {
 			music_Control();
@@ -74,6 +90,7 @@ public class Control_Panel extends JPanel {
 		add(play_anim);
 		add(stop_anim);
 		
+		add(music_Mode);
 		add(empty_space);
 		add(what_name);
 		add(load_music);
@@ -119,7 +136,7 @@ public class Control_Panel extends JPanel {
 			}
 		});
 		
-		Dimension space_size = new Dimension(150, 200);
+		Dimension space_size = new Dimension(150, 150);
 
 		/*
 		 * Load TS Robot image to the left side of main UI
