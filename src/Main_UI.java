@@ -18,13 +18,18 @@ import java.awt.event.*;
 public class Main_UI extends JFrame {
 	private  Container  contentPane;
 	private  JRootPane  root_panel;
-	public static boolean isPlay = false;
+	private  Color      light_Gray = new Color(170, 170, 170);
+	private  Color      dark_Gray  = new Color(50, 50, 50);
+	public static boolean isPlay   = false;
 	
 	private  ArrayList<Integer> robot1_anchor = new ArrayList<Integer>();
 	private  ArrayList<Integer> robot2_anchor = new ArrayList<Integer>();
 	
 	@SuppressWarnings("unused")
-	private  FileOpenDialog fod;
+	private  FileOpenDialog fod1;
+	private  FileOpenDialog fod2;
+	private  FileSaveDialog sf1;
+	private  FileSaveDialog sf2;
 	Font clear_gothic = new Font("맑은 고딕", Font.BOLD, 12);
 
 	/**
@@ -40,11 +45,12 @@ public class Main_UI extends JFrame {
 	private JMenuItem  program_info;
 	private JMenuItem  saveItem1;
 	private JMenuItem  loadItem1;
+	private JMenuItem  saveItem2;
+	private JMenuItem  loadItem2;
 	private JMenuItem  exitItem;
 	private JMenuItem  howToUse;
 	
 	JLabel label;
-	FileSaveDialog     sf;
 	Control_Panel      cp         = new Control_Panel ();
 	keyframe           kf;
 	Manual_Frame       mf;
@@ -219,25 +225,6 @@ public class Main_UI extends JFrame {
 	public void show_Background () {
 		panel = new ImagePanel(new ImageIcon("image\\bg_stage.jpg").getImage());
 		add(panel);
-		
-		/*
-		bg = new ImageIcon(RelativePath.getAbsolutePath("image\\bg_stage.jpg"));
-		play_panel = new JPanel() {
-			public void paintComponent(Graphics g) {
-				// Draw Image with Handling NullPointerException
-				try
-				{
-					g.drawImage(bg.getImage(), 0, 0, getWidth(), getHeight(), null);
-				}
-				catch(NullPointerException e)
-				{
-					System.out.println("[Main_UI : show_background] No such image error");
-				}
-            	setOpaque(false);
-            	super.paintComponent(g);
-			}
-		};
-		*/
 	}
 	
 	/**
@@ -261,13 +248,17 @@ public class Main_UI extends JFrame {
 		
 		howToUse     = new JMenuItem ("사용법(How to Use)", KeyEvent.VK_U);
 		exitItem     = new JMenuItem ("종료(Exit)",  KeyEvent.VK_E);
-		loadItem1    = new JMenuItem ("불러오기(Load)",  KeyEvent.VK_L);
-		saveItem1    = new JMenuItem ("저장하기(Save)",  KeyEvent.VK_S);
+		loadItem1    = new JMenuItem ("세이브파일 불러오기(Load File)",  KeyEvent.VK_L);
+		saveItem1    = new JMenuItem ("세이브파일 저장하기(Save File)",  KeyEvent.VK_S);
+		loadItem2    = new JMenuItem ("세이브파일 불러오기(Load File)",  KeyEvent.VK_L);
+		saveItem2    = new JMenuItem ("세이브파일 저장하기(Save File)",  KeyEvent.VK_S);
 		program_info = new JMenuItem ("프로그램 정보(About)", KeyEvent.VK_A);
 
 		howToUse    .setIcon(htu_img);
 		loadItem1   .setIcon(load_img);
 		saveItem1   .setIcon(save_img);
+		loadItem2   .setIcon(load_img);
+		saveItem2   .setIcon(save_img);
 		program_info.setIcon(info_img);
 		exitItem    .setIcon(exit_img);
 		
@@ -278,25 +269,31 @@ public class Main_UI extends JFrame {
 		exitItem    .setFont(clear_gothic);
 		loadItem1   .setFont(clear_gothic);
 		saveItem1   .setFont(clear_gothic);
+		loadItem2   .setFont(clear_gothic);
+		saveItem2   .setFont(clear_gothic);
 		howToUse    .setFont(clear_gothic);
 		program_info.setFont(clear_gothic);
 		
-		fileMenu    .setForeground(new Color(170, 170, 170));
-		helpMenu    .setForeground(new Color(170, 170, 170));
-		roboCtrl_1  .setForeground(new Color(170, 170, 170));
-		roboCtrl_2  .setForeground(new Color(170, 170, 170));
+		fileMenu    .setForeground(light_Gray);
+		helpMenu    .setForeground(light_Gray);
+		roboCtrl_1  .setForeground(light_Gray);
+		roboCtrl_2  .setForeground(light_Gray);
 		
-		exitItem    .setBackground(new Color(50, 50, 50));
-		saveItem1   .setBackground(new Color(50, 50, 50));
-		loadItem1   .setBackground(new Color(50, 50, 50));
-		howToUse    .setBackground(new Color(50, 50, 50));
-		program_info.setBackground(new Color(50, 50, 50));
+		exitItem    .setBackground(dark_Gray);
+		saveItem1   .setBackground(dark_Gray);
+		loadItem1   .setBackground(dark_Gray);
+		saveItem2   .setBackground(dark_Gray);
+		loadItem2   .setBackground(dark_Gray);
+		howToUse    .setBackground(dark_Gray);
+		program_info.setBackground(dark_Gray);
 		
-		exitItem    .setForeground(new Color(170, 170, 170));
-		saveItem1   .setForeground(new Color(170, 170, 170));
-		loadItem1   .setForeground(new Color(170, 170, 170));	
-		howToUse    .setForeground(new Color(170, 170, 170));
-		program_info.setForeground(new Color(170, 170, 170));
+		exitItem    .setForeground(light_Gray);
+		saveItem1   .setForeground(light_Gray);
+		loadItem1   .setForeground(light_Gray);	
+		saveItem2   .setForeground(light_Gray);
+		loadItem2   .setForeground(light_Gray);
+		howToUse    .setForeground(light_Gray);
+		program_info.setForeground(light_Gray);
 		
 		/**
 		 * Add Action Event to Each Menu Item.
@@ -309,14 +306,27 @@ public class Main_UI extends JFrame {
 		
 		loadItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 fod = new FileOpenDialog("Dancing Robot File", "iwbtr");
+				 fod1 = new FileOpenDialog("Dancing Robot File", "iwbtr");
+			}
+		 });
+		
+		loadItem2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 fod2 = new FileOpenDialog("Dancing Robot File", "iwbtr");
 			}
 		 });
 		
 		saveItem1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sf = new FileSaveDialog ();
+				sf1 = new FileSaveDialog ();
+			}
+		});
+		
+		saveItem2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sf2 = new FileSaveDialog ();
 			}
 		});
 		
@@ -339,7 +349,8 @@ public class Main_UI extends JFrame {
 		helpMenu  .add(program_info);
 		roboCtrl_1.add(loadItem1);
 		roboCtrl_1.add(saveItem1);
-		fileMenu  .addSeparator();
+		roboCtrl_2.add(loadItem2);
+		roboCtrl_2.add(saveItem2);
 		fileMenu  .add(exitItem);
 		
 		// Insert the menuBar to the top of the frame.
