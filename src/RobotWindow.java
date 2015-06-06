@@ -14,7 +14,6 @@ public class RobotWindow extends JComponent
 	private BGM audioFactory;
 	private ArrayList <InstructionIO>   robotMotion;
 	private ArrayList <RobotController> robotFactory;
-	private ArrayList <Boolean>         robotActivity;
 	
 	private double xsize, ysize;
 	
@@ -26,7 +25,6 @@ public class RobotWindow extends JComponent
 		// Initialize every list in this object
 		robotMotion  = new ArrayList <InstructionIO> (4);
 		robotFactory = new ArrayList <RobotController> (4);
-		robotActivity = new ArrayList <Boolean> (4);
 		audioFactory = new BGM();
 		
 		// Set Size
@@ -64,6 +62,7 @@ public class RobotWindow extends JComponent
 		
 		// Assign new robot controller for them
 		InstructionIO rm_temp;
+		RobotController rf_temp;
 		double gap = xsize/(robotList.size());
 		double xpos = gap/2;
 		for(GRobot r : robotList)
@@ -73,13 +72,14 @@ public class RobotWindow extends JComponent
 			xpos += gap;
 			
 			// Each robot has it's own motionList.
-			robotMotion.add((rm_temp = new InstructionIO()));
+			rm_temp = new InstructionIO();
+			robotMotion.add(rm_temp);
 			
 			// Each robot has it's controller, which manage their motion.
-			robotFactory.add(new RobotController(r, rm_temp, audioFactory, 650));
-			
-			// In default, every robot should be deactivated.
-			robotActivity.add(false);
+			rf_temp = new RobotController(r, rm_temp, audioFactory, 650);
+			robotFactory.add(rf_temp);
+			addMouseListener(rf_temp);
+			addMouseMotionListener(rf_temp);
 		}
 	}
 	
@@ -146,10 +146,9 @@ public class RobotWindow extends JComponent
 		Graphics2D g2d = (Graphics2D)g;
 		
 		// Draw Every Robot
-		int cnt = 0;
 		for(RobotController rc : robotFactory)
 		{
-			if(robotActivity.get(cnt++))
+			if(rc.isActive())
 			{
 				rc.draw(g2d);
 			}
@@ -197,7 +196,7 @@ public class RobotWindow extends JComponent
 	{
 		if(isValidIndex(index))
 		{
-			robotActivity.set(index, true);
+			robotFactory.get(index).activate();
 		}
 	}
 	
@@ -211,7 +210,7 @@ public class RobotWindow extends JComponent
 	{
 		if(isValidIndex(index))
 		{
-			robotActivity.set(index, false);
+			robotFactory.get(index).deactivate();
 		}
 	}
 	
