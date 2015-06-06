@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  * Strange Robot for Me.
@@ -7,6 +8,8 @@ import java.awt.Color;
  */
 public class TaeinRobot extends GRobot {
 
+	private static ArrayList <Instruction> DEFAULT_STATE = null;
+	
 	public TaeinRobot(String name) {
 		super(name);
 	}
@@ -28,23 +31,38 @@ public class TaeinRobot extends GRobot {
 		TaeinRobotHead head = (TaeinRobotHead)root.add(new TaeinRobotHead(name + "_head", 0, -80, 70));
 		
 		TaeinRobotArm lleg = (TaeinRobotArm)root.add(new TaeinRobotArm(name + "_left_leg", new Color(0, 0, 0), new Color(20, 67, 85), -30, 50, 100, 20));
-		lleg.setCurrentAngle(Math.PI/2);
 		
 		TaeinRobotArm rleg = (TaeinRobotArm)root.add(new TaeinRobotArm(name + "_right_leg", new Color(0, 0, 0), new Color(20, 67, 85), 30, 50, 100, 20));
-		rleg.setCurrentAngle(Math.PI/2);
 		
 		TaeinRobotArm lhand = (TaeinRobotArm)larm.add(new TaeinRobotArm(name + "_left_hand", new Color(0, 0, 0), new Color(191, 122, 169), 55, 11, 20, 20));
-		lhand.setCurrentAngle(Math.PI/2);
 		
 		TaeinRobotArm rhand = (TaeinRobotArm)rarm.add(new TaeinRobotArm(name + "_right_hand", new Color(0, 0, 0), new Color(191, 122, 169), 55, 11, 20, 20));
-		rhand.setCurrentAngle(Math.PI/2);
 		
 		TaeinRobotArm lfoot = (TaeinRobotArm)lleg.add(new TaeinRobotArm(name + "_left_hand", new Color(0, 0, 0), new Color(50, 50, 50), 90, 11, 10, 40));
-		lhand.setCurrentAngle(Math.PI/2);
 		
 		TaeinRobotArm rfoot = (TaeinRobotArm)rleg.add(new TaeinRobotArm(name + "_right_hand", new Color(0, 0, 0), new Color(50, 50, 50), 90, -11, 10, 40));
-		rhand.setCurrentAngle(Math.PI/2);
+	}
+	
+	/**
+	 * Reset current robot's motion state into default.
+	 */
+	public void reset()
+	{
+		// Construct DEFAULT_STATE only once.
+		if(DEFAULT_STATE == null)
+		{
+			DEFAULT_STATE = new ArrayList <Instruction> (1);
+			
+			DEFAULT_STATE.add(new Instruction(0, 0, 0));
+			DEFAULT_STATE.add(new Instruction(0, 0, 90));
+			DEFAULT_STATE.add(new Instruction(0, 0, 90));
+			DEFAULT_STATE.add(new Instruction(0, 0, 0));
+			DEFAULT_STATE.add(new Instruction(0, 0, 90));
+			DEFAULT_STATE.add(new Instruction(0, 0, 90));
+			DEFAULT_STATE.add(new Instruction(0, 0, 90));
+			DEFAULT_STATE.add(new Instruction(0, 0, 90));
+		}
 		
-		
+		applyInstruction(DEFAULT_STATE);
 	}
 }

@@ -11,6 +11,7 @@
  */
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -58,9 +59,12 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 			throw new NullPointerException("[OptionListEditor : Constructor] Null reference is not allowed");
 		}
 		this.listReference = listReference;
+		this.listReference.setEditor(this);
 		
 		// Define this panel's layout style.
-		setLayout(new GridLayout(4, 4, 5, 5));
+		setLayout(new GridLayout(5, 4, 5, 5));
+		setPreferredSize(new Dimension(360, 140));
+		
 		setBackground(background);
 		
 		// Construct the title part
@@ -80,8 +84,12 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 		
 		// Skip 3 cells
 		add(new JLabel());
-		add(new JLabel());
-		add(new JLabel());
+		//add(new JLabel());
+		//add(new JLabel());
+
+		// Add Buttons
+				add(addbtn);
+				add(rembtn);
 		
 		// Assign Label & Number Fields
 		for(int i=0; i<numberField.length; ++i)
@@ -93,9 +101,7 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 			add(numberField[i]);
 		}
 		
-		// Add Buttons
-		add(addbtn);
-		add(rembtn);
+		
 		
 		// Initialize Event
 		eventInit();
@@ -178,7 +184,15 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 		
 		for(int i=0; i<numberField.length; ++i)
 		{
-			list.add(Integer.parseInt(numberField[i].getText()));
+			// Automatically fill as -1 if there is no valid value
+			try
+			{
+				list.add(Integer.parseInt(numberField[i].getText()));
+			}
+			catch(NumberFormatException e)
+			{
+				list.add(-1);
+			}
 		}
 		
 		return list;
@@ -189,11 +203,11 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 	 * 
 	 * @param angleList
 	 */
-	public void setCurrentValues(ArrayList <Integer> angleList)
+	public void setCurrentValues(ArrayList <Instruction> motion)
 	{
 		for(int i=0; i<numberField.length; ++i)
 		{
-			numberField[i].setText(Integer.toString(angleList.get(i)));
+			numberField[i].setText(Integer.toString(motion.get(i).angle));
 		}
 	}
 	
@@ -213,11 +227,20 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// JOptionPane will return null if user press cancel button
 				String motionName = JOptionPane.showInputDialog("키프레임 이름을 입력하십시오.", "키프레임 이름 입력");
-				listReference.addMotion(motionName, getCurrentValues());
 				
-				// Debug
-				System.out.println("[OptionListEditor : addbtn] New motion key has been added");
+				if(motionName != null)
+				{
+					listReference.addMotion(motionName, getCurrentValues());
+					
+					System.out.println("[OptionListEditor : addbtn] Log : New motion key has been added");
+				}
+				else
+				{
+					System.out.println("[OptionListEditor : addbtn] Log : Adding cancled.");
+				}
+				
 			}
 		});
 		
@@ -227,29 +250,8 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 		rembtn.addActionListener(new ActionListener()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				/*
-				if(i_size > 0)
-				{
-					int pos = (cur_index) * 5;
-					System.out.println("pos : " + pos);
-					for(int i = 0; i < 5; i++) {
-						robot_1.remove(pos + 0);
-					}
-					System.out.println("Removed.");
-					anim1.ol1.listMode_1.removeElementAt(cur_index);
-				} else {
-					JOptionPane.showMessageDialog(null, "제거할 키프레임이 존재하지 않습니다.", "제거 오류", JOptionPane.ERROR_MESSAGE, null);
-				}
-				
-				//Debug
-				System.out.println("---Romoved(Robot_1)---");
-				for(int i = 0; i < robot_1.size(); i++) {
-					System.out.println(robot_1.get(i));
-				}
-				System.out.println("----------------------");
-				*/
-				
+			public void actionPerformed(ActionEvent e)
+			{	
 				listReference.removeMotion();
 			}
 		});

@@ -129,4 +129,9 @@ public abstract class Robot {
 			bfs.poll();
 		}
 	}
+	
+	/**
+	 * Reset current roboit's motion state.
+	 */
+	public abstract void reset();
 }

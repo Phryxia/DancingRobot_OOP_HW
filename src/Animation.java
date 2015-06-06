@@ -38,7 +38,7 @@ public class Animation extends JPanel implements StandardPartName {
 		}
 		
 		// Setting attribution
-		setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+		setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
 		setBackground(c_background);
 		
 		// Construct OptionList

@@ -21,7 +21,7 @@ public class keyframe extends JPanel {
 	 */
 	private Animation anim1;
 	private Animation anim2;
-	private ArrayList <Integer> robot_1 = new ArrayList<Integer> ();
+	//private ArrayList <Integer> robot_1 = new ArrayList<Integer> ();
 	private ArrayList <Integer> robot_2 = new ArrayList<Integer> ();
 	
 	private ArrayList <Integer> debug1 = new ArrayList<Integer> ();
@@ -43,11 +43,15 @@ public class keyframe extends JPanel {
 	// Item Name which is added in the JList.
 	private  String      keyname;
 	
-	public keyframe (InstructionIO iReference) {
+	public keyframe (RobotWindow robotWindow) {
+		
+		anim1 = new Animation(robotWindow.getMotionList(0));
+		anim2 = new Animation(robotWindow.getMotionList(1));
+		
 		setLayout(new GridLayout(1, 2, 0, 0));
 		optionpanel_Setting ();
 		
-		robot_1.ensureCapacity(100);
+		//robot_1.ensureCapacity(100);
 		robot_2.ensureCapacity(100);
 
 		add(anim1);
@@ -117,6 +121,7 @@ public class keyframe extends JPanel {
 	 * @param option
 	 * @return
 	 */
+	/*
 	public ArrayList<Integer> export_list (int option) {
 		if(option == 1) {
 			return robot_1;
@@ -125,5 +130,6 @@ public class keyframe extends JPanel {
 		}
 		return null;
 	}
+	*/
 	
 }

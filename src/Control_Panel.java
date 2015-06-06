@@ -51,7 +51,6 @@ public class Control_Panel extends JPanel {
 		r2_Active.setBackground(new Color(50, 50, 50));
 		r2_Active.setForeground(new Color(170, 170, 170));
 		
-		
 		play_anim.setBackground(new Color(0, 100, 147));
 		play_anim.setForeground(new Color(255, 255, 255));
 		
@@ -100,6 +99,9 @@ public class Control_Panel extends JPanel {
 		cur_music.setBackground(new Color(50, 50, 50));
 		cur_music.setForeground(new Color(170, 170, 170));
 		
+		/*
+		 * This button change music file.
+		 */
 		load_music = new JButton("À½¾Ç Ãß°¡");
 		load_music.setFont(clear_gothic);
 		load_music.setBackground(btn_bg);

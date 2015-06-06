@@ -54,7 +54,7 @@ public class Main_UI extends JFrame {
 	Dimension          screenSize = theKit.getScreenSize();
 	
 	ImagePanel panel;
-	RobotWindow rw1 = new RobotWindow(741, 396);
+	RobotWindow rw1;
 	
 	/**
 	 * Icon Images for icon which is in the MenuBar
@@ -77,6 +77,11 @@ public class Main_UI extends JFrame {
 	 * @author UlnamSong
 	 */
 	public Main_UI () {
+		rw1 = new RobotWindow(741, 396);
+		rw1.startDancing();
+		
+		
+		kf  = new keyframe(rw1);
 		
 		robot1_anchor.ensureCapacity(100);
 		robot2_anchor.ensureCapacity(100);
@@ -107,7 +112,7 @@ public class Main_UI extends JFrame {
 	 */
 	public void button_Control () {
 		/*
-		 * This button should play BGM & RobotDance.
+		 * This button play BGM & RobotDance.
 		 */
 		cp.play_anim.addActionListener(new ActionListener() {
 			@Override
@@ -115,7 +120,7 @@ public class Main_UI extends JFrame {
 				if(!isPlay) {
 					System.out.println("[Main_UI] Notice : Play_Button is clicked");
 					rw1.setBGM(cp.ret_music());
-					rw1.setMode(true);
+					rw1.setMode(false);
 					rw1.startDancing();
 					isPlay = true;
 				}
@@ -123,7 +128,7 @@ public class Main_UI extends JFrame {
 		});
 		
 		/*
-		 * This button should stop BGM & RobotDance.
+		 * This button stop BGM & RobotDance.
 		 */
 		cp.stop_anim.addActionListener(new ActionListener() {
 			@Override
@@ -148,9 +153,10 @@ public class Main_UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(cp.r1_Active.isSelected()) {
 					System.out.println("chkbox1 Check true");
-					
+					rw1.activeRobot(0);
 				} else {
 					System.out.println("chkbox1 Check false");
+					rw1.deactiveRobot(0);
 					
 				}
 			}
@@ -161,10 +167,10 @@ public class Main_UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(cp.r2_Active.isSelected()) {
 					System.out.println("chkbox2 Check true");
-					
+					rw1.activeRobot(1);
 				} else {
 					System.out.println("chkbox2 Check false");
-					
+					rw1.deactiveRobot(1);
 				}
 			}
 		});
@@ -198,10 +204,6 @@ public class Main_UI extends JFrame {
 	public void show_Background () {
 		panel = new ImagePanel(new ImageIcon("image\\bg_stage.jpg").getImage());
 		add(panel);
-		
-		
-		
-		
 		
 		/*
 		bg = new ImageIcon(RelativePath.getAbsolutePath("image\\bg_stage.jpg"));

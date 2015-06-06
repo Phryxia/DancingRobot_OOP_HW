@@ -41,6 +41,7 @@ public class OptionList extends JPanel {
 	private JList            <String> motionNameDisplayer;
 	private JScrollPane               scrollbar;
 	private int currentSelected = -1;
+	private OptionListEditor motionEditor;
 	
 	/**
 	 * Constructor
@@ -70,6 +71,18 @@ public class OptionList extends JPanel {
 		motionNameListInit();
 		motionNameDisplayerInit();		
 		scrollbarInit();
+		
+		// Assign Event
+		eventInit();
+	}
+	
+	/**
+	 * @param e
+	 */
+	@Deprecated
+	public void setEditor(OptionListEditor e)
+	{
+		motionEditor = e;
 	}
 	
 	/**
@@ -169,11 +182,18 @@ public class OptionList extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e)
 			{
-				if (!e.getValueIsAdjusting())
+				if (!e.getValueIsAdjusting()) // Prohibit multiple call
 				{
 					// Update values
 					currentSelected = motionNameDisplayer.getSelectedIndex();
 					
+					// Update editor's JTextField
+					if(0 <= currentSelected && currentSelected < motionList.size())
+					{
+						motionEditor.setCurrentValues(motionList.get(currentSelected));
+					}
+					
+					// Log
 					System.out.println("[OptionList : eventInit]" +
 							"Log : currentSelected = " + currentSelected);
 	            }

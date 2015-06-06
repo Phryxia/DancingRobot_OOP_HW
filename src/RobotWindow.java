@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import java.util.ArrayList;
 import java.io.*;
 
@@ -10,6 +12,7 @@ import java.io.*;
  * 
  * @author Se-Kyu-Kwon
  */
+@SuppressWarnings("serial")
 public class RobotWindow extends JComponent
 {
 	private BGM audioFactory;
@@ -27,6 +30,7 @@ public class RobotWindow extends JComponent
 		// Initialize every list in this object
 		robotMotion  = new ArrayList <InstructionIO> (4);
 		robotFactory = new ArrayList <RobotController> (4);
+		robotActivity = new ArrayList <Boolean> (4);
 		audioFactory = new BGM();
 		
 		// Set Size
@@ -68,10 +72,18 @@ public class RobotWindow extends JComponent
 		double xpos = gap/2;
 		for(GRobot r : robotList)
 		{
+			// Default position.
 			r.move(xpos, ysize/2);
 			xpos += gap;
+			
+			// Each robot has it's own motionList.
 			robotMotion.add((rm_temp = new InstructionIO()));
-			robotFactory.add(new RobotController(r, rm_temp, audioFactory, 250));
+			
+			// Each robot has it's controller, which manage their motion.
+			robotFactory.add(new RobotController(r, rm_temp, audioFactory, 450));
+			
+			// In default, every robot should be deactivated.
+			robotActivity.add(false);
 		}
 	}
 	
@@ -138,9 +150,13 @@ public class RobotWindow extends JComponent
 		Graphics2D g2d = (Graphics2D)g;
 		
 		// Draw Every Robot
+		int cnt = 0;
 		for(RobotController rc : robotFactory)
 		{
-			rc.draw(g2d);
+			if(robotActivity.get(cnt++))
+			{
+				rc.draw(g2d);
+			}
 		}
 		
 		// Frame Rate Control
@@ -158,12 +174,59 @@ public class RobotWindow extends JComponent
 	
 	/**
 	 * Return specified robot's InstructionIO
+	 * Invalid index will return null
 	 * 
 	 * @param index
 	 * @return
 	 */
 	public InstructionIO getMotionList(int index)
 	{
-		return robotMotion.get(index);
+		if(isValidIndex(index))
+		{
+			return robotMotion.get(index);
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	/**
+	 * Activate specific robot.
+	 * Invalid index will be ignored
+	 * 
+	 * @param index
+	 */
+	public void activeRobot(int index)
+	{
+		if(isValidIndex(index))
+		{
+			robotActivity.set(index, true);
+		}
+	}
+	
+	/**
+	 * De-Activate specific robot.
+	 * Invalid index will be ignored
+	 * 
+	 * @param index
+	 */
+	public void deactiveRobot(int index)
+	{
+		if(isValidIndex(index))
+		{
+			robotActivity.set(index, false);
+		}
+	}
+	
+	/**
+	 * Check whether an random index is valid or not.
+	 * 
+	 * @param index
+	 * @return
+	 */
+	private boolean isValidIndex(int index)
+	{
+		return 0 <= index && index < robotMotion.size();
 	}
 }

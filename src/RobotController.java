@@ -59,6 +59,13 @@ public class RobotController extends Thread implements DancingRobot
 			// Check the pointer's validation and assign them.
 			if(iSequence.size() > 0 && isDancing)
 			{
+				// Invalid Pointer State Fixing
+				if(pointer < 0 || pointer >= iSequence.size())
+				{
+					System.out.println("[RobotController : run] Log : Motion pointer reset");
+					pointer = 0;
+				}
+				
 				// Move pointer to next one.
 				if(!musicMode || (musicMode && bgm.getData(0) > 0.4))
 				{
