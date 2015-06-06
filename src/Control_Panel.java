@@ -131,8 +131,8 @@ public class Control_Panel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				fod = new FileOpenDialog("MP3 File", "mp3");
-				music_name = fod.getFile(2);
-				cur_music.setText("파일명 :  " + fod.getFileInfo(2));
+				music_name = fod.filename;
+				cur_music.setText("파일명 :  " + music_name);
 			}
 		});
 		
