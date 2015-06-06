@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 /**
  * RobotController class handle specific robot's motion.
@@ -8,12 +11,14 @@ import java.awt.*;
  * @author Se-Kyu-Kwon
  *
  */
-public class RobotController extends Thread implements DancingRobot
+public class RobotController extends Thread
+implements DancingRobot, MouseListener, MouseMotionListener
 {
 	private GRobot robot;
 	private InstructionIO iSequence;
 	private int period = 100;
 	private int pointer = 0;
+	private boolean isActive  = false;
 	private boolean isDancing = false;
 	private boolean musicMode = false;
 	private BGM bgm;
@@ -57,7 +62,7 @@ public class RobotController extends Thread implements DancingRobot
 	 */
 	@Override
 	public final void run()
-	{
+	{	
 		// Loop
 		while(true)
 		{
@@ -155,5 +160,93 @@ public class RobotController extends Thread implements DancingRobot
 	public void draw(Graphics2D g2d)
 	{
 		robot.draw(g2d);
+	}
+	
+	/**
+	 * Some mouse attribution
+	 */
+	private boolean isDragging   = false;
+	private Vector2D mouseVector = new Vector2D(0, 0);
+	private Vector2D diff        = new Vector2D(0, 0);
+	
+	/**
+	 * Drag the robot. RobotWindow will pass MouseEvent automatically
+	 * so DO NOT use this function directly.
+	 */
+	private void scanMouse(MouseEvent mouse)
+	{
+		// Calculate the difference between mouse and robot.
+		mouseVector.set(mouse.getX(), mouse.getY());
+		diff.set(Vector2D.sub(mouseVector, robot.getPosition()));
+	}
+	
+	@Override
+	public void mouseDragged(MouseEvent mouse)
+	{
+		if(isActive && isDragging)
+		{
+			scanMouse(mouse);
+			robot.move(diff.x()*0.2, diff.y()*0.2);
+		}
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent mouse)
+	{
+		if(isActive)
+		{
+			scanMouse(mouse);
+		}
+	}			
+	
+	public void activate()
+	{
+		isActive = true;
+	}
+	
+	public void deactivate()
+	{
+		isActive = false;
+	}
+	
+	public boolean isActive()
+	{
+		return isActive;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent mouse)
+	{
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e)
+	{
+	}
+
+	@Override
+	public void mousePressed(MouseEvent mouse)
+	{
+		if(isActive)
+		{
+			scanMouse(mouse);
+			
+			if(diff.size() < 70)
+			{
+				isDragging = true;
+			}
+		}
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e)
+	{
+		isDragging = false;
+		diff.set(0, 0);
 	}
 }

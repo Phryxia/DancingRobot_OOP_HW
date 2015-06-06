@@ -41,12 +41,24 @@ public abstract class Robot {
 	 * But you still want to control whole body.
 	 * That's why I provide these method explicitly.
 	 */
-	public void move(double dx, double dy) {
+	public void move(double dx, double dy)
+	{
 		root.move(dx, dy);
 	}
 	
-	public void rotate(double theta) {
+	public void rotate(double theta)
+	{
 		root.rotate(theta);
+	}
+	
+	public void setPosition(Vector2D pos)
+	{
+		root.setCenter(pos);
+	}
+	
+	public Vector2D getPosition()
+	{
+		return root.getAbsolutePosition();
 	}
 	
 	/**

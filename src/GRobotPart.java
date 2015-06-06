@@ -33,7 +33,7 @@ public abstract class GRobotPart extends RobotPart implements Drawable {
 		
 		drawDefine(g2d);
 		
-		drawVector(g2d);
+		//drawVector(g2d);
 		
 		// Inverse-Transformation
 		g2d.rotate(-temp_angle);
