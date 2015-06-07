@@ -74,7 +74,7 @@ public class TaeinRobotBody extends GRobotPart implements ColorModule {
 		g2d.fillRect((int)(-width/2), (int)(-height/2), (int)width, (int)height);
 		g2d.setColor(Color.BLACK);
 		g2d.fillRect((int)(-width/2) + 10, (int)(-height/2) + 20, (int)width - 20, (int)height - 45);
-				
+		
 		// Draw Text
 		g2d.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		g2d.setColor(Color.WHITE);
