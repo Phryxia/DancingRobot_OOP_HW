@@ -30,8 +30,8 @@ public class TaeinRobotHead extends GRobotPart implements ColorModule {
 		this.radius = radius;
 		
 		cList = new Color[4];
-		cList[BODY_LINE] = new Color(0, 0, 0);
-		cList[BODY_FILL] = new Color(83, 122, 169);
+		cList[BODY_LINE] = new Color(120, 120, 120);
+		cList[BODY_FILL] = new Color(120, 120, 120);
 	}
 	
 	public double setRadius(double r) {
@@ -62,12 +62,13 @@ public class TaeinRobotHead extends GRobotPart implements ColorModule {
 	public void drawDefine(Graphics2D g2d) {
 		// Start Drawing
 		g2d.setColor(cList[BODY_LINE]);
-		g2d.drawRoundRect((int)(-radius/2), (int)(-radius/2) , (int)radius, (int)radius, 20, 20);
+		g2d.drawRect((int)(-radius/2), (int)(-radius/2) + 14, (int)radius, (int)radius - 20);
 		g2d.setColor(cList[BODY_FILL]);
-		g2d.fillRoundRect((int)(-radius/2), (int)(-radius/2), (int)radius, (int)radius, 20, 20);
-		g2d.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		g2d.setColor(new Color(209, 220, 232));
-		g2d.drawString("    ^ ^", -45, 0);
-		g2d.drawString("¤Ñ", -10, 25);
+		g2d.fillRect((int)(-radius/2), (int)(-radius/2) + 14, (int)radius, (int)radius - 20);
+		g2d.setColor(new Color(0, 0, 0));
+		g2d.drawRect((int)(-radius/2), (int)(-radius/2) + 24, (int)radius, 20);
+		g2d.fillRect((int)(-radius/2), (int)(-radius/2) + 24, (int)radius, 20);
+		g2d.setColor(Color.WHITE);
+		g2d.drawString(" --  --", (int)(-radius/2) + 5, (int)(-radius/2) + 40);
 	}
 }
