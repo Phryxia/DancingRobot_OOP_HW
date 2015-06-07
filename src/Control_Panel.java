@@ -188,7 +188,11 @@ public class Control_Panel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				music_name = FileOpenDialog.openFile("Select MP3 file to use", "mp3");
 				robotMain.setBGM(music_name);
-				cur_music.setText("파일명 :  " + music_name);
+				if(music_name == null) {
+					cur_music.setText("파일명 :  " + "추가된 파일 없음");
+				} else {
+					cur_music.setText("파일명 :  " + music_name);
+				}
 			}
 		});
 		
