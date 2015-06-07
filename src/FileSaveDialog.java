@@ -34,7 +34,7 @@ public class FileSaveDialog {
 		 
 		chooser = new JFileChooser();
 		chooser.setDialogTitle("Specify a file to save");    
-		 
+		chooser.setFileFilter(new FileNameExtensionFilter("Dancing Robot Files", "iwbtr"));
 		int userSelection = chooser.showSaveDialog(parentFrame);
 		 
 		if (userSelection == JFileChooser.APPROVE_OPTION) {
