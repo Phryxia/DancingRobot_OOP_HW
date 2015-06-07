@@ -1,7 +1,4 @@
 import java.awt.*;
-import java.awt.geom.*;
-
-import com.sun.prism.BasicStroke;
 
 /**
  * Drawing class of RobotArm.

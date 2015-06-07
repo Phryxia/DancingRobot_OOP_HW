@@ -14,6 +14,7 @@ public class TaeinRobot extends GRobot {
 		super(name);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void setAppearance(String name) {
 		// Check whether Null Pointer Exception is occured

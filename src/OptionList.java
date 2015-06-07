@@ -85,8 +85,7 @@ public class OptionList extends JPanel {
 	 * Grouping function for initializing MotionNameDisplayer
 	 * You MUST call motionListInit() first before you call this
 	 */
-	private void motionNameDisplayerInit()
-	{
+	private void motionNameDisplayerInit() {
 		motionNameDisplayer = new JList <String> (motionNameList);
 		motionNameDisplayer.setForeground(new Color(170, 170, 170));
 		motionNameDisplayer.setBackground(new Color(40, 40, 40));
@@ -97,8 +96,7 @@ public class OptionList extends JPanel {
 	 * Grouping function for initializing scrollbar.
 	 * You must call motionNameDisplayerInit() first before you call this.
 	 */
-	private void scrollbarInit()
-	{
+	private void scrollbarInit() {
 		scrollbar = new JScrollPane(motionNameDisplayer);
 		scrollbar.setForeground(new Color(40, 40, 40));
 		scrollbar.setPreferredSize(new Dimension(90, 120));
@@ -152,14 +150,13 @@ public class OptionList extends JPanel {
 	 * Refresh current JList by iterating InstructionIO.
 	 * This method should be used when new script has been loaded.
 	 */
-	public void refreshList()
-	{
+	@SuppressWarnings("unused")
+	public void refreshList() {
 		motionNameList.clear();
 		
 		// Re-load from InstructionIO
 		int cnt = 0;
-		for(ArrayList <Instruction> i : motionList)
-		{
+		for(ArrayList <Instruction> i : motionList) {
 			motionNameList.addElement("Motion_"+(cnt++));
 		}
 	}

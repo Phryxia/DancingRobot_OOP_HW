@@ -29,22 +29,19 @@ public class keyframe extends JPanel {
 	 * 
 	 * @param robotWindow
 	 */
-	public keyframe (RobotWindow robotWindow)
-	{	
+	public keyframe (RobotWindow robotWindow) {	
 		setLayout(new GridLayout(1, 2, 0, 0));
 		optionpanel_Setting ();
 		
 		// Create Editor List
 		motionEditor = new Animation[2];
-		for(int i=0; i<motionEditor.length; ++i)
-		{
+		for(int i=0; i<motionEditor.length; ++i) {
 			motionEditor[i] = new Animation(robotWindow.getMotionList(i), i+1);
 			add(motionEditor[i]);
 		}
 	}
 	
-	public void refresh(int index)
-	{
+	public void refresh(int index) {
 		motionEditor[index].refresh();
 	}
 	

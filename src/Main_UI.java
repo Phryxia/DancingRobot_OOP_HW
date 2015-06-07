@@ -25,10 +25,10 @@ public class Main_UI extends JFrame {
 	private  ArrayList<Integer> robot1_anchor = new ArrayList<Integer>();
 	private  ArrayList<Integer> robot2_anchor = new ArrayList<Integer>();
 	
+	@SuppressWarnings("unused")
 	private  FileOpenDialog fod1;
+	@SuppressWarnings("unused")
 	private  FileOpenDialog fod2;
-	private  FileSaveDialog sf1;
-	private  FileSaveDialog sf2;
 	
 	private final Font clear_gothic = new Font("맑은 고딕", Font.BOLD, 12);
 
@@ -170,12 +170,12 @@ public class Main_UI extends JFrame {
 		saveItem2    = new JMenuItem ("세이브파일 저장하기(Save File)",  KeyEvent.VK_S);
 		program_info = new JMenuItem ("프로그램 정보(About)", KeyEvent.VK_A);
 
-		howToUse    .setIcon(htu_img);
+		howToUse    .setIcon(info_img);
 		loadItem1   .setIcon(load_img);
 		saveItem1   .setIcon(save_img);
 		loadItem2   .setIcon(load_img);
 		saveItem2   .setIcon(save_img);
-		program_info.setIcon(info_img);
+		program_info.setIcon(htu_img);
 		exitItem    .setIcon(exit_img);
 		
 		fileMenu    .setFont(clear_gothic);
