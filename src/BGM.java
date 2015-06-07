@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import javax.swing.Timer;
+
+import java.awt.event.*;
+
 import ddf.minim.*;
 import ddf.minim.analysis.FFT;
 
@@ -19,6 +23,8 @@ public class BGM
 {
 	private Minim minim;
 	private AudioPlayer player;
+	private FFT fft;
+	
 	private FileInputStream fs;
 	
 	private ArrayList <BGMListener> bgmListener;
@@ -33,6 +39,18 @@ public class BGM
 		fs     = null;
 		
 		bgmListener = new ArrayList <BGMListener> (16);
+		
+		(new Timer(10, new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if(fft != null && player != null)
+				{
+					fft.forward(player.mix);
+				}
+			}
+		})).start();
 	}
 	
 	/**
@@ -53,6 +71,7 @@ public class BGM
 			
 			// Load new mp3 to the audioFactory
 			player = minim.loadFile(filename);
+			fft    = new FFT(player.bufferSize(), player.sampleRate());
 			
 			// Call musicChanged Handler.
 			for(BGMListener bl : bgmListener)
@@ -141,14 +160,7 @@ public class BGM
 	
 	public FFT getFFT()
 	{
-		if(player != null)
-		{
-			return new FFT(player.bufferSize(), player.sampleRate());
-		}
-		else
-		{
-			return null;
-		}
+		return fft;
 	}
 	
 	/**

@@ -199,6 +199,56 @@ public class RobotWindow extends JComponent
 	}
 	
 	/**
+	 * Save selected robot's motion list to the file.
+	 * Just give this function absolute path of the file
+	 * which is going to be saved.
+	 * 
+	 * @param index
+	 * @param filenmae
+	 */
+	public void saveMotionList(int index, String filename)
+	{
+		if(!isValidIndex(index))
+		{
+			System.out.println("[RobotWindow : saveMotionList] Warning : Invalid robot index will be ignored : " + index);
+		}
+		else if(filename == null)
+		{
+			System.out.println("[RobotWindow : saveMotionList] Warning : Invalid filename (null) will be ignored");
+		}
+		else
+		{
+			System.out.println("[RobotWindow : saveMotionList] Notice : Robot " + (index+1) + "'s motion has been saved");
+			robotMotion.get(index).save(filename);
+		}
+	}
+	
+	/**
+	 * Load selected robot's motion list from the file.
+	 * Just give this function absolute path of the file
+	 * which is going to be loaded.
+	 * 
+	 * @param index
+	 * @param filenmae
+	 */
+	public void loadMotionList(int index, String filename)
+	{
+		if(!isValidIndex(index))
+		{
+			System.out.println("[RobotWindow : saveMotionList] Warning : Invalid robot index will be ignored : " + index);
+		}
+		else if(filename == null)
+		{
+			System.out.println("[RobotWindow : saveMotionList] Warning : Invalid filename (null) will be ignored");
+		}
+		else
+		{
+			System.out.println("[RobotWindow : saveMotionList] Notice : Robot " + (index+1) + "'s motion has been loaded");
+			robotMotion.get(index).load(filename);
+		}
+	}
+	
+	/**
 	 * Activate specific robot.
 	 * Invalid index will be ignored
 	 * 

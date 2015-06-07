@@ -48,4 +48,9 @@ public class Animation extends JPanel implements StandardPartName {
 		optionListEditor = new OptionListEditor(optionList, num);
 		add(optionListEditor);
 	}
+	
+	public void refresh()
+	{
+		optionList.refreshList();
+	}
 }

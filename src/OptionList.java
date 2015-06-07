@@ -161,6 +161,22 @@ public class OptionList extends JPanel {
 	}
 	
 	/**
+	 * Refresh current JList by iterating InstructionIO.
+	 * This method should be used when new script has been loaded.
+	 */
+	public void refreshList()
+	{
+		motionNameList.clear();
+		
+		// Re-load from InstructionIO
+		int cnt = 0;
+		for(ArrayList <Instruction> i : motionList)
+		{
+			motionNameList.addElement("Motion_"+(cnt++));
+		}
+	}
+	
+	/**
 	 * Grouping function to assign some event handler to this object.
 	 */
 	private void eventInit()

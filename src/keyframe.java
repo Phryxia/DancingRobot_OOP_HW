@@ -15,10 +15,7 @@ public class keyframe extends JPanel {
 	 * ArrayList<Integer> robot_1 / robot_2 : Store the data of Robot Setting.
 	 * ArrayList<Integer> debug : Temporary ArrayList for Debugging
 	 */
-	private Animation anim1;
-	private Animation anim2;
-	//private ArrayList <Integer> robot_1 = new ArrayList<Integer> ();
-	private ArrayList <Integer> robot_2 = new ArrayList<Integer> ();
+	private Animation[] motionEditor;
 
 	// Attribution
 	private Color back    = new Color(50, 50, 50);
@@ -27,19 +24,28 @@ public class keyframe extends JPanel {
 	private Color msg_txt = new Color(170, 170,170);
 	Font    clear_gothic  = new Font("¸¼Àº °íµñ", Font.BOLD, 12);
 
-	public keyframe (RobotWindow robotWindow) {
-		
-		anim1 = new Animation(robotWindow.getMotionList(0), 1);
-		anim2 = new Animation(robotWindow.getMotionList(1), 2);
-		
+	/**
+	 * Create group panel that contains several motionEditor panels.
+	 * 
+	 * @param robotWindow
+	 */
+	public keyframe (RobotWindow robotWindow)
+	{	
 		setLayout(new GridLayout(1, 2, 0, 0));
 		optionpanel_Setting ();
 		
-		//robot_1.ensureCapacity(100);
-		robot_2.ensureCapacity(100);
-
-		add(anim1);
-		add(anim2);
+		// Create Editor List
+		motionEditor = new Animation[2];
+		for(int i=0; i<motionEditor.length; ++i)
+		{
+			motionEditor[i] = new Animation(robotWindow.getMotionList(i), i+1);
+			add(motionEditor[i]);
+		}
+	}
+	
+	public void refresh(int index)
+	{
+		motionEditor[index].refresh();
 	}
 	
 	/**
@@ -95,25 +101,4 @@ public class keyframe extends JPanel {
 		para1.add(pos_g + 3, para2.get(pos_g + 3));
 		para1.add(pos_g + 4, para2.get(pos_g + 4));
 	}
-	
-	/**
-	 * Export ArrayList Method.
-	 * 
-	 * if option value is 1, return Robot 1 ArrayList.
-	 * else return Robot 2 ArrayList.
-	 * 
-	 * @param option
-	 * @return
-	 */
-	/*
-	public ArrayList<Integer> export_list (int option) {
-		if(option == 1) {
-			return robot_1;
-		} else if(option == 2) {
-			return robot_2;
-		}
-		return null;
-	}
-	*/
-	
 }

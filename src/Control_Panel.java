@@ -279,7 +279,7 @@ public class Control_Panel extends JPanel {
 			 */
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String music_name = FileOpenDialog.openFile("Select MP3 file to use", "mp3");
+				String music_name = FileOpenDialog.openFile("Select MP3 file to use", "Music File", "mp3");
 				robotMain.setBGM(music_name);
 				if(music_name == null)
 				{

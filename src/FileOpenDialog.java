@@ -1,7 +1,10 @@
 /**
  * FileOpenDialog.java
  * 
+ * This class provides users to get absolute path using JFileChooser.
+ * 
  * @author Taein Kim
+ * @comment Se-Kyu-Kwon (also did refactoring)
  */
 
 import javax.swing.*;
@@ -9,60 +12,61 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 @SuppressWarnings("serial")
-public class FileOpenDialog extends JFrame {
-	FileFilter filter;
-	String filename;
-	String filepath;
-	JFileChooser chooser = new JFileChooser();
-	
-	public FileOpenDialog (String input1, String input2) {
-		filter = new FileNameExtensionFilter(input1, input2);
-		if(openFile() == 0) {
-			filename = getFile(1);
-			filepath = getFile(2);
-			//System.out.println(getFileInfo(1));
-			//System.out.println(getFileInfo(2));
-		}
-	}
-	
+public class FileOpenDialog extends JFrame
+{
 	/**
-	 * Method Open File
+	 * Generate absolute path to load any file.
+	 * If user press cancel button, then null would be returned.
 	 * 
-	 * @return Absolute Path of File or null.
+	 * @param comment
+	 * @param description
+	 * @param extension
+	 * @return
 	 */
-	public int openFile () {
-		chooser.setFileFilter(filter);
-		if(chooser.showOpenDialog(null) == 1)
-			return 1;
-		return 0;
-	}
-	
-	public String getFile(int option) {
-		if(option == 1) {
-			return chooser.getSelectedFile().getName();
-		} else {
-			return chooser.getSelectedFile().getAbsolutePath();
-		}
-	}
-	
-	public String getFileInfo (int option) {
-		if(option == 1)
-			return filepath;
-		else if(option == 2)
-			return filename;
-		return null;
-	}
-	
-	public static String openFile(String comment, String extension)
+	public static String openFile(String comment, String description, String extension)
 	{
 		JFileChooser fileChooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter(comment, extension);
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(description, extension);
 		
+		fileChooser.setDialogTitle(comment);
 		fileChooser.setFileFilter(filter);
 		switch(fileChooser.showOpenDialog(null))
 		{
 		case JFileChooser.APPROVE_OPTION:
 			return fileChooser.getSelectedFile().getAbsolutePath();
+		default:
+			return null;
+		}
+	}
+	
+	/**
+	 * Generate absolutepath to save any file.
+	 * If you don't extension to string then it'll automatically
+	 * concatenate it.
+	 *
+	 * If user press cancel button, then null would be returned.
+	 * 
+	 * @param comment
+	 * @param description
+	 * @param extension
+	 * @return
+	 */
+	public static String saveFile(String comment, String description, String extension)
+	{
+		JFileChooser fileChooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(description, extension);
+		
+		fileChooser.setDialogTitle(comment);    
+		fileChooser.setFileFilter(filter);
+		switch(fileChooser.showSaveDialog(null))
+		{
+		case JFileChooser.APPROVE_OPTION:
+			String temp = fileChooser.getSelectedFile().getAbsolutePath();
+			if(!temp.matches("(.)*\\." + extension))
+			{
+				temp += "." + extension;
+			}
+			return temp;
 		default:
 			return null;
 		}
