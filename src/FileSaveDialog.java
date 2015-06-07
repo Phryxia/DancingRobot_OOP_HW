@@ -47,13 +47,24 @@ public class FileSaveDialog {
 
 	}
 	
+	/*
 	public int saveFile () {
 		chooser.setFileFilter(filter);
 		if(chooser.showOpenDialog(null) == 1)
 			return 1;
 		return 0;
 	}
+	*/
 	
+	
+	/**
+	 * Method for Getting File Information
+	 * 
+	 * option value is 1, return file name. else, return file path.
+	 * 
+	 * @param option
+	 * @return file name or file path
+	 */
 	public String getFile(int option) {
 		if(option == 1) {
 			return chooser.getSelectedFile().getName();
@@ -62,6 +73,12 @@ public class FileSaveDialog {
 		}
 	}
 	
+	/**
+	 * Method for return file information
+	 * 
+	 * @param option
+	 * @return file name or file path
+	 */
 	public String getFileInfo (int option) {
 		if(option == 1)
 			return filepath;
