@@ -49,8 +49,7 @@ public class OptionList extends JPanel {
 	 */
 	public OptionList (InstructionIO iReference) {
 		// NullPointerHandling
-		if(iReference == null)
-		{
+		if(iReference == null) {
 			throw new NullPointerException();
 		}
 		
@@ -71,16 +70,14 @@ public class OptionList extends JPanel {
 	 * @param e
 	 */
 	@Deprecated
-	public void setEditor(OptionListEditor e)
-	{
+	public void setEditor(OptionListEditor e) {
 		motionEditor = e;
 	}
 	
 	/**
 	 * Grouping function for initializing MotionNameList
 	 */
-	private void motionNameListInit()
-	{
+	private void motionNameListInit() {
 		motionNameList = new DefaultListModel <String>();
 	}
 	
@@ -115,25 +112,20 @@ public class OptionList extends JPanel {
 	 * @param motionName
 	 * @param angleList
 	 */
-	public void addMotion(String motionName, ArrayList <Integer> angleList)
-	{
+	public void addMotion(String motionName, ArrayList <Integer> angleList) {
 		// Create Instruction List
 		ArrayList <Instruction> insList = new ArrayList <Instruction> (6);
-		for(Integer i : angleList)
-		{
+		for(Integer i : angleList) {
 			Instruction ins = new Instruction(0, 0, i);
 			insList.add(ins);
 		}
 		
 		// Insert to the InstructionIO.
-		if(0 <= currentSelected && currentSelected < motionList.size())
-		{
+		if(0 <= currentSelected && currentSelected < motionList.size()) {
 			// Valid position. Insert it at this point.
 			motionList.add(currentSelected, insList);
 			motionNameList.add(currentSelected, motionName);
-		}
-		else
-		{
+		} else {
 			// Pointer state is out of range.
 			currentSelected = -1;
 			motionList.add(insList);
@@ -145,16 +137,12 @@ public class OptionList extends JPanel {
 	 * Remove current pointed Motion from this list system.
 	 * Both name & contents will be removed simultaneously.
 	 */
-	public void removeMotion()
-	{
-		if(0 <= currentSelected && currentSelected < motionList.size())
-		{
+	public void removeMotion() {
+		if(0 <= currentSelected && currentSelected < motionList.size()) {
 			// Valid position. Remove it.
 			motionList.remove(currentSelected);
 			motionNameList.remove(currentSelected);
-		}
-		else
-		{
+		} else {
 			// Pointer state is out of range. Just Ignore.
 			currentSelected = -1;
 		}
@@ -179,24 +167,20 @@ public class OptionList extends JPanel {
 	/**
 	 * Grouping function to assign some event handler to this object.
 	 */
-	private void eventInit()
-	{
+	private void eventInit() {
 		/*
 		 * Event Handler to update current pointer from motionNameDisplayer.
 		 */
-		motionNameDisplayer.addListSelectionListener(new ListSelectionListener()
-		{
+		motionNameDisplayer.addListSelectionListener(new ListSelectionListener() {
 			@Override
-			public void valueChanged(ListSelectionEvent e)
-			{
-				if (!e.getValueIsAdjusting()) // Prohibit multiple call
-				{
+			public void valueChanged(ListSelectionEvent e) {
+				// Prohibit multiple call
+				if (!e.getValueIsAdjusting()) {
 					// Update values
 					currentSelected = motionNameDisplayer.getSelectedIndex();
 					
 					// Update editor's JTextField
-					if(0 <= currentSelected && currentSelected < motionList.size())
-					{
+					if(0 <= currentSelected && currentSelected < motionList.size()) {
 						motionEditor.setCurrentValues(motionList.get(currentSelected));
 					}
 					

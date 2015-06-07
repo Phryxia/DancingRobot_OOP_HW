@@ -23,8 +23,8 @@ public class FileSaveDialog {
 		if(saveDialog() == 0) {
 			filename = getFile(1);
 			filepath = getFile(2);
-			System.out.println(getFileInfo(1));
-			System.out.println(getFileInfo(2));
+			//System.out.println(getFileInfo(1));
+			//System.out.println(getFileInfo(2));
 		}
 		
 	}
@@ -34,7 +34,7 @@ public class FileSaveDialog {
 		 
 		chooser = new JFileChooser();
 		chooser.setDialogTitle("Specify a file to save");    
-		 
+		chooser.setFileFilter(new FileNameExtensionFilter("Dancing Robot Files", "iwbtr"));
 		int userSelection = chooser.showSaveDialog(parentFrame);
 		 
 		if (userSelection == JFileChooser.APPROVE_OPTION) {

@@ -60,8 +60,7 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 	    title = new JLabel("<ROBOT " + num + ">");
 		
 		// Assign Link
-		if(listReference == null)
-		{
+		if(listReference == null) {
 			throw new NullPointerException("[OptionListEditor : Constructor] Null reference is not allowed");
 		}
 		this.listReference = listReference;
@@ -98,8 +97,7 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 				add(rembtn);
 		
 		// Assign Label & Number Fields
-		for(int i=0; i<numberField.length; ++i)
-		{
+		for(int i=0; i<numberField.length; ++i) {
 			// Add PtName First
 			add(ptNameField[i]);
 			
@@ -116,16 +114,14 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 	/**
 	 * Grouping function for title initialization
 	 */
-	public void titleInit()
-	{
+	public void titleInit() {
 		title.setForeground(textcolor);
 	}
 
 	/**
 	 * Grouping function for Part Name Labels initialization
 	 */
-	private void ptNameFieldInit()
-	{
+	private void ptNameFieldInit() {
 		// Construct the ptNameFields
 		ptNameField = new JLabel[6];
 				
@@ -137,8 +133,7 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 		ptNameField[LEG_RIGHT] = new JLabel("Right Leg : ");
 				
 		// Set the style & design of ptNameField
-		for(int i=0; i<ptNameField.length; ++i)
-		{
+		for(int i=0; i<ptNameField.length; ++i) {
 			ptNameField[i].setForeground(textcolor);
 		}
 	}
@@ -146,12 +141,10 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 	/**
 	 * Grouping function for Number Fields initialization
 	 */
-	private void numberFieldInit()
-	{
+	private void numberFieldInit() {
 		// Construct the numberFields
 		numberField = new JTextField[6];
-		for(int i=0; i<numberField.length; ++i)
-		{
+		for(int i=0; i<numberField.length; ++i) {
 			// Construct new JTextField
 			numberField[i] = new JTextField(3);
 					
@@ -166,8 +159,7 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 	/**
 	 * Grouping function for Button initialization
 	 */
-	private void buttonInit()
-	{
+	private void buttonInit() {
 		// First Button : Add
 		addbtn.setBackground(c_button);
 		addbtn.setForeground(Color.WHITE);
@@ -184,19 +176,14 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 	 * 
 	 * @return List which has values from JTextFields.
 	 */
-	public ArrayList <Integer> getCurrentValues()
-	{
+	public ArrayList <Integer> getCurrentValues() {
 		ArrayList <Integer> list = new ArrayList <Integer> (6);
 		
-		for(int i=0; i<numberField.length; ++i)
-		{
+		for(int i=0; i<numberField.length; ++i) {
 			// Automatically fill as -1 if there is no valid value
-			try
-			{
+			try {
 				list.add(Integer.parseInt(numberField[i].getText()));
-			}
-			catch(NumberFormatException e)
-			{
+			} catch(NumberFormatException e) {
 				list.add(-1);
 			}
 		}
@@ -209,10 +196,8 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 	 * 
 	 * @param angleList
 	 */
-	public void setCurrentValues(ArrayList <Instruction> motion)
-	{
-		for(int i=0; i<numberField.length; ++i)
-		{
+	public void setCurrentValues(ArrayList <Instruction> motion) {
+		for(int i=0; i<numberField.length; ++i) {
 			numberField[i].setText(Integer.toString(motion.get(i).angle));
 		}
 	}
@@ -220,13 +205,11 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 	/**
 	 * Grouping function to assign some event handler to this system.
 	 */
-	private void eventInit()
-	{
+	private void eventInit() {
 		/**
 		 * Button Listener for Add Button
 		 */
-		addbtn.addActionListener(new ActionListener()
-		{
+		addbtn.addActionListener(new ActionListener() {
 			/**
 			 * This will extract data from this editor's JTextLabels
 			 * and then add it to the OptionList.
@@ -236,14 +219,11 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 				// JOptionPane will return null if user press cancel button
 				String motionName = JOptionPane.showInputDialog("키프레임 이름을 입력하십시오.", "키프레임 이름 입력");
 				
-				if(motionName != null)
-				{
+				if(motionName != null) {
 					listReference.addMotion(motionName, getCurrentValues());
 					
 					System.out.println("[OptionListEditor : addbtn] Log : New motion key has been added");
-				}
-				else
-				{
+				} else {
 					System.out.println("[OptionListEditor : addbtn] Log : Adding cancled.");
 				}
 				
@@ -253,11 +233,9 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 		/**
 		 * Button Listener for Remove Button
 		 */
-		rembtn.addActionListener(new ActionListener()
-		{
+		rembtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{	
+			public void actionPerformed(ActionEvent e) {	
 				listReference.removeMotion();
 			}
 		});

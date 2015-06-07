@@ -41,8 +41,7 @@ public class Control_Panel extends JPanel {
 	 * @author Taein Kim
 	 */
 	public Control_Panel (RobotWindow robotMain) {
-		if(robotMain == null)
-		{
+		if(robotMain == null) {
 			throw new NullPointerException("[ControlPanel : Constructor] Null robotMain reference is now allowed");
 		}
 		this.robotMain = robotMain;
@@ -121,8 +120,7 @@ public class Control_Panel extends JPanel {
 	 * return reference to the container.
 	 * @return JCheckBox with activation function
 	 */
-	private JCheckBox new_RobotActCheckbox(int robotIndex)
-	{
+	private JCheckBox new_RobotActCheckbox(int robotIndex) {
 		/*
 		 * Create JCheckBox and set it's attribution
 		 */
@@ -134,18 +132,14 @@ public class Control_Panel extends JPanel {
 		/*
 		 * Assign checkbox listener.
 		 */
-		checkBox.addActionListener(new ActionListener()
-		{
+		checkBox.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				if(checkBox.isSelected())
-				{
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox.isSelected()) {
 					System.out.println("[Control_Panel : Checkbox] Notice : ROBOT" + (robotIndex+1) + " activated.");
 					robotMain.activeRobot(robotIndex);
 				}
-				else
-				{
+				else {
 					System.out.println("[Control_Panel : Checkbox] Notice : ROBOT" + (robotIndex+1) + " deactivated.");
 					robotMain.deactiveRobot(robotIndex);
 				}
@@ -162,8 +156,7 @@ public class Control_Panel extends JPanel {
 	 * return reference to the container.
 	 * @return JCheckBox with music control feature
 	 */
-	private JCheckBox new_MusicModeCheckbox()
-	{
+	private JCheckBox new_MusicModeCheckbox() {
 		JCheckBox checkBox = new JCheckBox("  음악 모드 활성화 ");
 		checkBox.setBackground(C_CHECKBOX_BG);
 		checkBox.setForeground(C_CHECKBOX_FG);
@@ -200,33 +193,24 @@ public class Control_Panel extends JPanel {
 	private JButton new_DancingButton(boolean play)
 	{
 		JButton button;
-		if(play)
-		{
+		if(play) {
 			button = new JButton("    재생 (PLAY)    ");
-		}
-		else
-		{
+		} else {
 			button = new JButton("    정지 (STOP)    ");
 		}
 		button.setBackground(C_BUTTON_BG);
 		button.setForeground(C_BUTTON_FG);
 		button .setFont(clear_gothic);
 		
-		button.addActionListener(new ActionListener()
-		{
+		button.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
+			public void actionPerformed(ActionEvent e) {
 				// To protect from duplicated play call
-				if(isPlay ^ play)
-				{
-					if(play)
-					{
+				if(isPlay ^ play) {
+					if(play) {
 						System.out.println("[Control_Panel : Button] Start dancing.");
 						robotMain.startDancing();
-					}
-					else
-					{
+					} else {
 						System.out.println("[Control_Panel : Button] Stop dancing.");
 						robotMain.stopDancing();
 					}
@@ -245,8 +229,7 @@ public class Control_Panel extends JPanel {
 	 * return reference to the container.
 	 * @return JLabel with logo image.
 	 */
-	private JLabel new_LogoImage()
-	{
+	private JLabel new_LogoImage() {
 		JLabel logoImage = new JLabel(new ImageIcon(RelativePath.getAbsolutePath("image\\icon_noname.jpg")));
     	logoImage.setPreferredSize(new Dimension(150, 150));
 		logoImage.setBackground(C_CHECKBOX_FG);
@@ -262,16 +245,14 @@ public class Control_Panel extends JPanel {
 	 * return reference to the container.
 	 * @return JButton with music loading event
 	 */
-	private JButton new_MusicLoadButton()
-	{
+	private JButton new_MusicLoadButton() {
 		JButton load_music = new JButton("음악 선택");
 		load_music.setBackground(C_BUTTON_BG);
 		load_music.setForeground(C_BUTTON_FG);
 		load_music.setFont(clear_gothic);
 		add(load_music);
 		
-		load_music.addActionListener(new ActionListener()
-		{
+		load_music.addActionListener(new ActionListener() {
 			/**
 			 * This will open the dialog which get music file's
 			 * absolute path. Then, make RobotWindow to load
@@ -281,12 +262,9 @@ public class Control_Panel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				String music_name = FileOpenDialog.openFile("Select MP3 file to use", "Music File", "mp3");
 				robotMain.setBGM(music_name);
-				if(music_name == null)
-				{
+				if(music_name == null) {
 					cur_music.setText("파일명 :  " + "추가된 파일 없음");
-				} 
-				else 
-				{
+				} else {
 					cur_music.setText("파일명 :  " + music_name);
 				}
 			}
@@ -303,8 +281,7 @@ public class Control_Panel extends JPanel {
 	 * @param content
 	 * @return
 	 */
-	private JLabel new_InfoLabel(String content)
-	{
+	private JLabel new_InfoLabel(String content) {
 		JLabel infoLabel = new JLabel(content);
 		infoLabel.setBackground(C_CHECKBOX_BG);
 		infoLabel.setForeground(C_CHECKBOX_FG);

@@ -101,7 +101,7 @@ public class Main_UI extends JFrame {
 		generate_panel();
 		
 		panel.add(robotMain);
-
+		
 		// Set this window's icon
 		setIconImage((new ImageIcon(RelativePath.getAbsolutePath("image\\icon_main.jpg"))).getImage());
 		setBackground(new Color(50, 50, 50));
