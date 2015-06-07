@@ -25,15 +25,12 @@ public class Main_UI extends JFrame {
 	private  ArrayList<Integer> robot1_anchor = new ArrayList<Integer>();
 	private  ArrayList<Integer> robot2_anchor = new ArrayList<Integer>();
 	
-	@SuppressWarnings("unused")
 	private  FileOpenDialog fod1;
-	@SuppressWarnings("unused")
 	private  FileOpenDialog fod2;
-	@SuppressWarnings("unused")
 	private  FileSaveDialog sf1;
-	@SuppressWarnings("unused")
 	private  FileSaveDialog sf2;
-	Font clear_gothic = new Font("¸¼Àº °íµñ", Font.BOLD, 12);
+	
+	private final Font clear_gothic = new Font("¸¼Àº °íµñ", Font.BOLD, 12);
 
 	/**
 	 * JSplitPane : split root panel for 3 panels.
@@ -54,7 +51,7 @@ public class Main_UI extends JFrame {
 	private JMenuItem  howToUse;
 	
 	JLabel label;
-	RobotWindow rw1;
+	RobotWindow robotMain;
 	Control_Panel      cp;
 	keyframe           kf;
 	Manual_Frame       mf;
@@ -91,21 +88,19 @@ public class Main_UI extends JFrame {
 	 * @author UlnamSong
 	 */
 	public Main_UI () {
-		rw1 = new RobotWindow(741, 396);
-		rw1.startDancing();
+		robotMain = new RobotWindow(741, 396);
 		
-		cp = new Control_Panel(rw1);
+		cp = new Control_Panel(robotMain);
 		
-		kf  = new keyframe(rw1);
+		kf  = new keyframe(robotMain);
 		
 		robot1_anchor.ensureCapacity(100);
 		robot2_anchor.ensureCapacity(100);
 		
 		generate_Menu ();
 		generate_panel();
-		chkBox_control();
 		
-		panel.add(rw1);
+		panel.add(robotMain);
 
 		// Set this window's icon
 		setIconImage((new ImageIcon(RelativePath.getAbsolutePath("image\\icon_main.jpg"))).getImage());
@@ -117,57 +112,6 @@ public class Main_UI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
-	}
-	
-	/**
-	 * Robot Activation CheckBox Control
-	 * 
-	 * @author UlnamSong
-	 */
-	public void chkBox_control () {
-		cp.r1_Active.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(cp.r1_Active.isSelected()) {
-					System.out.println("[Main UI] Notice : ROBOT1 activated.");
-					rw1.activeRobot(0);
-				} else {
-					System.out.println("[Main UI] Notice : ROBOT1 deactivated.");
-					rw1.deactiveRobot(0);
-					
-				}
-			}
-		});
-		
-		cp.r2_Active.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(cp.r2_Active.isSelected()) {
-					System.out.println("[Main UI] Notice : ROBOT2 activated.");
-					rw1.activeRobot(1);
-				} else {
-					System.out.println("[Main UI] Notice : ROBOT2 deactivated.");
-					rw1.deactiveRobot(1);
-				}
-			}
-		});
-		
-		/**
-		 * Decide whether Music Mode is Active.
-		 * Print Log of Activation
-		 */
-		cp.music_Mode.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(cp.music_Mode.isSelected()) {
-					rw1.setMode(true);
-					System.out.println("[Control Panel] Music Mode On");
-				} else {
-					rw1.setMode(false);
-					System.out.println("[Control Panel] Music Mode Off");
-				}
-			}
-		});
 	}
 	
 	/**
@@ -203,7 +147,6 @@ public class Main_UI extends JFrame {
 	/**
 	 * Generate Menu Bar & Events
 	 * Add to Main UI Frame
-	 * 
 	 */
 	public void generate_Menu() {
 		MenuBar  menuBar    = new MenuBar ();

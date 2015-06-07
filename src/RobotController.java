@@ -60,6 +60,7 @@ implements DancingRobot, MouseListener, MouseMotionListener
 	/**
 	 * Extends running threads
 	 */
+	private boolean warning = false;
 	@Override
 	public final void run()
 	{	
@@ -77,12 +78,34 @@ implements DancingRobot, MouseListener, MouseMotionListener
 				}
 				
 				// Move pointer to next one.
-				if(!musicMode || (musicMode && bgm.getPlayer().left.get(0) > 0.4))
+				if(musicMode)
+				{
+					// Check if the music has been loaded properly.
+					if(bgm.getPlayer() != null)
+					{
+						// Do some nice things
+						robot.applyInstruction(iSequence.get(pointer));	
+						pointer = (pointer + 1)%iSequence.size(); // Loop in bounded region [0, size-1]
+					}
+					else
+					{
+						// If there is no music loaded, reset the robot and do nothing.
+						if(!warning)
+						{
+							System.out.println("[RobotController : run] Null audio player will be ignored : There is no music loaded.");
+							robot.reset();
+							warning = true;
+						}
+					}
+				}
+				else
 				{
 					// Do some nice things
-					robot.applyInstruction(iSequence.get(pointer));
+					robot.applyInstruction(iSequence.get(pointer));	
+					pointer = (pointer + 1)%iSequence.size(); // Loop in bounded region [0, size-1]
 					
-					pointer = (pointer + 1)%iSequence.size();
+					// Reset warning flag
+					warning = false;
 				}
 			}
 			
@@ -150,6 +173,7 @@ implements DancingRobot, MouseListener, MouseMotionListener
 	public void stopDancing()
 	{
 		isDancing = false;
+		robot.reset();
 	}
 	
 	public void setMusicMode(boolean t)

@@ -5,7 +5,7 @@
  * Note that this class should be linked with RobotWindow.
  * 
  * @author Taein Kim
- * @comment Se-Kyu-Kwon
+ * @comment Se-Kyu-Kwon (also did refactoring)
  */
 
 import javax.swing.*;
@@ -19,19 +19,7 @@ import java.io.IOException;
 @SuppressWarnings("serial")
 public class Control_Panel extends JPanel {
 	private RobotWindow robotMain;
-	
-	public JCheckBox r1_Active;
-	public JCheckBox r2_Active;
-	public JCheckBox music_Mode;
-	
-	public JButton   play_anim;
-	public JButton   stop_anim;
-	public JButton   load_music;
-	
-	public JLabel    logoImage;
-	public JLabel    cur_music;
-	
-	public String    music_name = "추가된 파일 없음";
+	public JLabel       cur_music;
 	
 	// Attribution & Style
 	private Color C_BUTTON_BG   = new Color(0, 100, 147);   // Color of Button's Background
@@ -40,6 +28,7 @@ public class Control_Panel extends JPanel {
 	private Color C_CHECKBOX_FG = new Color(170, 170, 170); // Color of Checkbox's Foreground
 	private Font  clear_gothic  = new Font("맑은 고딕", Font.BOLD, 12);
 	
+	// Play button flag
 	private boolean isPlay = false;
 	
 	//MP3 File Name which is loaded.
@@ -83,95 +72,199 @@ public class Control_Panel extends JPanel {
 		 */
 		
 		/*
-		 * Robot 1 Activation
+		 * Robot Activation Control Box
 		 */
-		r1_Active = new JCheckBox("  ROBOT1 활성화  ");
-		r1_Active.setBackground(C_CHECKBOX_BG);
-		r1_Active.setForeground(C_CHECKBOX_FG);
-		r1_Active .setFont(clear_gothic);
-		add(r1_Active);
-		
-		/*
-		 * Robot 2 Activation
-		 */
-		r2_Active = new JCheckBox("  ROBOT2 활성화  ");
-		r2_Active.setBackground(C_CHECKBOX_BG);
-		r2_Active.setForeground(C_CHECKBOX_FG);
-		r2_Active .setFont(clear_gothic);
-		add(r2_Active);
+		add(new_RobotActCheckbox(0));
+		add(new_RobotActCheckbox(1));
 		
 		/*
 		 * Music Mode Toggle
 		 */
-		music_Mode = new JCheckBox("  음악 모드 활성화 ");
-		music_Mode.setBackground(C_CHECKBOX_BG);
-		music_Mode.setForeground(C_CHECKBOX_FG);
-		music_Mode.setFont(clear_gothic);
-		add(music_Mode);
+		add(new_MusicModeCheckbox());
 		
 		/*
 		 * Start Dancing
 		 */
-		play_anim = new JButton("    재생 (PLAY)    ");
-		play_anim.setBackground(C_BUTTON_BG);
-		play_anim.setForeground(C_BUTTON_FG);
-		play_anim .setFont(clear_gothic);
-		add(play_anim);
-		
-		play_anim.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(!isPlay) {
-					System.out.println("[Control_Panel] Notice : Play_Button is clicked");
-					robotMain.setMode(false);
-					robotMain.startDancing();
-					isPlay = true;
-				}
-			}
-		});
-		
-		/*
-		 * Stop Dancing
-		 */
-		stop_anim = new JButton("    정지 (STOP)    ");
-		stop_anim.setBackground(C_BUTTON_BG);
-		stop_anim.setForeground(C_BUTTON_FG);
-		stop_anim .setFont(clear_gothic);
-		add(stop_anim);
-		
-		stop_anim.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(isPlay) {
-					System.out.println("[Control_Panel] Notice : Stop_Button is clicked");
-					robotMain.stopDancing();
-					isPlay = false;
-				}
-			}
-		});
+		add(new_DancingButton(true));
+		add(new_DancingButton(false));
 		
 		/*
 		 * Load TS Robot image to the left side of main UI
 		 */
-		logoImage = new JLabel(new ImageIcon(RelativePath.getAbsolutePath("image\\icon_noname.jpg")));
-    	logoImage.setPreferredSize(new Dimension(150, 150));
-		logoImage.setBackground(C_CHECKBOX_FG);
-		logoImage.setForeground(C_CHECKBOX_FG);
-		add(logoImage);
+		add(new_LogoImage());
 		
 		/*
 		 * Notice Label
-		 */
-		JLabel infoLabel = new JLabel("음악 삽입 : ");
-		infoLabel.setBackground(C_CHECKBOX_BG);
-		infoLabel.setForeground(C_CHECKBOX_FG);
-		infoLabel.setFont(clear_gothic);
-		add(infoLabel);
+		 */		
+		add(new_InfoLabel("음악 삽입 : "));
 		
 		/*
 		 * Music Load Button
 		 */
-		load_music = new JButton("음악 선택");
+		add(new_MusicLoadButton());
+		
+		/*
+		 * Loaded Music's Name
+		 */
+		cur_music = new JLabel("파일명 : 추가된 파일 없음");
+		cur_music.setPreferredSize(new Dimension(155, 15));
+		cur_music.setBackground(C_CHECKBOX_BG);
+		cur_music.setForeground(C_CHECKBOX_FG);
+		cur_music.setFont(clear_gothic);
+		add(cur_music);
+	}
+	
+	/**
+	 * Create a robot activation control box.
+	 * 
+	 * This doesn't add directly to this panel, so use it's
+	 * return reference to the container.
+	 * @return JCheckBox with activation function
+	 */
+	private JCheckBox new_RobotActCheckbox(int robotIndex)
+	{
+		/*
+		 * Create JCheckBox and set it's attribution
+		 */
+		JCheckBox checkBox = new JCheckBox("  ROBOT" + (robotIndex+1) + " 활성화  ");
+		checkBox.setBackground(C_CHECKBOX_BG);
+		checkBox.setForeground(C_CHECKBOX_FG);
+		checkBox.setFont(clear_gothic);
+		
+		/*
+		 * Assign checkbox listener.
+		 */
+		checkBox.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if(checkBox.isSelected())
+				{
+					System.out.println("[Control_Panel : Checkbox] Notice : ROBOT" + (robotIndex+1) + " activated.");
+					robotMain.activeRobot(robotIndex);
+				}
+				else
+				{
+					System.out.println("[Control_Panel : Checkbox] Notice : ROBOT" + (robotIndex+1) + " deactivated.");
+					robotMain.deactiveRobot(robotIndex);
+				}
+			}
+		});
+		
+		return checkBox;
+	}
+	
+	/**
+	 * Create a music mode control checkbox.
+	 * 
+	 * This doesn't add directly to this panel, so use it's
+	 * return reference to the container.
+	 * @return JCheckBox with music control feature
+	 */
+	private JCheckBox new_MusicModeCheckbox()
+	{
+		JCheckBox checkBox = new JCheckBox("  음악 모드 활성화 ");
+		checkBox.setBackground(C_CHECKBOX_BG);
+		checkBox.setForeground(C_CHECKBOX_FG);
+		checkBox.setFont(clear_gothic);
+		
+		checkBox.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if(checkBox.isSelected()) 
+				{
+					robotMain.setMode(true);
+					System.out.println("[Control Panel : Checkbox] Notice : Music Mode On");
+				} 
+				else
+				{
+					robotMain.setMode(false);
+					System.out.println("[Control Panel : Checkbox] Notice : Music Mode Off");
+				}
+			}
+		});
+		
+		return checkBox;
+	}
+	
+	/**
+	 * Create a playing-button.
+	 * 
+	 * This doesn't add directly to this panel, so use it's
+	 * return reference to the container.
+	 * @return JButton with proper action
+	 */
+	private JButton new_DancingButton(boolean play)
+	{
+		JButton button;
+		if(play)
+		{
+			button = new JButton("    재생 (PLAY)    ");
+		}
+		else
+		{
+			button = new JButton("    정지 (STOP)    ");
+		}
+		button.setBackground(C_BUTTON_BG);
+		button.setForeground(C_BUTTON_FG);
+		button .setFont(clear_gothic);
+		
+		button.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				// To protect from duplicated play call
+				if(isPlay ^ play)
+				{
+					if(play)
+					{
+						System.out.println("[Control_Panel : Button] Start dancing.");
+						robotMain.startDancing();
+					}
+					else
+					{
+						System.out.println("[Control_Panel : Button] Stop dancing.");
+						robotMain.stopDancing();
+					}
+					isPlay = !isPlay;
+				}
+			}
+		});
+		
+		return button;
+	}
+	
+	/**
+	 * Create a logo image.
+	 * 
+	 * This doesn't add directly to this panel, so use it's
+	 * return reference to the container.
+	 * @return JLabel with logo image.
+	 */
+	private JLabel new_LogoImage()
+	{
+		JLabel logoImage = new JLabel(new ImageIcon(RelativePath.getAbsolutePath("image\\icon_noname.jpg")));
+    	logoImage.setPreferredSize(new Dimension(150, 150));
+		logoImage.setBackground(C_CHECKBOX_FG);
+		logoImage.setForeground(C_CHECKBOX_FG);
+		
+		return logoImage;
+	}
+	
+	/**
+	 * Create a music loading button.
+	 * 
+	 * This doesn't add directly to this panel, so use it's
+	 * return reference to the container.
+	 * @return JButton with music loading event
+	 */
+	private JButton new_MusicLoadButton()
+	{
+		JButton load_music = new JButton("음악 선택");
 		load_music.setBackground(C_BUTTON_BG);
 		load_music.setForeground(C_BUTTON_FG);
 		load_music.setFont(clear_gothic);
@@ -186,24 +279,37 @@ public class Control_Panel extends JPanel {
 			 */
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				music_name = FileOpenDialog.openFile("Select MP3 file to use", "mp3");
+				String music_name = FileOpenDialog.openFile("Select MP3 file to use", "mp3");
 				robotMain.setBGM(music_name);
-				if(music_name == null) {
+				if(music_name == null)
+				{
 					cur_music.setText("파일명 :  " + "추가된 파일 없음");
-				} else {
+				} 
+				else 
+				{
 					cur_music.setText("파일명 :  " + music_name);
 				}
 			}
 		});
 		
-		/*
-		 * Loaded Music's Name
-		 */
-		cur_music = new JLabel("파일명 :  " + music_name);
-		cur_music.setPreferredSize(new Dimension(155, 15));
-		cur_music.setBackground(C_CHECKBOX_BG);
-		cur_music.setForeground(C_CHECKBOX_FG);
-		cur_music.setFont(clear_gothic);
-		add(cur_music);
+		return load_music;
+	}
+	
+	/**
+	 * Create a info giving label. Not that special.
+	 * 
+	 * This doesn't add directly to this panel, so use it's
+	 * return reference to the container.
+	 * @param content
+	 * @return
+	 */
+	private JLabel new_InfoLabel(String content)
+	{
+		JLabel infoLabel = new JLabel(content);
+		infoLabel.setBackground(C_CHECKBOX_BG);
+		infoLabel.setForeground(C_CHECKBOX_FG);
+		infoLabel.setFont(clear_gothic);
+		
+		return infoLabel;
 	}
 }
