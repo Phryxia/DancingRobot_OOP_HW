@@ -212,7 +212,7 @@ public class Main_UI extends JFrame {
 		program_info.setForeground(light_Gray);
 		
 		/**
-		 * Add Action Event to Each Menu Item.
+		 * Exit Program.
 		 */
 		exitItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -220,29 +220,43 @@ public class Main_UI extends JFrame {
 			}
 		});
 		
+		/**
+		 * This part load script to the Robot 1
+		 */
 		loadItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 fod1 = new FileOpenDialog("Dancing Robot File", "iwbtr");
+				robotMain.loadMotionList(0, FileOpenDialog.openFile("Select robot motion script", "Dancing Robot File", "iwbtr"));
+				kf.refresh(0);
 			}
 		 });
 		
+		/**
+		 * This part load script to the Robot 2
+		 */
 		loadItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 fod2 = new FileOpenDialog("Dancing Robot File", "iwbtr");
+				robotMain.loadMotionList(1, FileOpenDialog.openFile("Select robot motion script", "Dancing Robot File", "iwbtr"));
+				kf.refresh(1);
 			}
 		 });
 		
+		/**
+		 * This part save Robot 1's motion script
+		 */
 		saveItem1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sf1 = new FileSaveDialog ();
+				robotMain.saveMotionList(0, FileOpenDialog.saveFile("Choose the location to save", "Dancing Robot File", "iwbtr"));
 			}
 		});
 		
+		/**
+		 * This part save Robot 2's motion script
+		 */
 		saveItem2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sf2 = new FileSaveDialog ();
+				robotMain.saveMotionList(1, FileOpenDialog.saveFile("Choose the location to save", "Dancing Robot File", "iwbtr"));
 			}
 		});
 		

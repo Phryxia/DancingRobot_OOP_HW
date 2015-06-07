@@ -84,8 +84,11 @@ implements DancingRobot, MouseListener, MouseMotionListener
 					if(bgm.getPlayer() != null)
 					{
 						// Do some nice things
-						robot.applyInstruction(iSequence.get(pointer));	
-						pointer = (pointer + 1)%iSequence.size(); // Loop in bounded region [0, size-1]
+						if(bgm.getFFT().calcAvg(20, 300) > 50)
+						{
+							robot.applyInstruction(iSequence.get(pointer));	
+							pointer = (pointer + 1)%iSequence.size(); // Loop in bounded region [0, size-1]
+						}
 					}
 					else
 					{
@@ -114,7 +117,7 @@ implements DancingRobot, MouseListener, MouseMotionListener
 			{
 				if(musicMode)
 				{
-					sleep(10);
+					sleep(100);
 				}
 				else
 				{

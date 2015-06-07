@@ -47,16 +47,6 @@ public class FileSaveDialog {
 
 	}
 	
-	/*
-	public int saveFile () {
-		chooser.setFileFilter(filter);
-		if(chooser.showOpenDialog(null) == 1)
-			return 1;
-		return 0;
-	}
-	*/
-	
-	
 	/**
 	 * Method for Getting File Information
 	 * 
