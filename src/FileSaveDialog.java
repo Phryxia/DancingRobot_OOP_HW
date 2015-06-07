@@ -19,12 +19,32 @@ public class FileSaveDialog {
 	FileFilter filter = new FileNameExtensionFilter("DancingRobot File", "iwbtr");
 	
 	public FileSaveDialog () {
-		if(saveFile() == 0) {
+		
+		if(saveDialog() == 0) {
 			filename = getFile(1);
 			filepath = getFile(2);
 			System.out.println(getFileInfo(1));
 			System.out.println(getFileInfo(2));
 		}
+		
+	}
+	
+	public int saveDialog() {
+		JFrame parentFrame = new JFrame();
+		 
+		chooser = new JFileChooser();
+		chooser.setDialogTitle("Specify a file to save");    
+		 
+		int userSelection = chooser.showSaveDialog(parentFrame);
+		 
+		if (userSelection == JFileChooser.APPROVE_OPTION) {
+		    File fileToSave = chooser.getSelectedFile();
+		    System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+		    return 0;
+		} else {
+			return 1;
+		}
+
 	}
 	
 	public int saveFile () {
