@@ -171,7 +171,7 @@ public class Control_Panel extends JPanel {
 		/*
 		 * Music Load Button
 		 */
-		load_music = new JButton("¿Ωæ« √ﬂ∞°");
+		load_music = new JButton("¿Ωæ« º±≈√");
 		load_music.setBackground(C_BUTTON_BG);
 		load_music.setForeground(C_BUTTON_FG);
 		load_music.setFont(clear_gothic);

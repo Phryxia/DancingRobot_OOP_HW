@@ -99,7 +99,7 @@ public class Program_Info extends JFrame {
 	 * @author Taein Kim
 	 */
 	public void addLabel () {
-		version = new JLabel("Dancing Robot (버전 : 0.9.1)");
+		version = new JLabel("Dancing Robot (버전 : 0.9.9)");
 		date    = new JLabel("2015. 06");
 		name1   = new JLabel("20142329 Taein Kim");
 		name2   = new JLabel("20142302 Sekyu Kwon");
