@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * Strange Robot for Me.
  * 
- * @author Ulnamsong (Taein Kim)
+ * @author Tae-in Kim
  */
 public class TaeinRobot extends GRobot {
 
@@ -48,11 +48,9 @@ public class TaeinRobot extends GRobot {
 	/**
 	 * Reset current robot's motion state into default.
 	 */
-	public void reset()
-	{
+	public void reset() {
 		// Construct DEFAULT_STATE only once.
-		if(DEFAULT_STATE == null)
-		{
+		if(DEFAULT_STATE == null) {
 			DEFAULT_STATE = new ArrayList <Instruction> (1);
 			
 			DEFAULT_STATE.add(new Instruction(0, 0, 0));

@@ -31,8 +31,7 @@ public class Animation extends JPanel implements StandardPartName {
 	public Animation (InstructionIO iReference, int num) {
 		this.num = num;
 		// NullPointer Check
-		if(iReference == null)
-		{
+		if(iReference == null) {
 			throw new NullPointerException("[Animatino : Constructor] Null reference is not allowed");
 		}
 		

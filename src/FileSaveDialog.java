@@ -23,8 +23,8 @@ public class FileSaveDialog {
 		if(saveDialog() == 0) {
 			filename = getFile(1);
 			filepath = getFile(2);
-			System.out.println(getFileInfo(1));
-			System.out.println(getFileInfo(2));
+			//System.out.println(getFileInfo(1));
+			//System.out.println(getFileInfo(2));
 		}
 		
 	}
