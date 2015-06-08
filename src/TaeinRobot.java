@@ -53,7 +53,6 @@ public class TaeinRobot extends GRobot {
 		// Construct DEFAULT_STATE only once.
 		if(DEFAULT_STATE == null) {
 			DEFAULT_STATE = new ArrayList <Instruction> (1);
-			
 			DEFAULT_STATE.add(new Instruction(0, 0, 0));
 			DEFAULT_STATE.add(new Instruction(0, 0, 90));
 			DEFAULT_STATE.add(new Instruction(0, 0, 90));
