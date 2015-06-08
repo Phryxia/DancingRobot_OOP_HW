@@ -63,5 +63,7 @@ public class SeKyuRobotHead extends GRobotPart implements ColorModule {
 		g2d.drawRect((int)(-radius/2), (int)(-radius/2), (int)radius, (int)radius);
 		g2d.setColor(cList[BODY_FILL]);
 		g2d.fillRect((int)(-radius/2), (int)(-radius/2), (int)radius, (int)radius);
+		g2d.setColor(Color.WHITE);
+		g2d.drawString(" бс  бс ", (int)(-radius/2) + 5, (int)(-radius/2) + 25);
 	}
 }
