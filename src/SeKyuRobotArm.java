@@ -33,8 +33,8 @@ public class SeKyuRobotArm extends GRobotPart implements ColorModule, BGMListene
 		this.weight = weight;
 		
 		cList = new Color[4];
-		cList[BODY_LINE] = Color.BLACK;
-		cList[BODY_FILL] = Color.RED;
+		cList[BODY_LINE] = new Color(70, 139, 172);
+		cList[BODY_FILL] = new Color(70, 139, 172);
 	}
 	
 	protected double length;

@@ -29,7 +29,7 @@ public class SeKyuRobotHead extends GRobotPart implements ColorModule {
 		
 		cList = new Color[4];
 		cList[BODY_LINE] = Color.BLACK;
-		cList[BODY_FILL] = Color.RED;
+		cList[BODY_FILL] = Color.BLACK;
 	}
 	
 	public double setRadius(double r) {
@@ -60,8 +60,8 @@ public class SeKyuRobotHead extends GRobotPart implements ColorModule {
 	public void drawDefine(Graphics2D g2d) {
 		// Start Drawing
 		g2d.setColor(cList[BODY_LINE]);
-		g2d.drawOval((int)(-radius/2), (int)(-radius/2), (int)radius, (int)radius);
+		g2d.drawRect((int)(-radius/2), (int)(-radius/2), (int)radius, (int)radius);
 		g2d.setColor(cList[BODY_FILL]);
-		g2d.fillOval((int)(-radius/2), (int)(-radius/2), (int)radius, (int)radius);
+		g2d.fillRect((int)(-radius/2), (int)(-radius/2), (int)radius, (int)radius);
 	}
 }

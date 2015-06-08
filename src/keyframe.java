@@ -56,7 +56,7 @@ public class keyframe extends JPanel {
 	 * 
 	 * All Fonts to Clear Gothic
 	 * 
-	 * @author UlnamSong
+	 * @author UlnamSong(Taein Kim)
 	 */
 	@SuppressWarnings("static-access")
 	public void optionpanel_Setting () {

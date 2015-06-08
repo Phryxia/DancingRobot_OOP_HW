@@ -36,8 +36,8 @@ public class SeKyuRobotBody extends GRobotPart implements ColorModule, BGMListen
 		this.height = height;
 		
 		cList = new Color[4];
-		cList[BODY_LINE] = Color.BLACK;
-		cList[BODY_FILL] = Color.RED;
+		cList[BODY_LINE] = new Color(0, 31, 102);
+		cList[BODY_FILL] = new Color(0, 31, 102);
 		
 		audioPlayer = null;
 		fft         = null;
@@ -118,9 +118,9 @@ public class SeKyuRobotBody extends GRobotPart implements ColorModule, BGMListen
 		g2d.fillRect((int)(-width/2), (int)(-height/2), (int)width, (int)height);
 				
 		// Draw Text
-		g2d.setFont(new Font("Gulim", Font.PLAIN, 25));
+		g2d.setFont(new Font("Gulim", Font.BOLD, 15));
 		g2d.setColor(Color.WHITE);
-		g2d.drawString("I ¢¾ Robot", -45, 0);
+		g2d.drawString("I ¢¾ Robot", -35, 0);
 		
 		// Draw Spectrum
 		if(fft != null)
