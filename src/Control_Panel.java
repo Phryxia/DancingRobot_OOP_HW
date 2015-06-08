@@ -93,7 +93,7 @@ public class Control_Panel extends JPanel {
 		/*
 		 * Notice Label
 		 */		
-		add(new_InfoLabel("음악 삽입 : "));
+		add(new_InfoLabel("Insert Music : "));
 		
 		/*
 		 * Music Load Button
@@ -103,7 +103,7 @@ public class Control_Panel extends JPanel {
 		/*
 		 * Loaded Music's Name
 		 */
-		cur_music = new JLabel("파일명 : 추가된 파일 없음");
+		cur_music = new JLabel("File Name : No File");
 		cur_music.setPreferredSize(new Dimension(155, 15));
 		cur_music.setBackground(C_CHECKBOX_BG);
 		cur_music.setForeground(C_CHECKBOX_FG);
@@ -122,7 +122,7 @@ public class Control_Panel extends JPanel {
 		/*
 		 * Create JCheckBox and set it's attribution
 		 */
-		JCheckBox checkBox = new JCheckBox("  ROBOT" + (robotIndex+1) + " 활성화  ");
+		JCheckBox checkBox = new JCheckBox("  ROBOT" + (robotIndex+1) + " Active  ");
 		checkBox.setBackground(C_CHECKBOX_BG);
 		checkBox.setForeground(C_CHECKBOX_FG);
 		checkBox.setFont(clear_gothic);
@@ -155,7 +155,7 @@ public class Control_Panel extends JPanel {
 	 * @return JCheckBox with music control feature
 	 */
 	private JCheckBox new_MusicModeCheckbox() {
-		JCheckBox checkBox = new JCheckBox("  음악 모드 활성화 ");
+		JCheckBox checkBox = new JCheckBox("    Music  Mode   ");
 		checkBox.setBackground(C_CHECKBOX_BG);
 		checkBox.setForeground(C_CHECKBOX_FG);
 		checkBox.setFont(clear_gothic);
@@ -192,9 +192,9 @@ public class Control_Panel extends JPanel {
 	{
 		JButton button;
 		if(play) {
-			button = new JButton("    재생 (PLAY)    ");
+			button = new JButton("    PLAY    ");
 		} else {
-			button = new JButton("    정지 (STOP)    ");
+			button = new JButton("    STOP    ");
 		}
 		button.setBackground(C_BUTTON_BG);
 		button.setForeground(C_BUTTON_FG);
@@ -244,7 +244,7 @@ public class Control_Panel extends JPanel {
 	 * @return JButton with music loading event
 	 */
 	private JButton new_MusicLoadButton() {
-		JButton load_music = new JButton("음악 선택");
+		JButton load_music = new JButton("Select");
 		load_music.setBackground(C_BUTTON_BG);
 		load_music.setForeground(C_BUTTON_FG);
 		load_music.setFont(clear_gothic);
@@ -261,9 +261,9 @@ public class Control_Panel extends JPanel {
 				String music_name = FileOpenDialog.openFile("Select MP3 file to use", "Music File", "mp3");
 				robotMain.setBGM(music_name);
 				if(music_name == null) {
-					cur_music.setText("파일명 :  " + "추가된 파일 없음");
+					cur_music.setText("File Name :  " + "No File");
 				} else {
-					cur_music.setText("파일명 :  " + music_name);
+					cur_music.setText("File Name :  " + music_name);
 				}
 			}
 		});

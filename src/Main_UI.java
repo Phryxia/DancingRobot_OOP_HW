@@ -150,25 +150,27 @@ public class Main_UI extends JFrame {
 	 */
 	public void generate_Menu() {
 		MenuBar  menuBar    = new MenuBar ();
-		JMenu    fileMenu   = new JMenu    ("파일(File)");
-		JMenu    roboCtrl_1 = new JMenu    ("ROBO1 관리");
-		JMenu    roboCtrl_2 = new JMenu    ("ROBO2 관리");
-		JMenu    helpMenu   = new JMenu    ("도움말(Help)");
+		JMenu    fileMenu   = new JMenu    ("File");
+		JMenu    roboCtrl_1 = new JMenu    ("Sekyu BOT Manage");
+		JMenu    roboCtrl_2 = new JMenu    ("Taein BOT Manage");
+		JMenu    helpMenu   = new JMenu    ("Help");
 		
 		fileMenu.setMnemonic (KeyEvent.VK_F);
+		roboCtrl_1.setMnemonic (KeyEvent.VK_S);
+		roboCtrl_2.setMnemonic (KeyEvent.VK_T);
 		helpMenu.setMnemonic (KeyEvent.VK_H);
 		menuBar.add (fileMenu);
 		menuBar.add (roboCtrl_1);
 		menuBar.add (roboCtrl_2);
 		menuBar.add (helpMenu);
 		
-		howToUse     = new JMenuItem ("사용법(How to Use)", KeyEvent.VK_U);
-		exitItem     = new JMenuItem ("종료(Exit)",  KeyEvent.VK_E);
-		loadItem1    = new JMenuItem ("세이브파일 불러오기(Load File)",  KeyEvent.VK_L);
-		saveItem1    = new JMenuItem ("세이브파일 저장하기(Save File)",  KeyEvent.VK_S);
-		loadItem2    = new JMenuItem ("세이브파일 불러오기(Load File)",  KeyEvent.VK_L);
-		saveItem2    = new JMenuItem ("세이브파일 저장하기(Save File)",  KeyEvent.VK_S);
-		program_info = new JMenuItem ("프로그램 정보(About)", KeyEvent.VK_A);
+		howToUse     = new JMenuItem ("Instruction", KeyEvent.VK_U);
+		exitItem     = new JMenuItem ("Exit",  KeyEvent.VK_E);
+		loadItem1    = new JMenuItem ("Load Saved File",  KeyEvent.VK_L);
+		saveItem1    = new JMenuItem ("Save to File",  KeyEvent.VK_S);
+		loadItem2    = new JMenuItem ("Load Saved File",  KeyEvent.VK_L);
+		saveItem2    = new JMenuItem ("Save to File",  KeyEvent.VK_S);
+		program_info = new JMenuItem ("About Program", KeyEvent.VK_A);
 
 		howToUse    .setIcon(info_img);
 		loadItem1   .setIcon(load_img);

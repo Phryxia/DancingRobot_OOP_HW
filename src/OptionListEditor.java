@@ -45,8 +45,8 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 	private JLabel[]     ptNameField; // Stores part name label
 	private JTextField[] numberField; // Stores number editor
 	private JLabel       title;
-	private JButton      addbtn    = new JButton("추가");
-	private JButton      rembtn    = new JButton("제거");
+	private JButton      addbtn    = new JButton("Add");
+	private JButton      rembtn    = new JButton("Remove");
 	
 	/**
 	 * Create an OptionListEditor.
@@ -125,12 +125,12 @@ public class OptionListEditor extends JPanel implements StandardPartName {
 		// Construct the ptNameFields
 		ptNameField = new JLabel[6];
 				
-		ptNameField[BODY]      = new JLabel("Body : ");
-		ptNameField[ARM_LEFT]  = new JLabel("Left Arm : ");
-		ptNameField[ARM_RIGHT] = new JLabel("Rigth Arm : ");
-		ptNameField[HEAD]      = new JLabel("Head : ");
-		ptNameField[LEG_LEFT]  = new JLabel("Left Leg: ");
-		ptNameField[LEG_RIGHT] = new JLabel("Right Leg : ");
+		ptNameField[BODY]      = new JLabel("   Body :");
+		ptNameField[ARM_LEFT]  = new JLabel("   Left Arm :");
+		ptNameField[ARM_RIGHT] = new JLabel("   Right Arm :");
+		ptNameField[HEAD]      = new JLabel("   Head :");
+		ptNameField[LEG_LEFT]  = new JLabel("   Left Leg :");
+		ptNameField[LEG_RIGHT] = new JLabel("   Right Leg :");
 				
 		// Set the style & design of ptNameField
 		for(int i=0; i<ptNameField.length; ++i) {
